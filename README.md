@@ -1,1 +1,1 @@
-# project3team2
+# eQuipt - A resource for LARP inventory management
