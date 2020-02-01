@@ -1,7 +1,7 @@
 {
-  "name": "mern",
+  "name": "equipt",
   "version": "1.0.0",
-  "description": "Mern Demo",
+  "description": "eQuipt is a LARP inventory tracker and trader.",
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -12,7 +12,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "author": "",
+  "author": "Ryan Isaacson, Noelle Everage, Abe Kim, and Jessica Sills",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",
@@ -21,6 +21,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "if-env": "^1.0.4",
-    "passport": "^0.4.1"
+    "mongoose": "^5.8.11",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
   }
 }
