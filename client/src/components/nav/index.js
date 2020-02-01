@@ -1,9 +1,13 @@
 import React from 'react'
-
+const styles = {
+    background: {
+        backgroundColor: "rgba(0,0,0,.7)",
+    },
+}
 export default function Nav() {
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+            <nav style={styles.background} className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a className="navbar-brand" href="/">
                     eQuipt
                 </a>
