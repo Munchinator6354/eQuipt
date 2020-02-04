@@ -16,23 +16,25 @@ const styles = {
         textDecoration: "none"
     },
     center: {
-
-  
-     
-    
         opacity: "1",
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
-    
         height:"100vh",
-
-
-       
     },
     fontSize: {
         fontSize: "0.9rem",
         marginTop: "15px"
     },
+    font:{
+        marginBottom: "5px",
+        fontSize: "1.6em",
+        fontFamily: "Almendra SC, serif"
+    },
+    regularFont:{
+        marginBottom: "5px",
+        fontSize: "1em",
+        fontFamily: "Almendra SC, serif"
+    }
 
 
 };
@@ -41,7 +43,9 @@ export default function Main() {
 
         <div style={styles.background}>
             <div className="container" style={styles.center}>
-                <h1 className="fadeUp">Welcome to eQuipt</h1>
+                <br />
+                <h1 className="fadeUp" style={styles.font}>Welcome to eQuipt</h1>
+                <p className="fadeUp" style={styles.regularFont}>Here you can give, trade, and recieve items for your epic journey</p>
             </div>
         </div>
      
