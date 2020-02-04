@@ -37,7 +37,8 @@ var UserSchema = new Schema({
       // The ObjectIds will refer to the ids in the Note model
       ref: "Inventory"
     }
-  ]
+  ],
+  
 });
 
 // This creates our model from the above schema, using mongoose's model method
