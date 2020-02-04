@@ -4,7 +4,7 @@ const styles = {
     background: {
         backgroundImage: `url(${background})`,
         color: "white",
-        height: "100vh",
+        height: "95vh",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -13,7 +13,7 @@ const styles = {
         opacity: "1",
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
-        height:"100vh",
+        height:"95vh",
     },
     font:{
         marginBottom: "5px",

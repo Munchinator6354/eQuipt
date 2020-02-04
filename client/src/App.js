@@ -9,6 +9,7 @@ import Trade from './components/Trade';
 import NoMatch from './pages/noMatch';
 import Register from './pages/register';
 import Login from './pages/login';
+import Inventory from './pages/Inventory';
 
 
 
@@ -26,6 +27,7 @@ export default function App() {
                         <Route exact path="/Give" component={Give} />
                         <Route exact path="/Trade" component={Trade} />
                         <Route exact path="/Register" component={Register} />
+                        <Route exact path="/Inventory" component={Inventory} />
                         <Route component={NoMatch} />
                     </Switch>
                 </div>
