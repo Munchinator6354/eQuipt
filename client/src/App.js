@@ -1,13 +1,14 @@
-import React from 'react'
-import Nav from './components/Nav'
+import React from 'react';
+import Nav from './components/Nav';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from './components/Main';
-import Login from './components/Login'
-import Create from './components/Create'
-import SearchPlayers from './components/Search'
-import Give from './components/Give'
-import Trade from './components/Trade'
-import NoMatch from './pages/noMatch'
+import Create from './components/Create';
+import SearchPlayers from './components/SearchPlayers';
+import Give from './components/Give';
+import Trade from './components/Trade';
+import NoMatch from './pages/noMatch';
+import Register from './pages/register';
+import Login from './pages/login';
 
 
 
@@ -24,6 +25,7 @@ export default function App() {
                         <Route exact path="/SearchPlayers" component={SearchPlayers} />
                         <Route exact path="/Give" component={Give} />
                         <Route exact path="/Trade" component={Trade} />
+                        <Route exact path="/Register" component={Register} />
                         <Route component={NoMatch} />
                     </Switch>
                 </div>
