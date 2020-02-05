@@ -78,7 +78,7 @@ module.exports = function(app) {
     // ---------------------------------------------------------------------------
 
     // Trade items between two users. 
-    app.update("/api/trade/:username1/:username2", function(req, res) {
+    app.put("/api/trade/:username1/:username2", function(req, res) {
         // How to authenticate both users...?
         // The ODM call will be a bit complicated here.
         // Get username1 items from req.body
@@ -98,7 +98,7 @@ module.exports = function(app) {
 
     // Give items from one user to another. The "fromuser" is the only user that
     // needs to be authenticated.
-    app.update("/api/give/fromuser/:username1/touser/:username2", function(req, res) {
+    app.put("/api/give/fromuser/:username1/touser/:username2", function(req, res) {
         // Get username1 items from req.body
         // ODM call to put username1 items into username2 inventory.
         let give = {
@@ -111,7 +111,7 @@ module.exports = function(app) {
 
     // Update an item's quantity, name, or description. Only staff users can update
     // items.
-    app.update("/api/item/:username", function(req, res) {
+    app.put("/api/item/:username", function(req, res) {
         // ODM update, where { username: username } and the item details are retrieved
         // from req.body.
         let update = {
