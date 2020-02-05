@@ -17,14 +17,14 @@ class Login extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        API.authenticateUser({username: this.state.username, password: this.state.password})
-            .then(res => {
-                if (res.data.status === "error") {
-                    throw new Error(res.data.message);
-                }
-                this.setState({ results: res.data.message, error: "" });
-            })
-            .catch(err => this.setState({ error: err.message }));
+        API.authenticateUser(this.state.username,this.state.password)
+            // .then(res => {
+            //     if (res.data.status === "error") {
+            //         throw new Error(res.data.message);
+            //     }
+            //     this.setState({ results: res.data.message, error: "" });
+            // })
+            // .catch(err => this.setState({ error: err.message }));
     };
     render() {
         return (

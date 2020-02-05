@@ -9,14 +9,14 @@ export default {
     })
     .then(response=>{
         console.log(response)
-        if(response.data){
-            console.log('successful login')
-            this.setState({
-                redirectTo: '/'
-            })
-        } else {
-            console.log('login error')
-        }
+        // if(response.data){
+        //     console.log('successful login')
+        //     this.setState({
+        //         redirectTo: '/'
+        //     })
+        // } else {
+        //     console.log('login error')
+        // }
     }).catch(error => { 
         console.log('login server error: ')
         console.log(error)

@@ -19,7 +19,7 @@ module.exports = function(app) {
         let authorize = {
             auth: req.body
         }
-        res.JSON(authorize);
+        res.json(authorize);
     });
 
     // Get all of the items associated with a given user.
