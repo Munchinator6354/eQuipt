@@ -19,7 +19,7 @@ module.exports = function(app) {
         let authorize = {
             auth: req.body
         }
-        res.JSON(authorize);
+        res.json(authorize);
     });
 
     // Get all of the items associated with a given user.
@@ -28,7 +28,7 @@ module.exports = function(app) {
         let searchQuery = {
             username: req.params.username
         }
-        res.JSON(searchQuery);
+        res.json(searchQuery);
     });
 
     // ICEBOX: Get all of the items in the entire database. Only staff users should be able
@@ -39,7 +39,7 @@ module.exports = function(app) {
         let items = {
             items: ["item1", "item2", "item3"]
         }
-        res.JSON(items);
+        res.json(items);
     });
 
     // API POST Requests
@@ -57,7 +57,7 @@ module.exports = function(app) {
             username: req.params.username,
             item: req.body
         }
-        res.JSON(item);
+        res.json(item);
     });
 
     // Create a new user.
@@ -66,7 +66,7 @@ module.exports = function(app) {
         let user = {
             user: req.body
         }
-        res.JSON(user);
+        res.json(user);
     });
 
     // API UPDATE Requests
@@ -93,7 +93,7 @@ module.exports = function(app) {
             username2: req.params.username2,
             items: req.body
         }
-        res.JSON(trade);
+        res.json(trade);
     });
 
     // Give items from one user to another. The "fromuser" is the only user that
@@ -106,7 +106,7 @@ module.exports = function(app) {
             username2: req.params.username2,
             items: req.body
         }
-        res.JSON(give);
+        res.json(give);
     });
 
     // Update an item's quantity, name, or description. Only staff users can update
@@ -118,7 +118,7 @@ module.exports = function(app) {
             username: req.params.username,
             item: req.body
         }
-        res.JSON(update);
+        res.json(update);
     });
 
     // API DELETE Requests
@@ -135,6 +135,6 @@ module.exports = function(app) {
             username: req.params.username,
             item: req.body
         }
-        res.JSON(deletion);
+        res.json(deletion);
     });
 };
