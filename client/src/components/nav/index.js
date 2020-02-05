@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+
 const styles = {
     background: {
         backgroundColor: "rgba(0,0,0,.7)",
@@ -47,6 +48,11 @@ export default function Nav() {
                             <li className="nav-item active">
                                 <a style={styles.font} className="navbar-brand nav-link" href="/trade">
                                     Trade
+                                </a>
+                            </li>
+                            <li className="nav-item active">
+                                <a style={styles.font} className="navbar-brand nav-link" href="/create">
+                                    Create
                                 </a>
                             </li>
                         </ul>
