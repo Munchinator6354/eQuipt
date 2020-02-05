@@ -3,7 +3,7 @@ import axios from "axios";
 export default {
   authenticateUser: function(username, password) {
       console.log(username)
-    axios.post("/api/login",{
+    axios.get("/api/login",{
         username: username,
         password: password
     })

@@ -7,6 +7,8 @@ class Register extends Component {
 
     state = {
         username: "",
+        playerName: "",
+        characterName: "",
         password: "",
         error: ""
     };
@@ -17,7 +19,7 @@ class Register extends Component {
     };
     handleFormSubmit = event => {
         event.preventDefault();
-        API.signUpUser(this.state.username, this.state.password)
+        API.signUpUser(this.state.username, this.state.playerName, this.state.characterName, this.state.password)
             .then(res => {
                 if (res.data.status === "error") {
                     throw new Error(res.data.message);

@@ -10,6 +10,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
+    "seed" : "node scripts/seedDB.js",
     "heroku-postbuild": "npm run build"
   },
   "author": "Ryan Isaacson, Noelle Everage, Abe Kim, and Jessica Sills",
