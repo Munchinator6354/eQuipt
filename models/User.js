@@ -27,10 +27,11 @@ var UserSchema = new Schema({
     type: String,
     unique: true
   },
-  // `notes` is an array that stores ObjectIds
-  // The ref property links these ObjectIds to the Note model
-  // This allows us to populate the User with any associated Notes
-  items: [
+  role: {
+      type:String,
+      required: true
+  },
+    items: [
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
@@ -38,7 +39,7 @@ var UserSchema = new Schema({
       ref: "Inventory"
     }
   ],
-  
+
 });
 
 // This creates our model from the above schema, using mongoose's model method
