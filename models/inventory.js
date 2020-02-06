@@ -25,10 +25,14 @@ var InventorySchema = new Schema({
     type: Number,
     required: true
   },
+  quantity: {
+      type: Number,
+      required: false
+  },
   link: {
     type: String,
     required: false
-  }
+  }  
 });
 
 // This creates our model from the above schema, using mongoose's model method
