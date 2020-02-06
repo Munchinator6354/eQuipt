@@ -40,7 +40,7 @@ export default function Give(props) {
                 <h1 className="fadeUp" style={styles.font}>Give Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Item to Give</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item to Give</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -53,7 +53,7 @@ export default function Give(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Quantity to Give</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Quantity to Give</label>
                         <div className="col-sm-10">
                             <input 
                                 type="password" 
@@ -65,7 +65,7 @@ export default function Give(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Player to Give</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Player to Give</label>
                         <div className="col-sm-10">
                             <input 
                                 type="password" 

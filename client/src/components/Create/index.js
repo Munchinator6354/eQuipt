@@ -41,7 +41,7 @@ export default function Create(props) {
                 <h1 className="fadeUp" style={styles.font}>Create Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Item Name</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item Name</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -54,7 +54,7 @@ export default function Create(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Item Description</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Item Description</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -67,7 +67,7 @@ export default function Create(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="itemlevel" className="col-sm-2 col-form-label fadeUp">Item Level</label>
+                        <label style={styles.labelFont} htmlFor="itemlevel" className="col-sm-2 col-form-label fadeUp">Item Level</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -80,7 +80,7 @@ export default function Create(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="marketprice" className="col-sm-2 col-form-label fadeUp">Market Price</label>
+                        <label style={styles.labelFont} htmlFor="marketprice" className="col-sm-2 col-form-label fadeUp">Market Price</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -93,7 +93,7 @@ export default function Create(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="link" className="col-sm-2 col-form-label fadeUp">Image Link</label>
+                        <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Image Link</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
