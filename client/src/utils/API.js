@@ -1,14 +1,11 @@
 import axios from "axios";
 
 export default {
-  authenticateUser: function(username, password) {
-      console.log(username)
-    axios.get("/api/login",{
-        username: username,
-        password: password
-    })
+  authenticateUser: function(userData) {
+    axios.get("/api/login",userData)
     .then(response=>{
-        console.log(response)
+        console.log(response.data)
+        
         // if(response.data){
         //     console.log('successful login')
         //     this.setState({

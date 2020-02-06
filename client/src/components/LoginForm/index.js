@@ -39,7 +39,7 @@ export default function LoginForm(props) {
                 <h1 style={styles.font} className="fadeUp">Login if you dare!</h1><br/>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">User Name</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">User Name</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -52,7 +52,7 @@ export default function LoginForm(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
                         <div className="col-sm-10">
                             <input 
                                 type="password" 
