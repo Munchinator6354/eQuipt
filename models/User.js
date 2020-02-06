@@ -29,9 +29,10 @@ var UserSchema = new Schema({
   },
   role: {
       type:String,
-      required: true
+      required: true,
+      default: "Player"
   },
-    items: [
+    inventory: [
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
