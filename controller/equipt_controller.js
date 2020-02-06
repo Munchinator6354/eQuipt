@@ -13,11 +13,17 @@ var odm = {
     Register: function(PlayerName, UserName, PassWord, CharacterName, EMail){
          db.User
         .create({ playername: PlayerName, username: UserName, password: PassWord, charactername: CharacterName, email: EMail})
-        .then(dbUser => console.log(dbUser))
-        .catch(err => console.log(err.message));
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
+    },
+// Get all of the items associated with a given user.
+    UserItems: function(UserName){
+        db.User
+        .findOne({username: UserName})
+        .populate("items")
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     }
-
-
 
 }
 
