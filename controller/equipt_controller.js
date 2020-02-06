@@ -36,10 +36,14 @@ var odm = {
 // ODM update, where { username: username } and the item details are retrieved
 // from req.body.
  Update: function(req,res){
-    db.Inventory.findByIdAndUpdate({username: req.params.username}, req.body)
+    db.Inventory.findOneAndUpdate({username: req.params.username}, req.body)
    .then(dbInventory => res.json(dbInventory))
    .catch(err => res.status(422).json(err));
  }
+  // Delete an item from a user. Only staff users can delete items.
+  // ODM delete, where { username: username } and the item details are retrieved
+//         // from req.body.
+
 }
 
 
