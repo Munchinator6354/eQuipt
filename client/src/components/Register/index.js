@@ -53,6 +53,30 @@ export default function Register(props) {
                         </div>
                     </div>
                     <div className="form-group row">
+                        <label style={styles.labelFont} for="playerName" className="col-sm-2 col-form-label fadeUp">Player Name</label>
+                        <div className="col-sm-10">
+                            <input 
+                                type="text" 
+                                className="form-control fadeUp" 
+                                name="playerName"
+                                value={props.playerName}
+                                onChange={props.handleInputChange}
+                                id="playerName" />
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label style={styles.labelFont} for="characterName" className="col-sm-2 col-form-label fadeUp">Character Name</label>
+                        <div className="col-sm-10">
+                            <input 
+                                type="characterName" 
+                                className="form-control fadeUp" 
+                                name="characterName"
+                                value={props.password}
+                                onChange={props.handleInputChange}
+                                id="characterName" />
+                        </div>
+                    </div>
+                    <div className="form-group row">
                         <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
                         <div className="col-sm-10">
                             <input 

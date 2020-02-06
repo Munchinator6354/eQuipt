@@ -38,7 +38,7 @@ export default function InventoryForm(props) {
                 <br />
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
 
-                <table class="table table-dark">
+                <table className="table table-dark">
                     <thead>
                         <tr>
                             <th scope="col">#</th>

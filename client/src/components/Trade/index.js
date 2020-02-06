@@ -40,7 +40,7 @@ export default function Trade(props) {
                 <h1 className="fadeUp" style={styles.font}>Trade items</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Player to Trade with</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Player to Trade with</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -53,7 +53,7 @@ export default function Trade(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Item to Trade</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item to Trade</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -66,7 +66,7 @@ export default function Trade(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Quantity to Trade</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Quantity to Trade</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -79,7 +79,7 @@ export default function Trade(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">Item to Receive</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item to Receive</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -92,7 +92,7 @@ export default function Trade(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Quantity to be Recieved</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Quantity to be Recieved</label>
                         <div className="col-sm-10">
                             <input 
                                 type="password" 
