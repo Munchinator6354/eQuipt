@@ -10,10 +10,10 @@ mongoose.connect("mongodb://localhost/eQuiptDB", { useNewUrlParser: true });
 
 var odm = {
 //Registering a brand new user
-    Register: function(PlayerName, UserName, PassWord, CharacterName, EMail){
+    Register: function(req,res){
          db.User
-        .create({ playername: PlayerName, username: UserName, password: PassWord, charactername: CharacterName, email: EMail})
-        .then(dbModel => res.json(dbModel))
+        .create(req.body)
+        .then(dbUser=> res.json(dbUser))
         .catch(err => res.status(422).json(err));
     },
 // Get all of the items associated with a given user.
@@ -21,10 +21,16 @@ var odm = {
         db.User
         .findOne({username: UserName})
         .populate("items")
-        .then(dbModel => res.json(dbModel))
+        .then(dbUser=> res.json(dbUser))
         .catch(err => res.status(422).json(err));
-    }
-
+    },
+// Create a new item associated with a user id. Only staff users can create 
+ NewItem: function(req,res){
+    db.Inventory.create(req.body)
+    .then(dbInventory => db.User.findByIdAndUpdate({username: req.params.username},{ $push: { items: dbInventory._id} }, { new: true }))
+    .then(dbUser => res.json(dbUser))
+    .catch(err => res.status(422).json(err));
+ }
 }
 
 
@@ -33,60 +39,3 @@ var odm = {
 module.exports = odm;
 
 
-
-
-var orm = {
-  all: function(tableInput, cb) {
-    var queryString = "SELECT * FROM " + tableInput + ";";
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      
-      cb(result);
-    });
-  },
-  // create: function(cb) {
-  create: function(table, cols, vals, cb) {
-    var queryString = "INSERT INTO " + table;
-
-    queryString += " (";
-    queryString += cols.toString();
-    queryString += ") ";
-    queryString += "VALUES (";
-    queryString += vals.toString();
-    queryString += ") ";
- //var queryString = "INSERT INTO burgers (burger_name) VALUES ('chicken');"
-    console.log(queryString);
-
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-
-  },
-  // An example of objColVals would be {name: panther, sleepy: true}
-  update: function(table, objColVals, condition, cb) {
-    var queryString = "UPDATE " + table;
-
-    queryString += " SET ";
-    queryString += objToSql(objColVals);
-    queryString += " WHERE ";
-    queryString += condition;
-
-    console.log(queryString);
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-
-      cb(result);
-    });
-  }
-
-};
-
-module.exports = orm;
