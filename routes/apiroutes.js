@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const db = require("../models");
+const odm = require("../controller/equipt_controller");
 
 // ===============================================================================
 // ROUTING
@@ -64,6 +66,22 @@ module.exports = function(app) {
     // Create a new user.
     app.post("/api/register", function(req, res) {
         // ODM create, where the user is retrieved from req.body
+        const { username, playername, charactername, email, password, role } = req.body;
+        
+        // Find the user, if they already exist.
+
+        // If they exist, return error.
+
+        // If they do not exist, register the new user.
+        odm.Register({
+            username: username,
+            playername: playername,
+            charactername: charactername,
+            email: email,
+            password: password,
+            role: role
+        })
+
         let user = {
             user: req.body
         }

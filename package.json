@@ -10,7 +10,7 @@
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "seed" : "node scripts/seedDB.js",
+    "seed": "node scripts/seedDB.js",
     "heroku-postbuild": "npm run build"
   },
   "author": "Ryan Isaacson, Noelle Everage, Abe Kim, and Jessica Sills",
@@ -22,6 +22,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.16.3",
+    "express-session": "^1.17.0",
     "if-env": "^1.0.4",
     "mongo": "^0.1.0",
     "mongoose": "^5.8.11",
