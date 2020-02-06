@@ -30,6 +30,15 @@ var odm = {
     .then(dbInventory => db.User.findByIdAndUpdate({username: req.params.username},{ $push: { items: dbInventory._id} }, { new: true }))
     .then(dbUser => res.json(dbUser))
     .catch(err => res.status(422).json(err));
+ },
+
+// Update an item's quantity, name, or description. Only staff users can update
+// ODM update, where { username: username } and the item details are retrieved
+// from req.body.
+ Update: function(req,res){
+    db.Inventory.findByIdAndUpdate({username: req.params.username}, req.body)
+   .then(dbInventory => res.json(dbInventory))
+   .catch(err => res.status(422).json(err));
  }
 }
 
