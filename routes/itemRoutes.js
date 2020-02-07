@@ -19,7 +19,12 @@ module.exports = function(app) {
         let searchQuery = {
             username: req.params.username
         }
-        res.json(searchQuery);
+        // res.json(searchQuery);
+        db.User
+        .findOne(searchQuery)
+        .populate("inventory")
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // ICEBOX: Get all of the items in the entire database. Only staff users should be able
