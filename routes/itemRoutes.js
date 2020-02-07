@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+var db = require("../models");
 // ===============================================================================
 // ITEM ROUTING
 // ===============================================================================
@@ -55,6 +55,7 @@ module.exports = function(app) {
             link: req.body.link
         }
         // res.json(item);
+        console.log("YO!")
         db.Inventory
         .create(item)
         .then(dbInventory => res.json(dbInventory))
