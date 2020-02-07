@@ -20,13 +20,14 @@ var odm = {
     UserItems: function(UserName){
         db.User
         .findOne({username: UserName})
-        .populate("items")
+        .populate("inventory")
         .then(dbUser=> res.json(dbUser))
         .catch(err => res.status(422).json(err));
     },
 // Create a new item associated with a user id. Only staff users can create 
  NewItem: function(req,res){
-    db.Inventory.create(req.body)
+    db.Inventory
+    .create(req.body)
     .then(dbInventory => db.User.findByIdAndUpdate({username: req.params.username},{ $push: { items: dbInventory._id} }, { new: true }))
     .then(dbUser => res.json(dbUser))
     .catch(err => res.status(422).json(err));
@@ -36,14 +37,22 @@ var odm = {
 // ODM update, where { username: username } and the item details are retrieved
 // from req.body.
  Update: function(req,res){
-    db.Inventory.findOneAndUpdate({username: req.params.username}, req.body)
-   .then(dbInventory => res.json(dbInventory))
+    db.User
+    .findOne({username: req.params.username})
+    .update({"inventory.name": req.body.name}, 
+    {$set: {'inventory.$.name': req.body.name,'inventory.$.description': req.body.description,'inventory.$.itemlevel': req.body.itemlevel,'inventory.$.marketprice': req.body.marketprice,'inventory.$.quantity': req.body.quantity,'inventory.$.link': req.body.link}})
+   .then(dbUser=> res.json(dbUser))
    .catch(err => res.status(422).json(err));
- }
+ },
   // Delete an item from a user. Only staff users can delete items.
   // ODM delete, where { username: username } and the item details are retrieved
 //         // from req.body.
-
+Delete: function(req,res){
+    db.User
+    .findOneAndRemove({username: req.params.username, "inventory.name": req.body.name}, req.body)
+   .then(dbUser=> res.json(dbUser))
+   .catch(err => res.status(422).json(err));
+ }
 }
 
 

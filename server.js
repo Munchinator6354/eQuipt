@@ -31,7 +31,8 @@ db.Inventory.insertMany(inventoryseed)
 // API ROUTER
 // ================================================================================
 
-require("./routes/apiRoutes")(app);
+require("./routes/userRoutes")(app);
+require("./routes/itemRoutes")(app);
 
 // Send every other request to the React app
 // Define any API routes before this runs
