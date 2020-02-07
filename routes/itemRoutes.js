@@ -126,9 +126,13 @@ module.exports = function(app) {
         // from req.body.
         let update = {
             username: req.params.username,
-            item: req.body
         }
-        res.json(update);
+        db.User
+        .findOne(update)
+        .update({"inventory.name": req.body.name}, 
+        {$set: {'inventory.$.name': req.body.name,'inventory.$.description': req.body.description,'inventory.$.itemlevel': req.body.itemlevel,'inventory.$.marketprice': req.body.marketprice,'inventory.$.quantity': req.body.quantity,'inventory.$.link': req.body.link}})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // API DELETE Requests
