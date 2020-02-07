@@ -19,7 +19,12 @@ module.exports = function(app) {
         let searchQuery = {
             username: req.params.username
         }
-        res.json(searchQuery);
+        // res.json(searchQuery);
+        db.User
+        .findOne(searchQuery)
+        .populate("inventory")
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // ICEBOX: Get all of the items in the entire database. Only staff users should be able
@@ -41,14 +46,18 @@ module.exports = function(app) {
     app.post("/api/createItem", function(req, res) {
         // ODM create, where { username: req.params.username } and the item is 
         // retrieved from req.body
-        // let item = {
-        //     username: req.params.username,
-        //     item: req.body
-        // }
+        let item = {
+            name: req.body.name,
+            description: req.body.description,
+            itemlevel: req.body.itemlevel,
+            marketprice: req.body.marketprice,
+            quantity: req.body.quantity,
+            link: req.body.link
+        }
         // res.json(item);
         console.log("YO!")
         db.Inventory
-        .create(req.body)
+        .create(item)
         .then(dbInventory => res.json(dbInventory))
         .catch(err => res.status(422).json(err));
         
@@ -118,9 +127,13 @@ module.exports = function(app) {
         // from req.body.
         let update = {
             username: req.params.username,
-            item: req.body
         }
-        res.json(update);
+        db.User
+        .findOne(update)
+        .update({"inventory.name": req.body.name}, 
+        {$set: {'inventory.$.name': req.body.name,'inventory.$.description': req.body.description,'inventory.$.itemlevel': req.body.itemlevel,'inventory.$.marketprice': req.body.marketprice,'inventory.$.quantity': req.body.quantity,'inventory.$.link': req.body.link}})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // API DELETE Requests
@@ -135,8 +148,11 @@ module.exports = function(app) {
         // from req.body.
         let deletion = {
             username: req.params.username,
-            item: req.body
         }
-        res.json(deletion);
+        // res.json(deletion);
+        db.User
+        .findOneAndRemove({deletion, "inventory.name": req.body.name})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 };
