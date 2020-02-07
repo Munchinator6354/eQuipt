@@ -40,12 +40,12 @@ export default {
         console.log(error)
     });
   },
-  createItem: function(itemName, itemDescription, itemLevel, marketPrice, imageLink, quantity){
-      axios.post("/api/createItem", {
+  createItem: function(itemData){
+      console.log(itemData)
 
-      })
+      axios.post("/api/createItem", itemData)
       .then(response=>{
-        console.log(response.data)
+        console.log(response)
         
         // if(response.data){
         //     console.log('successful login')
@@ -56,7 +56,7 @@ export default {
         //     console.log('login error')
         // }
     }).catch(error => { 
-        console.log('login server error: ')
+        console.log('createItem server error: ')
         console.log(error)
     });
   }

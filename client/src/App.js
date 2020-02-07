@@ -7,7 +7,7 @@ import {
     Switch,
   } from 'react-router-dom'
 import Main from './components/Main';
-import Create from './components/Create';
+import CreateItem from './pages/createItem';
 import SearchPlayers from './components/SearchPlayers';
 import Give from './components/Give';
 import Trade from './components/Trade';
@@ -39,7 +39,7 @@ export default function App() {
                         <Route exact path="/" component={Main} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/Register" component={Register} />
-                        <PrivateRoute exact path="/Create" component={Create} />
+                        <PrivateRoute exact path="/Create" component={CreateItem} />
                         <PrivateRoute exact path="/SearchPlayers" component={SearchPlayers} />
                         <PrivateRoute exact path="/Give" component={Give} />
                         <PrivateRoute exact path="/Trade" component={Trade} />
