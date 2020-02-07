@@ -46,13 +46,17 @@ module.exports = function(app) {
     app.post("/api/createItem", function(req, res) {
         // ODM create, where { username: req.params.username } and the item is 
         // retrieved from req.body
-        // let item = {
-        //     username: req.params.username,
-        //     item: req.body
-        // }
+        let item = {
+            name: req.body.name,
+            description: req.body.description,
+            itemlevel: req.body.itemlevel,
+            marketprice: req.body.marketprice,
+            quantity: req.body.quantity,
+            link: req.body.link
+        }
         // res.json(item);
         db.Inventory
-        .create(req.body)
+        .create(item)
         .then(dbInventory => res.json(dbInventory))
         .catch(err => res.status(422).json(err));
         
