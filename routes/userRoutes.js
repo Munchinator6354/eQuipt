@@ -8,27 +8,53 @@ module.exports = function(app) {
 
     // API GET Requests
     //
-    // Get items by user id
-    // Get all items in database
+    // Log in a user.
     //
     // ---------------------------------------------------------------------------
 
     // Log in a user.
     app.get("/api/login", function(req, res) {
         // Authorize a user.
-        const respondingwith = "hello!";
+
         let authorize = {
             auth: req.body
         };
         res.json(authorize);
     });
 
+    // API POST Requests
+    //
+    // Create a new user.
+    //
+    // ---------------------------------------------------------------------------
+
     // Create a new user.
     app.post("/api/register", function(req, res) {
         // ODM create, where the user is retrieved from req.body
-        let user = {
-            user: req.body
-        };
-        res.json(user);
+
+        db.User.findOne({ username: req.body.username }, (err, user) => {
+            if (err) {
+                console.log("User.js post error: ", err);
+            } else if (user) {
+                res.json({
+                    error: `Sorry, already a user with the username: ${username}`
+                });
+            }
+            else {
+                const newUser = {
+                    playername: req.body.playername,
+                    username: req.body.username,
+                    password: req.body.password,
+                    charactername: req.body.charactername,
+                    email: req.body.email,
+                    role: req.body.role,
+                    inventory: []
+                };
+                db.User
+                    .create(newUser)
+                    .then(dbUser => res.json(dbUser))
+                    .catch(err => res.status(422).json(err));
+            }
+        });
     });
 };
