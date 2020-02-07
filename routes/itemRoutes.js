@@ -150,7 +150,7 @@ module.exports = function(app) {
         }
         // res.json(deletion);
         db.User
-        .findOneAndRemove({deletion, "inventory.name": req.body.name}, req.body)
+        .findOneAndRemove({deletion, "inventory.name": req.body.name})
         .then(dbUser=> res.json(dbUser))
         .catch(err => res.status(422).json(err));
     });
