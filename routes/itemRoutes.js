@@ -38,17 +38,36 @@ module.exports = function(app) {
     // Create new items
     //
     // ---------------------------------------------------------------------------
-
+    app.post("/api/createItem", function(req, res) {
+        // ODM create, where { username: req.params.username } and the item is 
+        // retrieved from req.body
+        // let item = {
+        //     username: req.params.username,
+        //     item: req.body
+        // }
+        // res.json(item);
+        db.Inventory
+        .create(req.body)
+        .then(dbInventory => res.json(dbInventory))
+        .catch(err => res.status(422).json(err));
+        
+    });
     // Create a new item associated with a user id. Only staff users can create 
     // new items.
     app.post("/api/item/:username", function(req, res) {
         // ODM create, where { username: req.params.username } and the item is 
         // retrieved from req.body
-        let item = {
-            username: req.params.username,
-            item: req.body
-        }
-        res.json(item);
+        // let item = {
+        //     username: req.params.username,
+        //     item: req.body
+        // }
+        // res.json(item);
+        db.Inventory
+        .create(req.body)
+        .then(dbInventory => db.User.findByIdAndUpdate({username: req.params.username},{ $push: { items: dbInventory._id} }, { new: true }))
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+        
     });
 
     // API UPDATE Requests
