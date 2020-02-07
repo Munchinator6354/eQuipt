@@ -147,8 +147,11 @@ module.exports = function(app) {
         // from req.body.
         let deletion = {
             username: req.params.username,
-            item: req.body
         }
-        res.json(deletion);
+        // res.json(deletion);
+        db.User
+        .findOneAndRemove({deletion, "inventory.name": req.body.name}, req.body)
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 };
