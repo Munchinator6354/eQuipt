@@ -39,5 +39,25 @@ export default {
         console.log('Sign up server error: ')
         console.log(error)
     });
+  },
+  createItem: function(itemName, itemDescription, itemLevel, marketPrice, imageLink, quantity){
+      axios.post("/api/createItem", {
+
+      })
+      .then(response=>{
+        console.log(response.data)
+        
+        // if(response.data){
+        //     console.log('successful login')
+        //     this.setState({
+        //         redirectTo: '/'
+        //     })
+        // } else {
+        //     console.log('login error')
+        // }
+    }).catch(error => { 
+        console.log('login server error: ')
+        console.log(error)
+    });
   }
 };

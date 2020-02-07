@@ -1,5 +1,5 @@
 import React from 'react'
-import background from "../../images/Gift.jpg";
+import background from "../../images/Create.jpg";
 
 const styles = {
     background: {

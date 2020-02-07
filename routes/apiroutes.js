@@ -16,7 +16,6 @@ module.exports = function(app) {
     // Log in a user.
     app.get("/api/login", function(req, res) {
         // Authorize a user.
-        const respondingwith= "hello!"
         let authorize = {
             auth: req.body
         }

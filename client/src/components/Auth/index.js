@@ -1,19 +1,29 @@
-import React from 'react';
+import React from 'react'
+// import Login from '../../pages/login'
+import LoggedIn from '../LoggedInCheck';
 import {
-    BrowserRouter as Route,
-    Redirect,
-  } from 'react-router-dom';
-  
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from 'react-router-dom'
+import LoggedInCheck from '../LoggedInCheck';
+
+const authed = true;
+
+export default function PrivateRoute({ component: Component, ...rest }) {
+
+  return (
+    <Route {...rest} render={(props) => (
+      LoggedInCheck.isAuthenticated() === true
+        ? <Component {...props} />
+        : <Redirect to='/login' />
+    )} />
+  )
+}
 
 
-  export default function PrivateRoute({ component: Component, ...rest }) {
-    const authed=false;  
-    return (
-        <Route {...rest} render={(props) => (
-          authed === true
-            ? <Component {...props} />
-            : <Redirect exact to='/login' />
-        )} />
-      )
-  }
+
+
   

@@ -15,18 +15,19 @@ import NoMatch from './pages/noMatch';
 import Register from './pages/register';
 import Login from './pages/login';
 import Inventory from './pages/Inventory';
+import PrivateRoute from './components/Auth';
 // import PrivateRoute from './components/Auth';
 
 //here is where we can see if the user is authenticated and will protect the routes. 
-const authed=true
+// const authed=true
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props) => (
-      authed === true
-        ? <Component {...props} />
-        : <Redirect to='/login' />
-    )} />
-  )
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//     <Route {...rest} render={(props) => (
+//       authed === true
+//         ? <Component {...props} />
+//         : <Redirect to='/login' />
+//     )} />
+//   )
   
 export default function App() {
     return (
