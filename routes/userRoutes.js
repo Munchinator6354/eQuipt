@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const db = require("./models");
+const passport = require("../passport");
 
 // ===============================================================================
 // USER ROUTING
