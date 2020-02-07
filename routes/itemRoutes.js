@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // ===============================================================================
-// ROUTING
+// ITEM ROUTING
 // ===============================================================================
 
 module.exports = function(app) {
@@ -12,16 +12,6 @@ module.exports = function(app) {
     // Get all items in database
     //
     // ---------------------------------------------------------------------------
-
-    // Log in a user.
-    app.get("/api/login", function(req, res) {
-        // Authorize a user.
-        const respondingwith= "hello!"
-        let authorize = {
-            auth: req.body
-        }
-        res.json(authorize);
-    });
 
     // Get all of the items associated with a given user.
     app.get("/api/items/:username", function(req, res) {
@@ -59,15 +49,6 @@ module.exports = function(app) {
             item: req.body
         }
         res.json(item);
-    });
-
-    // Create a new user.
-    app.post("/api/register", function(req, res) {
-        // ODM create, where the user is retrieved from req.body
-        let user = {
-            user: req.body
-        }
-        res.json(user);
     });
 
     // API UPDATE Requests
