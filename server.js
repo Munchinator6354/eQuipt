@@ -5,7 +5,6 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const inventoryseed = require("../eQuipt/models/inventory");
 const db = require("./models");
 const passport = require('./passport');
 const session = require('express-session');
@@ -55,17 +54,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// ================================================================================
-// Seed MongoDB
-// ================================================================================
-
-db.Inventory.insertMany(inventoryseed)
-  .then(function(dbInventory) {
-    console.log(dbInventory);
-  })
-  .catch(function(err) {
-    console.log(err.message);
-  });
 
 // ================================================================================
 // API ROUTER
