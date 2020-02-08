@@ -1,4 +1,5 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
@@ -6,7 +7,7 @@ var Schema = mongoose.Schema;
 // Using the Schema constructor, create a new UserSchema object
 // This is similar to a Sequelize model
 var UserSchema = new Schema({
- 
+
   playername: {
     type: String,
     unique: true
@@ -28,11 +29,11 @@ var UserSchema = new Schema({
     unique: true
   },
   role: {
-      type:String,
-      required: true,
-      default: "Player"
+    type: String,
+    required: true,
+    default: "Player"
   },
-    inventory: [
+  inventory: [
     {
       // Store ObjectIds in the array
       type: Schema.Types.ObjectId,
@@ -40,7 +41,6 @@ var UserSchema = new Schema({
       ref: "Inventory"
     }
   ],
-
 });
 
 // This creates our model from the above schema, using mongoose's model method
