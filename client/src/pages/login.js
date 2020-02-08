@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component, useState, createContext} from 'react';
 import API from "../utils/API";
 import LoginForm from "../components/LoginForm";
-
+import Auth from "../components/ProtectedRoute";
+import ProtectedRoute from '../components/ProtectedRoute';
+import RouteHandler from '../components/RouteHandler'
 
 class Login extends Component {
 
-    // constructor(){
-    //     super();
-        // this.authenticated=true;
         state = {
             username: "",
             password: "",
@@ -15,8 +14,6 @@ class Login extends Component {
             error: ""
         };
         
-    // }
-
     handleInputChange = event => {
         const{name, value} = event.target;
         this.setState({ 
@@ -36,15 +33,16 @@ class Login extends Component {
     }
     isAuthenticated(){
         
-        return  this.authenticated
     }
     render() {
         return (
             <div>
+                
             <LoginForm
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
             />
+           
             </div>
 
         )

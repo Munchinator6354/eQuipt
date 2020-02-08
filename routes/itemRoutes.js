@@ -57,7 +57,7 @@ module.exports = function(app) {
         // res.json(item);
         console.log("YO!")
         db.Inventory
-        .create(item)
+        .create(req.body)
         .then(dbInventory => res.json(dbInventory))
         .catch(err => res.status(422).json(err));
         
