@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+var db = require("../models");
 // ===============================================================================
 // ITEM ROUTING
 // ===============================================================================
@@ -55,6 +55,7 @@ module.exports = function(app) {
             link: req.body.link
         }
         // res.json(item);
+        console.log("YO!")
         db.Inventory
         .create(item)
         .then(dbInventory => res.json(dbInventory))
@@ -147,8 +148,11 @@ module.exports = function(app) {
         // from req.body.
         let deletion = {
             username: req.params.username,
-            item: req.body
         }
-        res.json(deletion);
+        // res.json(deletion);
+        db.User
+        .findOneAndRemove({deletion, "inventory.name": req.body.name})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 };

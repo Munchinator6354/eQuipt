@@ -3,14 +3,20 @@ import API from "../utils/API";
 import LoginForm from "../components/LoginForm";
 
 
-
 class Login extends Component {
 
-    state = {
-        username: "",
-        password: "",
-        error: ""
-    };
+    // constructor(){
+    //     super();
+        // this.authenticated=true;
+        state = {
+            username: "",
+            password: "",
+            loggedIn: true,
+            error: ""
+        };
+        
+    // }
+
     handleInputChange = event => {
         const{name, value} = event.target;
         this.setState({ 
@@ -20,15 +26,29 @@ class Login extends Component {
         event.preventDefault();
         API.authenticateUser({username: this.state.username, password: this.state.password})
     };
-
+    login(cb){
+        this.authenticated=true;
+        cb();
+    }
+    logout(cb){
+        this.authenticated=false;
+        cb()
+    }
+    isAuthenticated(){
+        
+        return  this.authenticated
+    }
     render() {
         return (
+            <div>
             <LoginForm
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
             />
+            </div>
 
         )
     }
 }
+
 export default Login;
