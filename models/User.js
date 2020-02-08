@@ -10,23 +10,28 @@ var UserSchema = new Schema({
 
   playername: {
     type: String,
-    unique: true
+    unique: false,
+    required: true
   },
   username: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
   password: {
     type: String,
-    unique: true
+    unique: false,
+    required: true
   },
   charactername: {
     type: String,
-    unique: true
+    unique: false,
+    required: true
   },
   email: {
     type: String,
-    unique: true
+    unique: true,
+    required: true
   },
   role: {
     type: String,
@@ -41,6 +46,26 @@ var UserSchema = new Schema({
       ref: "Inventory"
     }
   ],
+});
+
+UserSchema.methods = {
+  checkPassword: function(inputPassword) {
+    return bcrypt.compareSync(inputPassword, this.password);
+  },
+  hashPassword: plainTextPassword => {
+    return bcrypt.hashSync(plainTextPassword, 10);
+  }
+};
+
+UserSchema.pre("save", function(next) {
+  if (!this.password) {
+    console.log("models/User.js ======= NO PASSWORD PROVIDED =======");
+    next();
+  } else {
+    console.log("models/User.js hashPassword in pre save.");
+    this.password = this.hashPassword(this.password);
+    next();
+  }
 });
 
 // This creates our model from the above schema, using mongoose's model method
