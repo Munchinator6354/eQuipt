@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const db = require("../models");
+const passport = require("../passport");
 
 // ===============================================================================
 // USER ROUTING
@@ -8,19 +9,38 @@ module.exports = function(app) {
 
     // API GET Requests
     //
-    // Log in a user.
+    // Get a user.
     //
     // ---------------------------------------------------------------------------
 
-    // Log in a user.
-    app.get("/api/login", function(req, res) {
-        // Authorize a user.
+    app.get(
+        "/api/user",
+        function(req, res) {
+            console.log('===== User!!======');
+            console.log(req.user);
+            if (req.user) {
+                res.json({ user: req.user });
+            } else {
+                res.json({ user: null });
+            }
+        });
 
-        let authorize = {
-            auth: req.body
-        };
-        res.json(authorize);
-    });
+    // Log in a user.
+    app.post(
+        "/api/login",
+        function(req, res, next) {
+            console.log("routes/userRoutes.js, login, req.body: ");
+            console.log(req.body);
+            next();
+        },
+        passport.authenticate("local"),
+        (req, res) => {
+            console.log("Logged in", req.user);
+            var userInfo = {
+                username: req.user.username
+            };
+            res.send(userInfo);
+        });
 
     // API POST Requests
     //
@@ -31,7 +51,9 @@ module.exports = function(app) {
     // Create a new user.
     app.post("/api/register", function(req, res) {
         // ODM create, where the user is retrieved from req.body
-
+        console.log("/api/register called");
+        console.log("Username: " + req.body.username);
+        console.log(req.body);
         db.User.findOne({ username: req.body.username }, (err, user) => {
             if (err) {
                 console.log("User.js post error: ", err);
@@ -41,6 +63,7 @@ module.exports = function(app) {
                 });
             }
             else {
+                console.log("Duplicate user not found. Proceed with create.");
                 const newUser = {
                     playername: req.body.playername,
                     username: req.body.username,

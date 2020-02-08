@@ -1,24 +1,62 @@
+// ================================================================================
+// Require dependencies
+// ================================================================================
+
 const express = require("express");
 const path = require("path");
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
+const inventoryseed = require("../eQuipt/models/inventory");
+const db = require("./models");
+const passport = require('./passport');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session)
+
+// ================================================================================
+// Set port, intialize express, and connect to MongoDB
+// ================================================================================
+
 const PORT = process.env.PORT || 3001;
 const app = express();
-var inventoryseed = require("../eQuipt/models/inventory");
-// Define middleware here
+mongoose.connect("mongodb://localhost/eQuiptDB", { useNewUrlParser: true });
+
+// ================================================================================
+// Define middleware
+// ================================================================================
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Require all models
-var db = require("./models");
+// Sessions
+app.use(
+	session({
+		secret: 'uncanny-Paladin', // Pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: mongoose.connection }),
+		resave: false, // Required
+		saveUninitialized: false // Required
+	})
+);
+
+app.use( (req, res, next) => {
+  console.log('req.session', req.session);
+  return next();
+});
+
+// Passport
+app.use(passport.initialize())
+app.use(passport.session()) // Calls the deserializeUser
+
+// ================================================================================
 // Serve up static assets (usually on heroku)
+// ================================================================================
+
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/eQuiptDB", { useNewUrlParser: true });
 
-// When the server starts, create and save a new User document to the db
-// The "unique" rule in the User model's schema will prevent duplicate users from being added to the server
+// ================================================================================
+// Seed MongoDB
+// ================================================================================
+
 db.Inventory.insertMany(inventoryseed)
   .then(function(dbInventory) {
     console.log(dbInventory);
@@ -35,10 +73,13 @@ require("./routes/userRoutes")(app);
 require("./routes/itemRoutes")(app);
 
 // Send every other request to the React app
-// Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
+
+// ================================================================================
+// Listener
+// ================================================================================
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
