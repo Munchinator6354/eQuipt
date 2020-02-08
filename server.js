@@ -9,7 +9,7 @@ const inventoryseed = require("../eQuipt/models/inventory");
 const db = require("./models");
 const passport = require('./passport');
 const session = require('express-session');
-// const MongoStore = require('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session)
 
 // ================================================================================
 // Set port, intialize express, and connect to MongoDB
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(
 	session({
 		secret: 'uncanny-Paladin', // Pick a random string to make the hash that is generated secure
-		// store: new MongoStore({ mongooseConnection: dbConnection }),
+		store: new MongoStore({ mongooseConnection: mongoose.connection }),
 		resave: false, // Required
 		saveUninitialized: false // Required
 	})
