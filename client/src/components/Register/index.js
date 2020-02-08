@@ -71,9 +71,21 @@ export default function Register(props) {
                                 type="characterName" 
                                 className="form-control fadeUp" 
                                 name="characterName"
-                                value={props.password}
+                                value={props.characterName}
                                 onChange={props.handleInputChange}
                                 id="characterName" />
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label style={styles.labelFont} for="email" className="col-sm-2 col-form-label fadeUp">Email Address</label>
+                        <div className="col-sm-10">
+                            <input 
+                                type="email" 
+                                className="form-control fadeUp" 
+                                name="email"
+                                value={props.email}
+                                onChange={props.handleInputChange}
+                                id="email" />
                         </div>
                     </div>
                     <div className="form-group row">
