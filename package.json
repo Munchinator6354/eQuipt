@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "eQuipt is a LARP inventory tracker and trader.",
   "main": "server.js",
+  "engines": {
+    "node": "12.15.0"
+  },
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "start:prod": "node server.js",
