@@ -2,9 +2,10 @@ import axios from "axios";
 
 export default {
   authenticateUser: function(userData) {
-    axios.get("/api/login",userData)
+    axios.post("/api/login",userData)
     .then(response=>{
-        console.log(response.data)
+        console.log("Login response: ");
+        console.log(response);
         
         // if(response.data){
         //     console.log('successful login')
@@ -15,16 +16,13 @@ export default {
         //     console.log('login error')
         // }
     }).catch(error => { 
-        console.log('login server error: ')
+        console.log("Login server error: ");
         console.log(error)
     });
   },
-  signUpUser: function(username,password){
-    console.log(username)
-    axios.post("/api/register",{
-        username: username,
-        password: password
-    })
+  signUpUser: function(newUser){
+    console.log(newUser)
+    axios.post("/api/register", newUser)
     .then(response=>{
         console.log(response)
         if(response.data){

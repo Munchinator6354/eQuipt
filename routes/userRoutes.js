@@ -39,7 +39,9 @@ module.exports = function(app) {
     // Create a new user.
     app.post("/api/register", function(req, res) {
         // ODM create, where the user is retrieved from req.body
-
+        console.log("/api/register called");
+        console.log("Username: " + req.body.username);
+        console.log(req.body);
         db.User.findOne({ username: req.body.username }, (err, user) => {
             if (err) {
                 console.log("User.js post error: ", err);
@@ -49,6 +51,7 @@ module.exports = function(app) {
                 });
             }
             else {
+                console.log("Duplicate user not found. Proceed with create.");
                 const newUser = {
                     playername: req.body.playername,
                     username: req.body.username,
