@@ -9,9 +9,21 @@ module.exports = function(app) {
 
     // API GET Requests
     //
-    // Log in a user.
+    // Get a user.
     //
     // ---------------------------------------------------------------------------
+
+    app.get(
+        "/api/user",
+        function(req, res) {
+            console.log('===== User!!======');
+            console.log(req.user);
+            if (req.user) {
+                res.json({ user: req.user });
+            } else {
+                res.json({ user: null });
+            }
+        });
 
     // Log in a user.
     app.post(
