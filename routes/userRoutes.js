@@ -7,11 +7,9 @@ const passport = require("../passport");
 
 module.exports = function(app) {
 
-    // API GET Requests
-    //
-    // Get a user.
-    //
-    // ---------------------------------------------------------------------------
+    // ===========================================================================
+    // GET
+    // ===========================================================================
 
     app.get(
         "/api/user",
@@ -25,35 +23,12 @@ module.exports = function(app) {
             }
         });
 
-    // Log in a user.
-    app.post(
-        "/api/login",
-        function(req, res, next) {
-            console.log("routes/userRoutes.js, login, req.body: ");
-            console.log(req.body);
-            next();
-        },
-        passport.authenticate("local"),
-        (req, res) => {
-            console.log("Logged in", req.user);
-            var userInfo = {
-                username: req.user.username
-            };
-            res.send(userInfo);
-        });
-
-    // API POST Requests
-    //
-    // Create a new user.
-    //
-    // ---------------------------------------------------------------------------
+    // ===========================================================================
+    // POST
+    // ===========================================================================
 
     // Create a new user.
     app.post("/api/register", function(req, res) {
-        // ODM create, where the user is retrieved from req.body
-        console.log("/api/register called");
-        console.log("Username: " + req.body.username);
-        console.log(req.body);
         db.User.findOne({ username: req.body.username }, (err, user) => {
             if (err) {
                 console.log("User.js post error: ", err);
@@ -79,5 +54,32 @@ module.exports = function(app) {
                     .catch(err => res.status(422).json(err));
             }
         });
+    });
+
+    // Log in a user.
+    app.post(
+        "/api/login",
+        function(req, res, next) {
+            console.log("routes/userRoutes.js, login, req.body: ");
+            console.log(req.body);
+            next();
+        },
+        passport.authenticate("local"),
+        (req, res) => {
+            console.log("Logged in", req.user);
+            var userInfo = {
+                username: req.user.username
+            };
+            res.json(userInfo);
+        });
+
+    // Log out a user.
+    app.post("/api/logout", (req, res) => {
+        if (req.user) {
+            req.logout();
+            res.json({ message: "Logging out" });
+        } else {
+            res.json({ message: "No user to log out" });
+        }
     });
 };

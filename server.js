@@ -5,7 +5,6 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const db = require("./models");
 const passport = require('./passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session)
@@ -15,6 +14,7 @@ const MongoStore = require('connect-mongo')(session)
 // ================================================================================
 
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://GenericUser:GenericPassword123@ds029658.mlab.com:29658/heroku_4xwdbn2k";
+// var MONGODB_URI = "mongodb://localhost/eQuiptDB";
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -53,7 +53,6 @@ app.use(passport.session()) // Calls the deserializeUser
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
 
 // ================================================================================
 // API ROUTER
