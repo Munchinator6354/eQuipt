@@ -15,7 +15,7 @@ const styles = {
         fontFamily: "Almendra SC, serif"
     }
 }
-export default function Nav() {
+export default function Navbar() {
     return (
         <div>
             <nav style={styles.background} className="navbar navbar-expand-lg navbar-dark bg-dark static-top">

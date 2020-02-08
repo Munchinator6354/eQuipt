@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import Nav from './components/Nav';
+import Navbar from './components/Navbar';
 import {
     BrowserRouter as Router,
     Redirect,
@@ -34,7 +34,7 @@ import PrivateRoute from './components/Auth';
 
 //     return (
 //         <div>
-//             <Nav />
+//             <Navbar />
 //             <Router>
 //                 <div>
 //                     <Switch>
@@ -99,7 +99,7 @@ class App extends Component {
     render() {
         return (
             <div>
-                <Nav />
+                <Navbar />
                 <Router>
                     <div>
                         <Switch>
