@@ -7,7 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const inventoryseed = require("../eQuipt/models/inventory");
 const db = require("./models");
-// const passport = require('./passport');
+const passport = require('./passport');
 const session = require('express-session');
 // const MongoStore = require('connect-mongo')(session)
 
@@ -41,15 +41,9 @@ app.use( (req, res, next) => {
   return next();
 });
 
-app.post('/user', (req, res) => {
-  console.log('user signup');
-  req.session.username = req.body.username;
-  res.end()
-});
-
 // Passport
-// app.use(passport.initialize())
-// app.use(passport.session()) // Calls the deserializeUser
+app.use(passport.initialize())
+app.use(passport.session()) // Calls the deserializeUser
 
 // ================================================================================
 // Serve up static assets (usually on heroku)

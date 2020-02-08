@@ -1,5 +1,5 @@
 const db = require("../models");
-// const passport = require("../passport");
+const passport = require("../passport");
 
 // ===============================================================================
 // USER ROUTING
@@ -14,14 +14,21 @@ module.exports = function(app) {
     // ---------------------------------------------------------------------------
 
     // Log in a user.
-    app.get("/api/login", function(req, res) {
-        // Authorize a user.
-
-        let authorize = {
-            auth: req.body
-        };
-        res.json(authorize);
-    });
+    app.post(
+        "/api/login",
+        function(req, res, next) {
+            console.log("routes/userRoutes.js, login, req.body: ");
+            console.log(req.body);
+            next();
+        },
+        passport.authenticate("local"),
+        (req, res) => {
+            console.log("Logged in", req.user);
+            var userInfo = {
+                username: req.user.username
+            };
+            res.send(userInfo);
+        });
 
     // API POST Requests
     //
