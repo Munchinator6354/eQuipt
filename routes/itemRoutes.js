@@ -117,7 +117,17 @@ module.exports = function(app) {
             username2: req.params.username2,
             items: req.body
         }
-        res.json(give);
+        // res.json(give);
+        db.Inventory
+        .create(give.items)
+        .then(dbInventory => db.User.findByIdAndUpdate({username: give.username1 },{ $push: dbInventory._id}, { new: true }))
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+
+        db.User
+        .findOneAndRemove({username: give.username1, "inventory.name": give.items.name})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // Update an item's quantity, name, or description. Only staff users can update
