@@ -2,6 +2,10 @@
   "name": "equipt",
   "version": "1.0.0",
   "description": "eQuipt is a LARP inventory tracker and trader.",
+  "engines": {
+    "node": "12.15.0",
+    "npm": "6.13.7"
+  },
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
@@ -11,7 +15,7 @@
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "seed": "node scripts/seedDB.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Ryan Isaacson, Noelle Everage, Abe Kim, and Jessica Sills",
   "license": "ISC",
@@ -28,6 +32,7 @@
     "if-env": "^1.0.4",
     "mongo": "^0.1.0",
     "mongoose": "^5.8.11",
+    "node-sass": "^4.13.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
   }

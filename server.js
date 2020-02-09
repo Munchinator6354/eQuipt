@@ -5,8 +5,6 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const inventoryseed = require("../eQuipt/models/inventory");
-const db = require("./models");
 const passport = require('./passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session)
@@ -15,9 +13,12 @@ const MongoStore = require('connect-mongo')(session)
 // Set port, intialize express, and connect to MongoDB
 // ================================================================================
 
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://GenericUser:GenericPassword123@ds029658.mlab.com:29658/heroku_4xwdbn2k";
+// var MONGODB_URI = "mongodb://localhost/eQuiptDB";
+
 const PORT = process.env.PORT || 3001;
 const app = express();
-mongoose.connect("mongodb://localhost/eQuiptDB", { useNewUrlParser: true });
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // ================================================================================
 // Define middleware
@@ -52,18 +53,6 @@ app.use(passport.session()) // Calls the deserializeUser
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-
-// ================================================================================
-// Seed MongoDB
-// ================================================================================
-
-db.Inventory.insertMany(inventoryseed)
-  .then(function(dbInventory) {
-    console.log(dbInventory);
-  })
-  .catch(function(err) {
-    console.log(err.message);
-  });
 
 // ================================================================================
 // API ROUTER
