@@ -119,9 +119,14 @@ module.exports = function(app) {
         }
         // res.json(give);
         db.Inventory
-        .create(give.item)
-        .then(dbInventory => db.User.findByIdAndUpdate({username: item.username  },{ $push: item.item}, { new: true }))
+        .create(give.items)
+        .then(dbInventory => db.User.findByIdAndUpdate({username: give.username1 },{ $push: dbInventory._id}, { new: true }))
         .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+
+        db.User
+        .findOneAndRemove({username: give.username1, "inventory.name": give.items.name})
+        .then(dbUser=> res.json(dbUser))
         .catch(err => res.status(422).json(err));
 
 
