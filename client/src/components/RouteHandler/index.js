@@ -15,33 +15,39 @@ import Register from '../../pages/register';
 import Login from '../../pages/login';
 import Inventory from '../../pages/Inventory';
 import ProtectedRoute from '../ProtectedRoute';
-import {LoggedInProvider} from '../../LoggedInContext';
+// import LoggedInProvider from '../../LoggedInContext';
+import TestComponent from '../TestComponent';
+import Navbar from '../Navbar';
 
-var loggedIn = true;
+
+
 export default function RouteHandler(props) {
     return (
         <div>
-            <LoggedInProvider>
+            {/* <LoggedInProvider> */}
 
-        
+            
             <Router>
                 <div>
+                    <Navbar/>
                     <Switch>
                         <Route exact path="/" component={Main} />
                         <Route exact path="/login" component={Login}/>
-                        <ProtectedRoute exact path="/Create" component={CreateItem} loggedIn={loggedIn}/>
+                        <Route exact path='/test' component={TestComponent}/>
+                        <ProtectedRoute exact path="/Create" component={CreateItem}/>
                         <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} />
                         <ProtectedRoute exact path="/Give" component={Give} />
                         <ProtectedRoute exact path="/Trade" component={Trade} />
                         <ProtectedRoute exact path="/Inventory" component={Inventory} />
                         <Route exact path="/Register" component={Register} />
-                  
+
                         <Route component={NoMatch} />
                     </Switch>
                 </div>
             </Router>
-
-            </LoggedInProvider>
+            
+{/* 
+            </LoggedInProvider> */}
         </div>
     )
 }
