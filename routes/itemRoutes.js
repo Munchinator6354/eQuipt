@@ -67,14 +67,14 @@ module.exports = function(app) {
     app.post("/api/item/:username", function(req, res) {
         // ODM create, where { username: req.params.username } and the item is 
         // retrieved from req.body
-        // let item = {
-        //     username: req.params.username,
-        //     item: req.body
-        // }
+        let item = {
+            username: req.params.username,
+            item: req.body
+        }
         // res.json(item);
         db.Inventory
-        .create(req.body)
-        .then(dbInventory => db.User.findByIdAndUpdate({username: req.params.username},{ $push: { items: dbInventory._id} }, { new: true }))
+        .create(item.item)
+        .then(dbInventory => db.User.findByIdAndUpdate({username: item.username  },{ $push: dbInventory._id}, { new: true }))
         .then(dbUser => res.json(dbUser))
         .catch(err => res.status(422).json(err));
         
@@ -117,7 +117,17 @@ module.exports = function(app) {
             username2: req.params.username2,
             items: req.body
         }
-        res.json(give);
+        // res.json(give);
+        db.Inventory
+        .create(give.items)
+        .then(dbInventory => db.User.findByIdAndUpdate({username: give.username1 },{ $push: dbInventory._id}, { new: true }))
+        .then(dbUser => res.json(dbUser))
+        .catch(err => res.status(422).json(err));
+
+        db.User
+        .findOneAndRemove({username: give.username1, "inventory.name": give.items.name})
+        .then(dbUser=> res.json(dbUser))
+        .catch(err => res.status(422).json(err));
     });
 
     // Update an item's quantity, name, or description. Only staff users can update
