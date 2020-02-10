@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 const styles = {
     background: {
@@ -19,41 +20,48 @@ export default function Navbar() {
     return (
         <div>
             <nav style={styles.background} className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-                <a className="navbar-brand" style={styles.headerFont} href="/">eQuipt</a>
+                    <Link to="/" style={styles.headerFont} className="navbar-brand">
+                        eQuipt
+                    </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/login">
+                            <Link to="/login" style={styles.font} className="navbar-brand nav-link">
                                 Login
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/searchPlayers">
-                                Search
-                            </a>
+                            <Link to="/searchPlayers" style={styles.font} className = "navbar-brand nav-link">
+                            Search
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/Inventory">
-                                Inventory
-                            </a>
+                            <Link to="/Inventory" style={styles.font} className = "navbar-brand nav-link">
+                            Inventory
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/give">
-                                Give
-                            </a>
+                            <Link to="/give" style={styles.font} className = "navbar-brand nav-link">
+                            Give
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/trade">
-                                Trade
-                            </a>
+                            <Link to="/trade"style={styles.font}  className = "navbar-brand nav-link">
+                            Trade
+                            </Link>
                         </li>
                         <li className="nav-item active">
-                            <a style={styles.font} className="navbar-brand nav-link" href="/create">
-                                Create
-                            </a>
+                            <Link to="/create" style={styles.font} className = "navbar-brand nav-link">
+                            Create
+                            </Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/test" style={styles.font} className = "navbar-brand nav-link">
+                            Test
+                            </Link>
                         </li>
                     </ul>
                 </div>

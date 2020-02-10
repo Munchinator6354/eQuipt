@@ -1,5 +1,10 @@
 import React from 'react'
 import background from "../../images/Door.jpg";
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../../actions/logIn';
+import { Link } from 'react-router-dom';
+
+
 const styles = {
     background: {
         backgroundImage: `url(${background})`,
@@ -30,7 +35,12 @@ const styles = {
         marginLeft: "15px"
     }
 }
+
 export default function LoginForm(props) {
+    const counter = useSelector(state => state.counter);
+    const isLogged = useSelector(state => state.isLogged);
+    const dispatch = useDispatch();
+    
     return (
 
         <div style={styles.background}>
@@ -68,14 +78,20 @@ export default function LoginForm(props) {
                         <button 
                             style={styles.buttonFont} 
                             type="submit" 
-                            onClick={props.handleFormSubmit} 
+                            onClick={()=> dispatch(login())} 
                             className="btn btn-outline-light fadeUp">
                             Login
                         </button>
                     </div>
                 </form>
                 <br />
-                <h2 style={styles.font} className="fadeUp">Register <a href = "/register">here </a>if you must!</h2>
+                <h2 style={styles.font} className="fadeUp">Register 
+                {/* <a href = "/register"> */}
+                <Link to="/register" >
+                    here 
+                </Link>
+                {/* </a> */}
+                if you must!</h2>
                 
             </div>
         </div>
