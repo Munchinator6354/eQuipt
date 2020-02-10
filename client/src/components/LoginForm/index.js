@@ -78,7 +78,7 @@ export default function LoginForm(props) {
                         <button 
                             style={styles.buttonFont} 
                             type="submit" 
-                            onClick={()=> dispatch(login())} 
+                            onClick={props.handleFormSubmit} 
                             className="btn btn-outline-light fadeUp">
                             Login
                         </button>
@@ -86,11 +86,9 @@ export default function LoginForm(props) {
                 </form>
                 <br />
                 <h2 style={styles.font} className="fadeUp">Register 
-                {/* <a href = "/register"> */}
                 <Link to="/register" >
                     here 
                 </Link>
-                {/* </a> */}
                 if you must!</h2>
                 
             </div>
