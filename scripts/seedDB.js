@@ -59,7 +59,7 @@ mongoose.connect(
     ]
 
 var userSeed = [
-  {playername: "", username: "", password: "", charactername: "", email:"", role:""}
+  {playername: "Joe", username: "joeguy", password: "12345", charactername: "Romelyn", email:"Joe@gmail.com", role:"Player", inventory: [ {name: 'Health Potion', description: 'Healing Potion', itemlevel: 'N/A', marketprice: 1, quantity: 5, link: 'https://res.cloudinary.com/teepublic/image/private/s--HsCIfyO---/t_Resized%20Artwork/c_fit,g_north_west,h_954,w_954/co_262c3a,e_outline:48/co_262c3a,e_outline:inner_fill:48/co_ffffff,e_outline:48/co_ffffff,e_outline:inner_fill:48/co_bbbbbb,e_outline:3:1000/c_mpad,g_center,h_1260,w_1260/b_rgb:eeeeee/c_limit,f_jpg,h_630,q_90,w_630/v1511453031/production/designs/2093002_1.jpg'}] }
 ]
 
 db.Inventory
