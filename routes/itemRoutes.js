@@ -152,6 +152,7 @@ module.exports = function(app) {
                db.Inventory
                .findById({_id:give.inventoryid})
                .then(dbModel => dbModel.remove())
+               .then(dbModel => res.json(dbModel))
                .catch(err => res.status(422).json(err));
             }
             else{
@@ -162,6 +163,7 @@ module.exports = function(app) {
                     db.Inventory
                     .findOneAndUpdate({_id:give.inventoryid}, {quantity: NewQuantity})
                 })
+                .then(dbModel => res.json(dbModel))
                 .catch(function(err){
                     res.json(err);
                 }) 
