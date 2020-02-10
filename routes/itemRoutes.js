@@ -121,9 +121,11 @@ module.exports = function(app) {
         }
         var GiveItem;
         // res.json(give);
+        //First find item within Inventory table by id
         db.Inventory
         .findOne({_id: give.inventoryid})
         .then(function(dbInventory){
+                //create new item based on item's fields with quantity given from above
                 GiveItem = {
                 name: dbInventory.name,
                 description: dbInventory.description,
@@ -135,6 +137,7 @@ module.exports = function(app) {
             db.Inventory
             .create(GiveItem)
             .then(function(dbInventory){
+                //after creating item, update user2 with Given item in their inventory.
                 return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true});
             })
             .catch(function(err){
@@ -145,9 +148,11 @@ module.exports = function(app) {
             res.json(err);
         })
 
+        //then find item in the inventory table
         db.Inventory
         .findOne({_id: give.inventoryid})
         .then(function(dbInventory){
+            //if quantity given is the same as original quantity then delete item from table
             if (dbInventory.quantity === give.give_quantity){
                db.Inventory
                .findById({_id:give.inventoryid})
@@ -156,14 +161,18 @@ module.exports = function(app) {
                .catch(err => res.status(422).json(err));
             }
             else{
+                //else reduce quantity by quantity given as the New Quantity
                 db.Inventory
                .findById({_id:give.inventoryid})
                 .then(function(dbModel){
                     let NewQuantity = dbModel.quantity - GiveItem.quantity;
                     db.Inventory
                     .findOneAndUpdate({_id:give.inventoryid}, {quantity: NewQuantity})
+                    .then(dbModel => res.json(dbModel))
+                    .catch(function(err){
+                        res.json(err);
+                    }) 
                 })
-                .then(dbModel => res.json(dbModel))
                 .catch(function(err){
                     res.json(err);
                 }) 
