@@ -8,16 +8,18 @@ import { login } from '../actions/logIn';
 export default {
 
     authenticateUser: function (userData) {
+     return new Promise((resolve, reject)=>{
         axios.post("/api/login", userData)
             .then(response => {
                 console.log("Login response: ");
                 console.log(response);
-                const counter = useSelector(state => state.counter);
-                const isLogged = useSelector(state => state.isLogged);
-                const dispatch = useDispatch();
+                resolve(response);
+                // const counter = useSelector(state => state.counter);
+                // const isLogged = useSelector(state => state.isLogged);
+                // const dispatch = useDispatch();
 
-                dispatch(login())
-                // if(response.data){
+                // dispatch(login())
+                // // if(response.data){
                 //     console.log('successful login')
                 //     this.setState({
                 //         redirectTo: '/'
@@ -28,7 +30,9 @@ export default {
             }).catch(error => {
                 console.log("Login server error: ");
                 console.log(error)
+                reject(Error("Failed to login"))
             })
+        })
     },
     signUpUser: function (newUser) {
         console.log(newUser)
@@ -50,6 +54,7 @@ export default {
     },
     createItem: function (itemData) {
         console.log(itemData)
+        console.log("within axios post")
 
         axios.post("/api/createItem", itemData)
             .then(response => {
