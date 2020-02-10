@@ -58,10 +58,25 @@ mongoose.connect(
     {name: 'Crypt Moss', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhO27vvTIVUJMBjrCHdwy9MSgQpCr0nxmVbdvmBiqGxdOBIRuZ' }
     ]
 
-    
+var userSeed = [
+  {playername: "", username: "", password: "", charactername: "", email:"", role:""}
+]
+
 db.Inventory
 .remove({})
 .then(() => db.Inventory.collection.insertMany(inventorySeed))
+.then(data => {
+  console.log(data.result.n + " records inserted!");
+  process.exit(0);
+})
+.catch(err => {
+  console.error(err);
+  process.exit(1);
+});
+
+db.User
+.remove({})
+.then(() => db.User.collection.insertMany(userSeed))
 .then(data => {
   console.log(data.result.n + " records inserted!");
   process.exit(0);
