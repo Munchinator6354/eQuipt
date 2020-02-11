@@ -58,15 +58,66 @@ mongoose.connect(
     {name: 'Crypt Moss', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhO27vvTIVUJMBjrCHdwy9MSgQpCr0nxmVbdvmBiqGxdOBIRuZ' }
     ]
 
-    
+var userSeed = [
+  {playername: "Bob", username: "Bob", password: "12345", charactername: "Bobert", email:"Bob@gmail.com", role:"Staff" },
+  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Druid", email:"Noelle@gmail.com", role:"Player" },
+  {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Noble", email:"Ryan@gmail.com", role:"Player" },
+  {playername: "Abe", username: "Abedude", password: "12347", charactername: "Abe the Weary Wizard", email:"Abe@gmail.com", role:"Player" },
+  {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Cleric", email:"Jessica@gmail.com", role:"Player" }
+]
+
 db.Inventory
 .remove({})
 .then(() => db.Inventory.collection.insertMany(inventorySeed))
 .then(data => {
   console.log(data.result.n + " records inserted!");
-  process.exit(0);
+  
 })
 .catch(err => {
   console.error(err);
   process.exit(1);
 });
+
+db.User
+.remove({})
+.then(() => db.User.collection.insertMany(userSeed))
+.then(data => {
+  console.log(data.result.n + " records inserted!");
+  db.Inventory
+  .findOne({name: 'Artificer Kit'})
+  .then(function(dbModel){
+     db.User
+     .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel._id}}, {new:true})
+     .populate("inventory")
+     .then(function(dbUser){
+       console.log(dbUser);
+       process.exit(0);
+     })
+    })
+     .catch(function(err) {
+      //     // If an error occurs, send it back to the client
+          res.json(err);
+        });  
+      })
+.catch(err => {
+  console.error(err);
+  process.exit(1);
+});
+
+// db.Inventory
+// .findOne({name: 'Apothecary Kit'})
+// .then(function(dbModel){
+//    db.User
+//    .findOneAndUpdate({playername: "Jessica"}, {$push: {inventory: dbModel._id}}, {new:true})
+//    .then(function(dbUser){
+//      console.log("HELLO");
+//    })
+    
+//    })
+// .then(data => {
+//    console.log("Added Apothecary Kit to Jessica");
+//   process.exit(0);
+// })
+// .catch(err => {
+//   process.exit(1);
+// }):
