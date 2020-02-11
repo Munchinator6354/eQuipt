@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import API from "../utils/API";
 import background from '../images/Door.jpg'
 import { useDispatch } from 'react-redux'
@@ -31,6 +31,11 @@ const styles = {
         fontSize: "1em",
         fontFamily: "Almendra SC, serif",
     },
+    errorFont: {
+        fontSize: "1em",
+        fontFamily: "Almendra SC, serif",
+        color: "red"
+    },
     buttonFont: {
         fontSize: "1em",
         fontFamily: "Almendra SC, serif",
@@ -43,6 +48,7 @@ export default function Login() {
     const dispatch = useDispatch();
     let userName = React.createRef();
     let password = React.createRef();
+    const [loginError, setError] = useState("");
 
     return (
         <div style={styles.background}>
@@ -73,6 +79,7 @@ export default function Login() {
                                 ref={password}/>
                         </div>
                     </div>
+                    <p style={styles.errorFont} className="text-center">{loginError}</p>
                     <br />
                     <div className="form-group row">
                         <button 
@@ -85,19 +92,22 @@ export default function Login() {
                                         if(response){
                                         dispatch(login())
                                         dispatch(username(response.data.username))
+                                        setError("")
                                         console.log(response)
                                         }
+                                    
                                     }
                                 )
                                 .catch(
                                     function(error) {
+                                        if(error == "Error: Failed to login"){
+                                           setError("Username or Password incorrect please try again")
+                                        }
                                         dispatch(logout())
-                                        console.log(error)
                                     }
                                 );
                                 API.getUserInfo({}).then(
                                     function(response){
-                                        console.log(response)
                                     }
                                 )
                             }} 
