@@ -85,6 +85,7 @@ export default function Login() {
                                         if(response){
                                         dispatch(login())
                                         dispatch(username(response.data.username))
+                                        console.log(response)
                                         }
                                     }
                                 )
@@ -94,6 +95,11 @@ export default function Login() {
                                         console.log(error)
                                     }
                                 );
+                                API.getUserInfo({}).then(
+                                    function(response){
+                                        console.log(response)
+                                    }
+                                )
                             }} 
                             className="btn btn-outline-light fadeUp">
                             Login

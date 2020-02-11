@@ -18,7 +18,6 @@ const styles = {
         fontSize: "1.3em",
         fontFamily: "Almendra SC, serif",
         marginTop: "1em",
-        color: "#1C246E"
     }
 
 }
@@ -26,6 +25,7 @@ export default function Navbar() {
     const username = useSelector(state => state.username);
     const isLogged = useSelector(state => state.isLogged);
     const dispatch = useDispatch();
+
     return (
         <div>
             <nav style={styles.background} className="navbar navbar-expand-lg navbar-dark bg-dark static-top">

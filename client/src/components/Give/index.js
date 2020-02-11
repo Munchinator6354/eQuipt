@@ -14,9 +14,9 @@ const styles = {
         opacity: "1",
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
-        height:"95vh",
+        height: "95vh",
     },
-    font:{
+    font: {
         marginBottom: "5px",
         fontSize: "1.55em",
         fontFamily: "Almendra SC, serif"
@@ -40,55 +40,54 @@ export default function Give(props) {
                 <h1 className="fadeUp" style={styles.font}>Give Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item to Give</label>
+                        <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
-                                id="username"
-                                name="username" 
-                                value={props.userName} 
-                                onChange={props.handleInputChange}
-                                />
+                            <select className="form-control fadeUp" id="exampleFormControlSelect1">
+                                <option>Long Sword</option>
+                                <option>Metal Axe</option>
+                                <option>Shield</option>
+                                <option>Large Shield</option>
+                                <option>Cloak</option>
+                            </select>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Quantity to Give</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="password" 
-                                className="form-control fadeUp" 
-                                name="password"
+                            <input
+                                type="number"
+                                className="form-control fadeUp"
+                                name="qtyToGive"
                                 value={props.password}
                                 onChange={props.handleInputChange}
-                                id="inputPassword" />
+                                id="qtyToGive" />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Player to Give</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="password" 
-                                className="form-control fadeUp" 
-                                name="password"
+                            <input
+                                type="text"
+                                className="form-control fadeUp"
+                                name="playerToGive"
                                 value={props.password}
                                 onChange={props.handleInputChange}
-                                id="inputPassword" />
+                                id="playerToGive" />
                         </div>
                     </div>
                     <br />
                     <div className="form-group row">
-                        <button 
-                            style={styles.buttonFont} 
-                            type="submit" 
-                            onClick={props.handleFormSubmit} 
+                        <button
+                            style={styles.buttonFont}
+                            type="submit"
+                            onClick={props.handleFormSubmit}
                             className="btn btn-outline-light fadeUp">
                             Give
                         </button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
-                )
-            }
+    )
+}

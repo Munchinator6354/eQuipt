@@ -14,6 +14,16 @@ export default {
             })
         })
     },
+    getUserInfo: function () {
+        return new Promise((resolve, reject)=>{
+           axios.get("/api/login")
+               .then(response => {
+                   resolve(response);
+               }).catch(error => {
+                   console.log(error)
+               })
+           })
+       },
     signUpUser: function (newUser) {
         console.log(newUser)
         axios.post("/api/register", newUser)
