@@ -31,13 +31,6 @@ class Register extends Component {
                 role: "Player",
                 inventory: []
             })
-            // .then(res => {
-            //     if (res.data.status === "error") {
-            //         throw new Error(res.data.message);
-            //     }
-            //     this.setState({ results: res.data.message, error: "" });
-            // })
-            // .catch(err => this.setState({ error: err.message }));
     };
     render() {
         return (
