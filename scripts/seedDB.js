@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const bcrypt = require("bcryptjs");
+
 
 mongoose.connect(
     process.env.MONGODB_URI ||
@@ -66,6 +68,22 @@ var userSeed = [
   {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Cleric", email:"Jessica@gmail.com", role:"Player" }
 ]
 
+var hashedUserSeed = []
+function hashSeed(seed){
+  for(i=0;i<seed.length;i++){
+    hashedUserSeed.push({
+      playername: seed[i].playername,
+      username: seed[i].username,
+      password: bcrypt.hashSync(seed[i].password, 10),
+      charactername: seed[i].charactername,
+      email: seed[i].email,
+      role: seed[i].email
+    })
+  }
+}
+
+hashSeed(userSeed)
+
 db.Inventory
 .remove({})
 .then(() => db.Inventory.collection.insertMany(inventorySeed))
@@ -80,7 +98,7 @@ db.Inventory
 
 db.User
 .remove({})
-.then(() => db.User.collection.insertMany(userSeed))
+.then(() => db.User.collection.insertMany(hashedUserSeed))
 .then(data => {
   console.log(data.result.n + " records inserted!");
   db.Inventory
@@ -103,6 +121,12 @@ db.User
   console.error(err);
   process.exit(1);
 });
+
+
+
+
+
+
 
 // db.Inventory
 // .findOne({name: 'Apothecary Kit'})
