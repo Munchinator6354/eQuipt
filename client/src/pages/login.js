@@ -6,6 +6,7 @@ import { login } from '../actions/logIn';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/logout';
 import { username } from '../actions/getUsername';
+import { userInfo } from '../actions/userInfo';
 
 const styles = {
     background: {
@@ -92,18 +93,19 @@ export default function Login() {
                                         if(response){
                                         dispatch(login())
                                         dispatch(username(response.data.username))
-                                        API.grabPlayerInventory({username: response.data.username})
-                                            .then(
-                                                function(response){
-                                                    if(response){
-                                                        console.log("something")
-                                                    }
-                                                console.log("42 off bench");
-                                            }).catch(
-                                                function(error){
-                                                    console.log(error);
-                                                }
-                                            );
+                                        dispatch(userInfo(response.data))
+                                        // API.grabPlayerInventory({username: response.data.username})
+                                        //     .then(
+                                        //         function(response){
+                                        //             if(response){
+                                        //                 console.log("something")
+                                        //             }
+                                        //         console.log("42 off bench");
+                                        //     }).catch(
+                                        //         function(error){
+                                        //             console.log(error);
+                                        //         }
+                                        //     );
                                         setError("")
                                         console.log(response)
                                         }
