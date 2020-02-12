@@ -72,6 +72,7 @@ module.exports = function(app) {
             };
             db.User
                 .findOne(userInfo)
+                .populate("inventory")
                 .then(dbUser => res.json(dbUser))
                 .catch(err => res.status(422).json(err));
         });
