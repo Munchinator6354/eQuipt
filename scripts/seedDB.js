@@ -102,7 +102,7 @@ db.User
 .then(data => {
   console.log(data.result.n + " records inserted!");
   db.Inventory
-  .findOne({name: 'Artificer Kit'})
+  .find({name: /Iron/i})
   .then(function(dbModel){
      db.User
      .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel._id}}, {new:true})
