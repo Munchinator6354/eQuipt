@@ -70,7 +70,11 @@ module.exports = function(app) {
             var userInfo = {
                 username: req.user.username
             };
-            res.json(userInfo);
+            db.User
+                .findOne(userInfo)
+                .populate("inventory")
+                .then(dbUser => res.json(dbUser))
+                .catch(err => res.status(422).json(err));
         });
 
     // Log out a user.

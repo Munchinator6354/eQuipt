@@ -6,6 +6,7 @@ export default {
      return new Promise((resolve, reject)=>{
         axios.post("/api/login", userData)
             .then(response => {
+                console.log(response)
                 resolve(response);
             }).catch(error => {
                 console.log("Login server error: ");
@@ -14,6 +15,16 @@ export default {
             })
         })
     },
+    getUserInfo: function () {
+        return new Promise((resolve, reject)=>{
+           axios.get("/api/login")
+               .then(response => {
+                   resolve(response);
+               }).catch(error => {
+                   console.log(error)
+               })
+           })
+       },
     signUpUser: function (newUser) {
         console.log(newUser)
         axios.post("/api/register", newUser)
@@ -42,5 +53,18 @@ export default {
                 console.log('createItem server error: ')
                 console.log(error)
             });
+    },
+    grabPlayerInventory: function (username) {
+        return new Promise ((resolve, reject) => {
+            axios.get("/api/items/" + username)
+            .then(response => {
+                console.log("Ball getting pased from route")
+            }).catch(error => {
+                console.log("grabPlayerInventory server error: ")
+                console.log(error);
+            })
+        })
+
     }
+
 };

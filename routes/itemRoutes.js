@@ -19,6 +19,7 @@ module.exports = function(app) {
         let searchQuery = {
             username: req.params.username
         }
+        console.log("REACHING items/usrname route");
         // res.json(searchQuery);
         db.User
         .findOne(searchQuery)

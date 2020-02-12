@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const bcrypt = require("bcryptjs");
+
 
 mongoose.connect(
     process.env.MONGODB_URI ||
@@ -60,11 +62,27 @@ mongoose.connect(
 
 var userSeed = [
   {playername: "Bob", username: "Bob", password: "12345", charactername: "Bobert", email:"Bob@gmail.com", role:"Staff" },
-  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Druid", email:"Noelle@gmail.com", role:"Player" },
-  {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Noble", email:"Ryan@gmail.com", role:"Player" },
+  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Drained Druid", email:"Noelle@gmail.com", role:"Player" },
+  {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Narcoleptic Noble", email:"Ryan@gmail.com", role:"Player" },
   {playername: "Abe", username: "Abedude", password: "12347", charactername: "Abe the Weary Wizard", email:"Abe@gmail.com", role:"Player" },
-  {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Cleric", email:"Jessica@gmail.com", role:"Player" }
+  {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Comical Cleric", email:"Jessica@gmail.com", role:"Player" }
 ]
+
+var hashedUserSeed = []
+function hashSeed(seed){
+  for(i=0;i<seed.length;i++){
+    hashedUserSeed.push({
+      playername: seed[i].playername,
+      username: seed[i].username,
+      password: bcrypt.hashSync(seed[i].password, 10),
+      charactername: seed[i].charactername,
+      email: seed[i].email,
+      role: seed[i].email
+    })
+  }
+}
+
+hashSeed(userSeed)
 
 db.Inventory
 .remove({})
@@ -80,14 +98,14 @@ db.Inventory
 
 db.User
 .remove({})
-.then(() => db.User.collection.insertMany(userSeed))
+.then(() => db.User.collection.insertMany(hashedUserSeed))
 .then(data => {
   console.log(data.result.n + " records inserted!");
   db.Inventory
-  .findOne({name: 'Artificer Kit'})
+  .find({name: /Iron/i})
   .then(function(dbModel){
      db.User
-     .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel._id}}, {new:true})
+     .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel}}, {new:true})
      .populate("inventory")
      .then(function(dbUser){
        console.log(dbUser);
@@ -103,6 +121,12 @@ db.User
   console.error(err);
   process.exit(1);
 });
+
+
+
+
+
+
 
 // db.Inventory
 // .findOne({name: 'Apothecary Kit'})

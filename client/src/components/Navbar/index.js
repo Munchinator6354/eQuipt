@@ -18,7 +18,6 @@ const styles = {
         fontSize: "1.3em",
         fontFamily: "Almendra SC, serif",
         marginTop: "1em",
-        color: "#1C246E"
     }
 
 }
@@ -26,13 +25,14 @@ export default function Navbar() {
     const username = useSelector(state => state.username);
     const isLogged = useSelector(state => state.isLogged);
     const dispatch = useDispatch();
+
     return (
         <div>
             <nav style={styles.background} className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
                     <Link to="/" style={styles.headerFont} className="navbar-brand">
                         eQuipt
                     </Link>
-                    {isLogged ? <p style={styles.welcomeFont} className="navbar-brand">Welcome {username}</p>: ''}
+                    {isLogged ? <p style={styles.welcomeFont} className="navbar-brand">Welcome &nbsp;{username}</p>: ''}
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
