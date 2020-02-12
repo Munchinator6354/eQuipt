@@ -53,5 +53,18 @@ export default {
                 console.log('createItem server error: ')
                 console.log(error)
             });
+    },
+    grabPlayerInventory: function (username) {
+        return new Promise ((resolve, reject) => {
+            axios.get("/api/items/" + username)
+            .then(response => {
+                console.log("Ball getting pased from route")
+            }).catch(error => {
+                console.log("grabPlayerInventory server error: ")
+                console.log(error);
+            })
+        })
+
     }
+
 };

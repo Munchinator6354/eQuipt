@@ -12,7 +12,7 @@ import Trade from '../Trade';
 import NoMatch from '../../pages/noMatch';
 import Register from '../../pages/register';
 import Login from '../../pages/login';
-import Inventory from '../../pages/Inventory';
+import Inventory from '../Inventory';
 import ProtectedRoute from '../ProtectedRoute';
 import TestComponent from '../TestComponent';
 import Navbar from '../Navbar';

@@ -1,5 +1,7 @@
-import React from 'react'
+import React from 'react';
 import background from "../../images/Door.jpg";
+import { useSelector, useDispatch } from 'react-redux';
+
 const styles = {
     background: {
         backgroundImage: `url(${background})`,
@@ -30,7 +32,12 @@ const styles = {
         marginLeft: "15px"
     }
 }
-export default function InventoryForm(props) {
+
+
+
+export default function InventoryForm() {
+    const userInfo = useSelector(state => state.userInfo);
+
     return (
 
         <div style={styles.background}>
@@ -39,34 +46,30 @@ export default function InventoryForm(props) {
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
 
                 <table className="table table-dark">
-                    <thead>
+
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Item Level</th>
+                        <th scope="col">Market Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Image Link</th>
+                    </tr>
+
+                    {userInfo.inventory.map(user => (
+
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Item</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Type</th>
+                            <td>{user.name}</td>
+                            <td>{user.description}</td>
+                            <td>{user.itemlevel}</td>
+                            <td>{user.marketprice}</td>
+                            <td>{user.quantity}</td>
+                            <td>{user.link}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Long Sword</td>
-                            <td>1</td>
-                            <td>Attack</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Wooden Shield</td>
-                            <td>1</td>
-                            <td>Defense</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Healing Potion</td>
-                            <td>3</td>
-                            <td>Health</td>
-                        </tr>
-                    </tbody>
+
+                    ))}
+
+
                 </table>
 
             </div>
