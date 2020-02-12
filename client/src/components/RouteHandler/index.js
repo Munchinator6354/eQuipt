@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     BrowserRouter as Router,
-    Redirect,
     Route,
     Switch,
   } from 'react-router-dom'
@@ -15,18 +14,14 @@ import Register from '../../pages/register';
 import Login from '../../pages/login';
 import Inventory from '../../pages/Inventory';
 import ProtectedRoute from '../ProtectedRoute';
-// import LoggedInProvider from '../../LoggedInContext';
 import TestComponent from '../TestComponent';
 import Navbar from '../Navbar';
-
-
+import Welcome from '../Welcome';
+import LogOut from '../LogOut';
 
 export default function RouteHandler(props) {
     return (
         <div>
-            {/* <LoggedInProvider> */}
-
-            
             <Router>
                 <div>
                     <Navbar/>
@@ -39,15 +34,13 @@ export default function RouteHandler(props) {
                         <ProtectedRoute exact path="/Give" component={Give} />
                         <ProtectedRoute exact path="/Trade" component={Trade} />
                         <ProtectedRoute exact path="/Inventory" component={Inventory} />
+                        <ProtectedRoute exact path="/Welcome" component={Welcome}/>
+                        <Route exact path="/Logout" component={LogOut}/>
                         <Route exact path="/Register" component={Register} />
-
                         <Route component={NoMatch} />
                     </Switch>
                 </div>
             </Router>
-            
-{/* 
-            </LoggedInProvider> */}
         </div>
     )
 }

@@ -112,22 +112,75 @@ module.exports = function(app) {
     app.put("/api/give/fromuser/:username1/touser/:username2", function(req, res) {
         // Get username1 items from req.body
         // ODM call to put username1 items into username2 inventory.
+        //Drop down menu with all of a users
         let give = {
             username1: req.params.username1,
             username2: req.params.username2,
-            items: req.body
+            inventoryid: req.body.inventoryid,
+            give_quantity: req.body.quantity,
         }
+        var GiveItem;
         // res.json(give);
+        //First find item within Inventory table by id
         db.Inventory
-        .create(give.items)
-        .then(dbInventory => db.User.findByIdAndUpdate({username: give.username1 },{ $push: dbInventory._id}, { new: true }))
-        .then(dbUser => res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+        .findOne({_id: give.inventoryid})
+        .then(function(dbInventory){
+                //create new item based on item's fields with quantity given from above
+                GiveItem = {
+                name: dbInventory.name,
+                description: dbInventory.description,
+                itemlevel: dbInventory.itemlevel,
+                marketprice: dbInventory.marketprice,
+                quantity: give.give_quantity,
+                link: dbInventory.link
+            }
+            db.Inventory
+            .create(GiveItem)
+            .then(function(dbInventory){
+                //after creating item, update user2 with Given item in their inventory.
+                return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true});
+            })
+            .catch(function(err){
+                res.json(err);
+            })
+        })
+        .catch(function(err){
+            res.json(err);
+        })
 
-        db.User
-        .findOneAndRemove({username: give.username1, "inventory.name": give.items.name})
-        .then(dbUser=> res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+        //then find item in the inventory table
+        db.Inventory
+        .findOne({_id: give.inventoryid})
+        .then(function(dbInventory){
+            //if quantity given is the same as original quantity then delete item from table
+            if (dbInventory.quantity === give.give_quantity){
+               db.Inventory
+               .findById({_id:give.inventoryid})
+               .then(dbModel => dbModel.remove())
+               .then(dbModel => res.json(dbModel))
+               .catch(err => res.status(422).json(err));
+            }
+            else{
+                //else reduce quantity by quantity given as the New Quantity
+                db.Inventory
+               .findById({_id:give.inventoryid})
+                .then(function(dbModel){
+                    let NewQuantity = dbModel.quantity - GiveItem.quantity;
+                    db.Inventory
+                    .findOneAndUpdate({_id:give.inventoryid}, {quantity: NewQuantity})
+                    .then(dbModel => res.json(dbModel))
+                    .catch(function(err){
+                        res.json(err);
+                    }) 
+                })
+                .catch(function(err){
+                    res.json(err);
+                }) 
+            }
+        })
+        .catch(function(err){
+            res.json(err);
+        })     
     });
 
     // Update an item's quantity, name, or description. Only staff users can update

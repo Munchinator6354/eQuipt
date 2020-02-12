@@ -1,40 +1,34 @@
 import axios from "axios";
-import { useSelector, useDispatch } from 'react-redux'
-import { increment } from '../actions/incrementAction'
-import { login } from '../actions/logIn';
-
-
 
 export default {
 
     authenticateUser: function (userData) {
+     return new Promise((resolve, reject)=>{
         axios.post("/api/login", userData)
             .then(response => {
-                console.log("Login response: ");
-                console.log(response);
-                const counter = useSelector(state => state.counter);
-                const isLogged = useSelector(state => state.isLogged);
-                const dispatch = useDispatch();
-
-                dispatch(login())
-                // if(response.data){
-                //     console.log('successful login')
-                //     this.setState({
-                //         redirectTo: '/'
-                //     })
-                // } else {
-                //     console.log('login error')
-                // }
+                console.log(response)
+                resolve(response);
             }).catch(error => {
                 console.log("Login server error: ");
                 console.log(error)
+                reject(Error("Failed to login"))
             })
+        })
     },
+    getUserInfo: function () {
+        return new Promise((resolve, reject)=>{
+           axios.get("/api/login")
+               .then(response => {
+                   resolve(response);
+               }).catch(error => {
+                   console.log(error)
+               })
+           })
+       },
     signUpUser: function (newUser) {
         console.log(newUser)
         axios.post("/api/register", newUser)
             .then(response => {
-                console.log(response)
                 if (response.data) {
                     console.log('successful signup')
                     this.setState({
@@ -50,19 +44,11 @@ export default {
     },
     createItem: function (itemData) {
         console.log(itemData)
+        console.log("within axios post")
 
         axios.post("/api/createItem", itemData)
             .then(response => {
                 console.log(response)
-
-                // if(response.data){
-                //     console.log('successful login')
-                //     this.setState({
-                //         redirectTo: '/'
-                //     })
-                // } else {
-                //     console.log('login error')
-                // }
             }).catch(error => {
                 console.log('createItem server error: ')
                 console.log(error)
