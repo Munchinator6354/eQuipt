@@ -62,10 +62,10 @@ mongoose.connect(
 
 var userSeed = [
   {playername: "Bob", username: "Bob", password: "12345", charactername: "Bobert", email:"Bob@gmail.com", role:"Staff" },
-  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Druid", email:"Noelle@gmail.com", role:"Player" },
-  {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Noble", email:"Ryan@gmail.com", role:"Player" },
+  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Drained Druid", email:"Noelle@gmail.com", role:"Player" },
+  {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Narcoleptic Noble", email:"Ryan@gmail.com", role:"Player" },
   {playername: "Abe", username: "Abedude", password: "12347", charactername: "Abe the Weary Wizard", email:"Abe@gmail.com", role:"Player" },
-  {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Cleric", email:"Jessica@gmail.com", role:"Player" }
+  {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Comical Cleric", email:"Jessica@gmail.com", role:"Player" }
 ]
 
 var hashedUserSeed = []
