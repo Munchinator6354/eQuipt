@@ -54,16 +54,17 @@ export default {
                 console.log(error)
             });
     },
-    grabPlayerInventory: function (inventoryArray) {
-        console.log(inventoryArray)
-            username = "username001";
-        axios.get("/api/items/" + username)
+    grabPlayerInventory: function (username) {
+        return new Promise ((resolve, reject) => {
+            axios.get("/api/items/" + username)
             .then(response => {
-                console.log(response)
+                console.log("Ball getting pased from route")
             }).catch(error => {
                 console.log("grabPlayerInventory server error: ")
                 console.log(error);
             })
+        })
+
     }
 
 };

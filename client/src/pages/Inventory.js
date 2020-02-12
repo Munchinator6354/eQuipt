@@ -1,25 +1,27 @@
 import React, { Component } from 'react'
 import InventoryForm from '../components/Inventory'
-// import Axios from 'axios';
 import API from "../utils/API";
+import { useSelector, useDispatch } from 'react-redux'
 
-export default class Inventory extends Component {
-    state = {
-        inventoryArray: [],
-    };
+export default function Inventory() {
+// class Inventory extends Component {
+    // state = {
+    //     inventoryArray: [],
+    // };
 
-    componentDidMount() {
-        API.grabPlayerInventory().then(res => {
-            console.log(res);
-            this.setState({ inventoryArray: res.data});
-        });
-    }
+    // componentDidMount() {
+    //     API.grabPlayerInventory(username).then(res => {
+    //         console.log(res);
 
-    render() {
+    //         // this.setState({ inventoryArray: res.data});
+    //     });
+    // }
+
         return (
             <div>
-                <InventoryForm/>
+                {/* <InventoryForm/> */}
             </div>
         )
-    }
+
 }
+
