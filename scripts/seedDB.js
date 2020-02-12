@@ -105,7 +105,7 @@ db.User
   .find({name: /Iron/i})
   .then(function(dbModel){
      db.User
-     .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel._id}}, {new:true})
+     .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel}}, {new:true})
      .populate("inventory")
      .then(function(dbUser){
        console.log(dbUser);
