@@ -1,5 +1,6 @@
 import React from 'react'
 import background from "../../images/Door.jpg";
+
 const styles = {
     background: {
         backgroundImage: `url(${background})`,
@@ -30,7 +31,10 @@ const styles = {
         marginLeft: "15px"
     }
 }
+
+
 export default function InventoryForm(props) {
+
     return (
 
         <div style={styles.background}>
@@ -48,24 +52,26 @@ export default function InventoryForm(props) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Long Sword</td>
-                            <td>1</td>
-                            <td>Attack</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Wooden Shield</td>
-                            <td>1</td>
-                            <td>Defense</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Healing Potion</td>
-                            <td>3</td>
-                            <td>Health</td>
-                        </tr>
+                        
+                        
+                        
+                        {/* <tr>
+                                <tr>
+                                    {props.inventoryArray.map(item => <td>{props.name[i]}</td>)}
+                                    {props.inventoryArray.map(item => <td>{props.description[i]}</td>)}
+                                    {props.inventoryArray.map(item => <td>{props.itemlevel[i]}</td>)}
+                                    {props.inventoryArray.map(item => <td>{props.marketprice[i]}</td>)}
+                                    {props.inventoryArray.map(item => <td>{props.quantity[i]}</td>)}
+                                    {props.inventoryArray.map(item => <td>{props.link[i]}</td>)}
+                                </tr>
+
+                        </tr> */}
+
+
+
+
+
+
                     </tbody>
                 </table>
 
