@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import background from "../../images/Door.jpg";
+import {useSelector, useDispatch} from 'react-redux';
 
 const styles = {
     background: {
@@ -33,7 +34,9 @@ const styles = {
 }
 
 
-export default function InventoryForm(props) {
+
+export default function InventoryForm() {
+    const userInfo = useSelector(state => state.userInfo);
 
     return (
 
@@ -45,33 +48,23 @@ export default function InventoryForm(props) {
                 <table className="table table-dark">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Item</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Item Level</th>
+                            <th scope="col">Market Price</th>
                             <th scope="col">Quantity</th>
-                            <th scope="col">Type</th>
+                            <th scope="col">Image Link</th>
                         </tr>
                     </thead>
                     <tbody>
-                        
-                        
-                        
-                        {/* <tr>
-                                <tr>
-                                    {props.inventoryArray.map(item => <td>{props.name[i]}</td>)}
-                                    {props.inventoryArray.map(item => <td>{props.description[i]}</td>)}
-                                    {props.inventoryArray.map(item => <td>{props.itemlevel[i]}</td>)}
-                                    {props.inventoryArray.map(item => <td>{props.marketprice[i]}</td>)}
-                                    {props.inventoryArray.map(item => <td>{props.quantity[i]}</td>)}
-                                    {props.inventoryArray.map(item => <td>{props.link[i]}</td>)}
-                                </tr>
-
-                        </tr> */}
-
-
-
-
-
-
+                        <tr>
+                        {userInfo.inventory.map((item, i) => <td>{item.name}</td>)}
+                        {userInfo.inventory.map((item, i) => <td>{item.description}</td>)}
+                        {userInfo.inventory.map((item, i) => <td>{item.itemlevel}</td>)}
+                        {userInfo.inventory.map((item, i) => <td>{item.marketprice}</td>)}
+                        {userInfo.inventory.map((item, i) => <td>{item.quantity}</td>)}
+                        {userInfo.inventory.map((item, i) => <td>{item.link}</td>)}
+                        </tr>
                     </tbody>
                 </table>
 

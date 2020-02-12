@@ -6,7 +6,7 @@ import { login } from '../actions/logIn';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/logout';
 import { username } from '../actions/getUsername';
-import { userInfo } from '../actions/userInfo';
+import { getUserInfo } from '../actions/getUserInfo';
 
 const styles = {
     background: {
@@ -93,7 +93,7 @@ export default function Login() {
                                         if(response){
                                         dispatch(login())
                                         dispatch(username(response.data.username))
-                                        dispatch(userInfo(response.data))
+                                        dispatch(getUserInfo(response.data))
                                         // API.grabPlayerInventory({username: response.data.username})
                                         //     .then(
                                         //         function(response){
