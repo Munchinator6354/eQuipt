@@ -1,5 +1,15 @@
-import React from 'react'
+import React, {useState} from 'react';
+import API from "../../utils/API";
 import background from "../../images/Gift.jpg";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux'
+import { login } from '../../actions/logIn';
+import { Link } from 'react-router-dom';
+import { logout } from '../../actions/logout';
+import { username } from '../../actions/getUsername';
+import { getUserInfo } from '../../actions/getUserInfo';
+
+
 const styles = {
     background: {
         backgroundImage: `url(${background})`,
@@ -32,6 +42,11 @@ const styles = {
     }
 }
 export default function Give(props) {
+    const userInfo = useSelector(state => state.userInfo);
+    const dispatch = useDispatch();
+    let userName = React.createRef();
+    let password = React.createRef();
+    const [loginError, setError] = useState("");
     return (
 
         <div style={styles.background}>
@@ -43,11 +58,14 @@ export default function Give(props) {
                         <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
                         <div className="col-sm-10">
                             <select className="form-control fadeUp" id="exampleFormControlSelect1">
-                                <option>Long Sword</option>
-                                <option>Metal Axe</option>
-                                <option>Shield</option>
-                                <option>Large Shield</option>
-                                <option>Cloak</option>
+                                {userInfo.inventory.map(user => (
+
+                                
+                                        <option>{user.name}</option>
+                                    
+
+                                ))}
+                            
                             </select>
                         </div>
                     </div>
@@ -80,8 +98,33 @@ export default function Give(props) {
                         <button
                             style={styles.buttonFont}
                             type="submit"
-                            onClick={props.handleFormSubmit}
-                            className="btn btn-outline-light fadeUp">
+                            className="btn btn-outline-light fadeUp"
+                            onClick={ (event)=>{ 
+                                event.preventDefault();
+                                API.giveToUser({username: userName.current.value, password: password.current.value })
+                                .then(
+                                    function(response){
+                                        if(response){
+                                        dispatch(login())
+                                        dispatch(username(response.data.username))
+                                       
+                                        setError("")
+                                        console.log(response)
+                                        }
+                                    
+                                    }
+                                )
+                                .catch(
+                                    // function(error) {
+                                    //     if(error == "Error: Failed to login"){
+                                    //        setError("Username or Password incorrect please try again")
+                                    //     }
+                                    //     dispatch(logout())
+                                    // }
+                                );
+                             
+                            }} 
+                            >
                             Give
                         </button>
                     </div>
