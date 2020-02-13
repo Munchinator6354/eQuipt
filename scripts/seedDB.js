@@ -27,7 +27,7 @@ mongoose.connect(
     {name: 'Iron Shield', description: 'An iron shield.', itemlevel: '0' , marketprice: '8' , quantity: '0', link:'https://bottega.avalonceltic.com/rep_immagini/prod/18-01_LRG_so.jpg' },
     {name: 'Leather Armor', description: 'A set of leather armor.', itemlevel: '0' , marketprice: '7' , quantity: '0', link:'https://i.pinimg.com/originals/2a/d8/f3/2ad8f32e4f3a6f77f8ba12d22faa4c33.jpg' },
     {name: 'Iron Chain Shirt', description: 'An iron chain shirt.', itemlevel: '0' , marketprice: '10' , quantity: '0', link:'https://cdn.britannica.com/59/13059-004-8DC4F03B/coat-Turkish-chain-mail.jpg' },
-    {name: 'Iron Coat of Plates', description: 'An iron coat of plates.', itemlevel: '0' , marketprice: '12' , quantity: '0', link:'https://nadler.us/armour/COP/COP_JAN_28_2013/COP_inside.jpg' },
+    {name: 'Iron Coat of Plates', description: 'An iron coat of plates.', itemlevel: '0' , marketprice: '12' , quantity: 15, link:'https://nadler.us/armour/COP/COP_JAN_28_2013/COP_inside.jpg' },
     {name: 'Iron Small Weapon', description: 'An iron small weapon, or throwing weapon.', itemlevel: '0' , marketprice: '7' , quantity: '0', link:'https://art.ngfiles.com/images/545000/545954_mike-watson_fantasy-weapons.jpg?f1504867448' },
     {name: 'Iron Medium Weapon', description: 'An iron weapon that can be held in one hand, but is larger than a small weapon.', itemlevel: '0' , marketprice: '9' , quantity: '0', link:'https://miro.medium.com/max/1200/1*2UrKXR8aN2jFoq94ZNBqnQ.jpeg' },
     {name: 'Iron Large Weapon', description: 'An iron weapon to be wielded with two hands.', itemlevel: '0' , marketprice: '9' , quantity: '0', link:'https://www.medievalcollectibles.com/wp-content/uploads/2019/04/600074.png' },
