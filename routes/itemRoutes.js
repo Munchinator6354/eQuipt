@@ -127,6 +127,32 @@ module.exports = function(app) {
         .findOne({_id: give.inventoryid})
         .then(function(dbInventory){
                 //create new item based on item's fields with quantity given from above
+                //if quantity given is the same as original quantity then delete item from table 
+            if (dbInventory.quantity === give.give_quantity){
+                db.Inventory
+                .findById({_id:give.inventoryid})
+                .then(dbModel => dbModel.remove())
+                .then(dbModel => res.json(dbModel))
+                .catch(err => res.status(422).json(err));
+             }
+             else{
+                 //else reduce quantity by quantity given as the New Quantity
+                 db.Inventory
+                .findById({_id:give.inventoryid})
+                 .then(function(dbModel){
+                     let NewQuantity = dbModel.quantity - GiveItem.quantity;
+                     db.Inventory
+                     .findOneAndUpdate({_id:give.inventoryid}, {quantity: NewQuantity})
+                     .then(dbModel => res.json(dbModel))
+                     .catch(function(err){
+                         res.json(err);
+                     }) 
+                 })
+                 .catch(function(err){
+                     res.json(err);
+                 }) 
+             }
+             //Let's create an object to hold all of the given items info
                 GiveItem = {
                 name: dbInventory.name,
                 description: dbInventory.description,
@@ -134,54 +160,44 @@ module.exports = function(app) {
                 marketprice: dbInventory.marketprice,
                 quantity: give.give_quantity,
                 link: dbInventory.link
-            }
-            db.Inventory
-            .create(GiveItem)
-            .then(function(dbInventory){
-                //after creating item, update user2 with Given item in their inventory.
-                return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true});
-            })
-            .catch(function(err){
-                res.json(err);
-            })
-        })
-        .catch(function(err){
-            res.json(err);
-        })
-
-        //then find item in the inventory table
-        db.Inventory
-        .findOne({_id: give.inventoryid})
-        .then(function(dbInventory){
-            //if quantity given is the same as original quantity then delete item from table
-            if (dbInventory.quantity === give.give_quantity){
-               db.Inventory
-               .findById({_id:give.inventoryid})
-               .then(dbModel => dbModel.remove())
-               .then(dbModel => res.json(dbModel))
-               .catch(err => res.status(422).json(err));
-            }
-            else{
-                //else reduce quantity by quantity given as the New Quantity
-                db.Inventory
-               .findById({_id:give.inventoryid})
-                .then(function(dbModel){
-                    let NewQuantity = dbModel.quantity - GiveItem.quantity;
+            }  
+            //DB USER look up user 2 and if findone inventory name returns then change quantity else
+            db.User
+            .findOne({username: give.username2})
+            .then(function(dbUser){
+                let obj = dbUser.inventory.find(o => o.name === GiveItem.name);
+                //if the object with that inventory name already exists add to that items quantiity
+                if(obj){
+                    let AddInventoryId = obj._id;
                     db.Inventory
-                    .findOneAndUpdate({_id:give.inventoryid}, {quantity: NewQuantity})
-                    .then(dbModel => res.json(dbModel))
+                    .findById({_id: AddInventoryId })
+                    .then(function(dbInventory){
+                        //Calculate Received quantity then update that inventoryid's quantity
+                        let ReceivedQuantity = dbInventory.quantity + give.give_quantity
+                        db.Inventory
+                        .findOneAndUpdate({_id:AddInventoryId}, {quantity: ReceivedQuantity})
+                        then(dbModel => console.log(dbModel))
+                        .catch(function(err){
+                        res.json(err);
+                    })
+                    })
+                }
+                else{
+                    db.Inventory
+                    .create(GiveItem)
+                    .then(function(dbInventory){
+                        //after creating item, update user2 with Given item in their inventory.
+                        return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true});
+                    })
                     .catch(function(err){
                         res.json(err);
-                    }) 
-                })
-                .catch(function(err){
-                    res.json(err);
-                }) 
-            }
+                    })
+                }
+            })    
         })
         .catch(function(err){
             res.json(err);
-        })     
+        })
     });
 
     // Update an item's quantity, name, or description. Only staff users can update
