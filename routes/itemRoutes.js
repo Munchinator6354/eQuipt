@@ -120,6 +120,7 @@ module.exports = function(app) {
             inventoryid: req.body.inventoryid,
             give_quantity: req.body.quantity,
         }
+       
         var GiveItem;
         // res.json(give);
         //First find item within Inventory table by id

@@ -44,6 +44,7 @@ const styles = {
 export default function Give(props) {
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
+    const username1 = userInfo.userName
     let userName = React.createRef();
     let password = React.createRef();
     const [loginError, setError] = useState("");
@@ -58,10 +59,10 @@ export default function Give(props) {
                         <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
                         <div className="col-sm-10">
                             <select className="form-control fadeUp" id="exampleFormControlSelect1">
-                                {userInfo.inventory.map(user => (
+                                {userInfo.inventory.map(item => (
 
                                 
-                                        <option>{user.name}</option>
+                                        <option>{item.name}</option>
                                     
 
                                 ))}
@@ -101,16 +102,16 @@ export default function Give(props) {
                             className="btn btn-outline-light fadeUp"
                             onClick={ (event)=>{ 
                                 event.preventDefault();
-                                API.giveToUser({username: userName.current.value, password: password.current.value })
+                                API.giveToUser({inventoryid: "5e4497c03c87b03060401fd1", quantity: 1 })
                                 .then(
                                     function(response){
-                                        if(response){
-                                        dispatch(login())
-                                        dispatch(username(response.data.username))
+                                        // if(response){
+                                  
                                        
-                                        setError("")
+                                        // setError("")
+                                        // console.log(response)
+                                        // }
                                         console.log(response)
-                                        }
                                     
                                     }
                                 )

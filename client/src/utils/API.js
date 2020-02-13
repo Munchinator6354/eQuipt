@@ -17,14 +17,14 @@ export default {
     },
     giveToUser: function (userData) {
         return new Promise((resolve, reject)=>{
-           axios.post("/api/login", userData)
+           axios.put("/api/give/fromuser/Bob/touser/Abedude", userData)
                .then(response => {
                    console.log(response)
                    resolve(response);
                }).catch(error => {
-                   console.log("Login server error: ");
+                   console.log("Give server error: ");
                    console.log(error)
-                   reject(Error("Failed to login"))
+                   reject(Error("Failed to give user"))
                })
            })
        },

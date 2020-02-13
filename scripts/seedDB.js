@@ -78,7 +78,8 @@ function hashSeed(seed){
       password: bcrypt.hashSync(seed[i].password, 10),
       charactername: seed[i].charactername,
       email: seed[i].email,
-      role: seed[i].role
+      role: seed[i].role,
+      inventory: []
     })
   }
 }
