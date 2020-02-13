@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 
 mongoose.connect(
     process.env.MONGODB_URI ||
+    // "mongodb://GenericUser:GenericPassword123@ds029658.mlab.com:29658/heroku_4xwdbn2k"
     "mongodb://localhost/eQuiptDB"
   );
 
@@ -23,7 +24,7 @@ mongoose.connect(
     {name: 'Craftsmanship Tools', description: 'Increases the efficiency of crafting.', itemlevel: '1' , marketprice: '24' , quantity: '0', link:'https://previews.123rf.com/images/stokkete/stokkete1709/stokkete170900071/85506479-old-used-woodworking-tools-on-a-vintage-workbench-carpentry-craftsmanship-and-handwork-concept.jpg' },
     {name: 'Basic Trap', description: 'A low quality trap.', itemlevel: '1' , marketprice: '12' , quantity: '0', link:'https://sheilaclapkin345.files.wordpress.com/2012/02/img_0057.jpg' },
     {name: 'Lockpicking Kit', description: 'Required to open locks without the corresponding key.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://i.pinimg.com/originals/b6/b0/93/b6b093b3d3a0ea550788188599b6e13a.jpg' },
-    {name: 'Iron Shield', description: 'An iron shield.', itemlevel: '0' , marketprice: '8' , quantity: '0', link:'https://lh3.googleusercontent.com/proxy/ceMjtid6xtXeAz2hp6YVxos2-P-NKBxtqoquEsE8PFl4zyXnMYfCd54h6L8Q2RrhKOEWk7JYeQewQG4v5GbBL_zeuQAUdg' },
+    {name: 'Iron Shield', description: 'An iron shield.', itemlevel: '0' , marketprice: '8' , quantity: '0', link:'https://bottega.avalonceltic.com/rep_immagini/prod/18-01_LRG_so.jpg' },
     {name: 'Leather Armor', description: 'A set of leather armor.', itemlevel: '0' , marketprice: '7' , quantity: '0', link:'https://i.pinimg.com/originals/2a/d8/f3/2ad8f32e4f3a6f77f8ba12d22faa4c33.jpg' },
     {name: 'Iron Chain Shirt', description: 'An iron chain shirt.', itemlevel: '0' , marketprice: '10' , quantity: '0', link:'https://cdn.britannica.com/59/13059-004-8DC4F03B/coat-Turkish-chain-mail.jpg' },
     {name: 'Iron Coat of Plates', description: 'An iron coat of plates.', itemlevel: '0' , marketprice: '12' , quantity: '0', link:'https://nadler.us/armour/COP/COP_JAN_28_2013/COP_inside.jpg' },
@@ -77,7 +78,7 @@ function hashSeed(seed){
       password: bcrypt.hashSync(seed[i].password, 10),
       charactername: seed[i].charactername,
       email: seed[i].email,
-      role: seed[i].email
+      role: seed[i].role
     })
   }
 }

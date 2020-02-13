@@ -24,6 +24,7 @@ const styles = {
 export default function Navbar() {
     const username = useSelector(state => state.username);
     const isLogged = useSelector(state => state.isLogged);
+    const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
 
     return (
@@ -73,7 +74,7 @@ export default function Navbar() {
                             </Link>
                         </li>
                         : ''}
-                        {isLogged ?
+                        {(isLogged===true && userInfo.role==="Staff")?
                         <li className="nav-item active">
                             <Link to="/create" style={styles.font} className = "navbar-brand nav-link">
                             Create
@@ -87,13 +88,6 @@ export default function Navbar() {
                             </Link>
                         </li>
                         : ''}
-                        
-                        <li className="nav-item active">
-                            <Link to="/test" style={styles.font} className = "navbar-brand nav-link">
-                            Test
-                            </Link>
-                        </li>
-                       
                     </ul>
                 </div>
             </nav>

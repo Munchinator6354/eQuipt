@@ -14,6 +14,7 @@ import Register from '../../pages/register';
 import Login from '../../pages/login';
 import Inventory from '../Inventory';
 import ProtectedRoute from '../ProtectedRoute';
+import AdminProtectedRoute from '../AdminProtectedRoute';
 import TestComponent from '../TestComponent';
 import Navbar from '../Navbar';
 import Welcome from '../Welcome';
@@ -29,7 +30,7 @@ export default function RouteHandler(props) {
                         <Route exact path="/" component={Main} />
                         <Route exact path="/login" component={Login}/>
                         <Route exact path='/test' component={TestComponent}/>
-                        <ProtectedRoute exact path="/Create" component={CreateItem}/>
+                        <AdminProtectedRoute exact path="/Create" component={CreateItem}/>
                         <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} />
                         <ProtectedRoute exact path="/Give" component={Give} />
                         <ProtectedRoute exact path="/Trade" component={Trade} />

@@ -1,6 +1,6 @@
 import React from 'react';
 import background from "../../images/Door.jpg";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 
 const styles = {
     background: {
@@ -16,6 +16,8 @@ const styles = {
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
         height: "95vh",
+        overflow:"scroll",
+        overflowX:"hidden",
     },
     font: {
         marginBottom: "5px",
@@ -30,6 +32,9 @@ const styles = {
         fontSize: "1em",
         fontFamily: "Almendra SC, serif",
         marginLeft: "15px"
+    },
+    imageFormat:{
+        height: "5vh"
     }
 }
 
@@ -53,7 +58,7 @@ export default function InventoryForm() {
                         <th scope="col">Item Level</th>
                         <th scope="col">Market Price</th>
                         <th scope="col">Quantity</th>
-                        <th scope="col">Image Link</th>
+                        <th scope="col">Image</th>
                     </tr>
 
                     {userInfo.inventory.map(user => (
@@ -64,7 +69,7 @@ export default function InventoryForm() {
                             <td>{user.itemlevel}</td>
                             <td>{user.marketprice}</td>
                             <td>{user.quantity}</td>
-                            <td>{user.link}</td>
+                            <td><img style={styles.imageFormat} src={user.link}/></td>
                         </tr>
 
                     ))}
