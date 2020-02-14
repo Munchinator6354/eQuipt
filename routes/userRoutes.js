@@ -11,17 +11,40 @@ module.exports = function(app) {
     // GET
     // ===========================================================================
 
-    app.get(
-        "/api/user",
+    app.get("/api/user",
         function(req, res) {
-            console.log('===== User!!======');
-            console.log(req.user);
-            if (req.user) {
-                res.json({ user: req.user });
-            } else {
-                res.json({ user: null });
-            }
+            console.log("Logged in", req.user);
+            var userInfo = {
+                username: req.user.username
+            };
+            db.User
+                .findOne(userInfo)
+                .populate("inventory")
+                .then(dbUser => {
+                    const userResponse = {
+                        playername: dbUser.playername,
+                        username: dbUser.username,
+                        charactername: dbUser.charactername,
+                        email: dbUser.email,
+                        role: dbUser.role,
+                        inventory: dbUser.inventory
+                    };
+                    res.json(userResponse);
+                })
+                .catch(err => res.status(422).json(err));
         });
+
+    // app.get(
+    //     "/api/user",
+    //     function(req, res) {
+    //         console.log('===== User!!======');
+    //         console.log(req.user);
+    //         if (req.user) {
+    //             res.json({ user: req.user });
+    //         } else {
+    //             res.json({ user: null });
+    //         }
+    //     });
 
     // ===========================================================================
     // POST
@@ -73,7 +96,17 @@ module.exports = function(app) {
             db.User
                 .findOne(userInfo)
                 .populate("inventory")
-                .then(dbUser => res.json(dbUser))
+                .then(dbUser => {
+                    const userResponse = {
+                        playername: dbUser.playername,
+                        username: dbUser.username,
+                        charactername: dbUser.charactername,
+                        email: dbUser.email,
+                        role: dbUser.role,
+                        inventory: dbUser.inventory
+                    };
+                    res.json(userResponse);
+                })
                 .catch(err => res.status(422).json(err));
         });
 
