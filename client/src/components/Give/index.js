@@ -48,6 +48,7 @@ export default function Give(props) {
     const username1 = userInfo.userName
     let selectedItem = React.createRef();
     let qtyToGive = React.createRef();
+    let userToGive = React.createRef();
     let userName = React.createRef();
     let password = React.createRef();
     const [itemID, setItemID] = useState("");
@@ -62,12 +63,9 @@ export default function Give(props) {
                         <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
                         <div className="col-sm-10">
                             <select onChange={(e) => setItemID(e.target.value)} className="form-control fadeUp" id="exampleFormControlSelect1">
+                            <option value="default" selected="selected">Select one option </option>
                                 {userInfo.inventory.map(item => (
-
-                                
                                         <option ref={selectedItem} value={item._id}>{item.name}</option>
-                                    
-
                                 ))}
                             
                             </select>
@@ -91,8 +89,7 @@ export default function Give(props) {
                                 type="text"
                                 className="form-control fadeUp"
                                 name="playerToGive"
-                                value={props.password}
-                                onChange={props.handleInputChange}
+                                ref={userToGive}
                                 id="playerToGive" />
                         </div>
                     </div>
@@ -104,9 +101,20 @@ export default function Give(props) {
                             className="btn btn-outline-light fadeUp"
                             onClick={ (event)=>{ 
                                 event.preventDefault();
-                                API.giveToUser({inventoryid: itemID, quantity:qtyToGive.current.value })
+                                API.giveToUser({inventoryid: itemID, quantity: parseInt(qtyToGive.current.value), userToGive: userToGive.current.value, userGiving: userInfo.username })
                                 .then(
-                                    function(response){                          
+                                    function(response){  
+                                       
+                                        API.getUserInfo({username: userInfo.username})
+                                        .then(
+                                            function(response){
+                                                dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))))
+                                              console.log( JSON.parse(JSON.stringify(response.data)))
+                                            }
+                                        )
+                                        .catch(
+                                        );
+                                                            
                                     }
                                 )
                                 .catch(
@@ -120,7 +128,8 @@ export default function Give(props) {
                                     //     dispatch(logout())
                                     // }
                                 );
-                             
+
+                           
                             }} 
                             >
                             Give
