@@ -69,7 +69,7 @@ export default function InventoryForm() {
                             <td>{user.itemlevel}</td>
                             <td>{user.marketprice}</td>
                             <td>{user.quantity}</td>
-                            <td><img style={styles.imageFormat} src={user.link}/></td>
+                            <td><img style={styles.imageFormat} src={user.link} alt={user.name + 'image'}/></td>
                         </tr>
 
                     ))}
