@@ -200,11 +200,13 @@ module.exports = function(app) {
                     db.Inventory
                     .findOne({_id: AlreadyHaveID})
                     .then(function(dbInventory){
-                        console.log(dbInventory.quantity)
-                        console.log(give.give_quantity);
+                        // console.log(dbInventory.quantity)
+                        
                        
                 //     // //     //Calculate Received quantity then update that inventoryid's quantity
-                        // let ReceivedQuantity = dbInventory.quantity + give.give_quantity
+                        let ReceivedQuantity = dbInventory.quantity + give.give_quantity;
+                        console.log(ReceivedQuantity);
+                        return db.Inventory.findOneAndUpdate({_id:AlreadyHaveID}, { quantity: ReceivedQuantity })
                         // db.Inventory
                         // .findOneAndUpdate({_id:AddInventoryId}, {quantity: ReceivedQuantity})
                         // .then(dbModel => console.log(dbModel))
