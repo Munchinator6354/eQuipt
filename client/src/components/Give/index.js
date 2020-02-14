@@ -104,9 +104,23 @@ export default function Give(props) {
                             className="btn btn-outline-light fadeUp"
                             onClick={ (event)=>{ 
                                 event.preventDefault();
+<<<<<<< HEAD
                                 API.giveToUser({inventoryid: itemID, quantity:qtyToGive.current.value })
                                 .then(
                                     function(response){                          
+=======
+                                API.giveToUser({inventoryid: '5e46289548dd942d703d96ed', quantity: 1 })
+                                .then(
+                                    function(response){
+                                        // if(response){
+                                            
+                                       
+                                        // setError("")
+                                        // console.log(response)
+                                        // }
+                                        console.log(response)
+                                    
+>>>>>>> master
                                     }
                                 )
                                 .catch(
