@@ -120,10 +120,7 @@ module.exports = function(app) {
             inventoryid: req.body.inventoryid,
             give_quantity: req.body.quantity,
         }
-       
         var GiveItem;
-        
-        // res.json(give);
         // First find item within Inventory table by id
         db.Inventory
         .findOne({_id: give.inventoryid})
@@ -163,16 +160,11 @@ module.exports = function(app) {
                 quantity: give.give_quantity,
                 link: dbInventory.link
             }  
-
-
-            
             //DB USER look up user 2 and if findone inventory name returns then change quantity else
-
             db.User
             .findOne({username: give.username2})
             .populate("inventory")
             .then(function(dbUser){
-
                let obj = null;
                let AlreadyHaveID;
               //loop through receiving user's inventory, if name is found change obj to true and log that inventory id
@@ -183,74 +175,33 @@ module.exports = function(app) {
                        AlreadyHaveID = dbUser.inventory[i]._id;
                    }
                }
-
-
-                console.log(obj);
-                console.log(AlreadyHaveID);
-                
-               
-                // console.log(itemYouWant);
-                // console.log(dbUser.inventory);
-                
-                //if the object with that inventory name already exists add to that items quantiity
-                // console.log(GiveItem.name);
-                // console.log(dbUser.inventory);
-
-
-              
+               //if item is in receivers inventory we'll update the quantity
                 if(obj){
-                   console.log("Worked");
-
-                    // let AddInventoryId = obj._id;
                     db.Inventory
                     .findOne({_id: AlreadyHaveID})
-                    .then(function(dbInventory){
-                        // console.log(dbInventory.quantity)
-                        
-                       
+                    .then(function(dbInventory){    
                   //Calculate Received quantity then update that inventoryid's quantity
                         let ReceivedQuantity = dbInventory.quantity + give.give_quantity;
                         console.log(ReceivedQuantity);
                         return db.Inventory.findOneAndUpdate({_id:AlreadyHaveID}, { quantity: ReceivedQuantity })
-                        // db.Inventory
-                        // .findOneAndUpdate({_id:AddInventoryId}, {quantity: ReceivedQuantity})
-                        // .then(dbModel => console.log(dbModel))
-                        // .catch(function(err){
-                        // res.json(err);
-                        // })
-                    // }
-                    // .catch(function(err){
-                    //     res.json(err);
-                    // })
                 })
                 .catch(function(err){
                     res.json(err);
                 })
-                }
+                } 
+                //if item is not already in receivers inventory create new item
                 else{
                     db.Inventory
                     .create(GiveItem)
                     .then(function(dbInventory){
                     //     //after creating item, update user2 with Given item in their inventory.
-                     var NewInvID = dbInventory._id;
-                    
+                     var NewInvID = dbInventory._id;  
                     console.log(dbInventory);
-
                          return db.User.findOneAndUpdate({_id:dbUser._id}, { $push: { inventory: NewInvID} }, { new: true });
-                        
-                        // .findOneAndUpdate({username: username2}, {$push: {inventory: dbInventory._id}}, {new: true})
-                        // .catch(function(err){
-                        //     // res.json(err);
-                        // })
-                   
-                    //  return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true})
-                    //     console.log("WALLAWALLA")
-                    
                     })
                     .then(function(dbUser){
                         console.log(dbUser)
                     })
-                    
                     .catch(function(err){
                         res.json(err);
                     })
