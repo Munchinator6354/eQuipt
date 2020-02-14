@@ -44,10 +44,13 @@ const styles = {
 export default function Give(props) {
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
+    
     const username1 = userInfo.userName
+    let selectedItem = React.createRef();
+    let qtyToGive = React.createRef();
     let userName = React.createRef();
     let password = React.createRef();
-    const [loginError, setError] = useState("");
+    const [itemID, setItemID] = useState("");
     return (
 
         <div style={styles.background}>
@@ -58,11 +61,11 @@ export default function Give(props) {
                     <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
                         <div className="col-sm-10">
-                            <select className="form-control fadeUp" id="exampleFormControlSelect1">
+                            <select onChange={(e) => setItemID(e.target.value)} className="form-control fadeUp" id="exampleFormControlSelect1">
                                 {userInfo.inventory.map(item => (
 
                                 
-                                        <option>{item.name}</option>
+                                        <option ref={selectedItem} value={item._id}>{item.name}</option>
                                     
 
                                 ))}
@@ -77,9 +80,8 @@ export default function Give(props) {
                                 type="number"
                                 className="form-control fadeUp"
                                 name="qtyToGive"
-                                value={props.password}
-                                onChange={props.handleInputChange}
-                                id="qtyToGive" />
+                                id="qtyToGive"
+                                ref={qtyToGive} />
                         </div>
                     </div>
                     <div className="form-group row">
@@ -102,6 +104,11 @@ export default function Give(props) {
                             className="btn btn-outline-light fadeUp"
                             onClick={ (event)=>{ 
                                 event.preventDefault();
+<<<<<<< HEAD
+                                API.giveToUser({inventoryid: itemID, quantity:qtyToGive.current.value })
+                                .then(
+                                    function(response){                          
+=======
                                 API.giveToUser({inventoryid: '5e46289548dd942d703d96ed', quantity: 1 })
                                 .then(
                                     function(response){
@@ -113,6 +120,7 @@ export default function Give(props) {
                                         // }
                                         console.log(response)
                                     
+>>>>>>> master
                                     }
                                 )
                                 .catch(

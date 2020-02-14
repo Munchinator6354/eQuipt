@@ -15,6 +15,18 @@ export default {
             })
         })
     },
+    getUserInfo:function(userData){
+        return new Promise((resolve, reject)=>{
+            axios.post("/api/user", userData)
+                .then(response=>{
+                    console.log(response)
+                    resolve(response)
+                }).catch(error=>{
+                    console.log("grab server error: " + error)
+                  
+                })
+        })
+    },
     giveToUser: function (userData) {
         return new Promise((resolve, reject)=>{
            axios.put("/api/give/fromuser/Bob/touser/Abedude", userData)

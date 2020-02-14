@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect } from 'react';
 import background from "../../images/Door.jpg";
-import { useSelector } from 'react-redux';
+// import API from "../utils/API";
+import { useSelector} from 'react-redux';
 
 const styles = {
     background: {
@@ -42,6 +43,12 @@ const styles = {
 
 export default function InventoryForm() {
     const userInfo = useSelector(state => state.userInfo);
+    // useEffect(() => {
+    //     console.log("YOOOOOO!")
+    //     //  API.getUserInfo({}).then().catch()
+    //     // userInfo = useSelector(state => state.userInfo);
+    //   });
+    
 
     return (
 
