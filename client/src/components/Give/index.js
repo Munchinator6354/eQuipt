@@ -102,7 +102,7 @@ export default function Give(props) {
                             className="btn btn-outline-light fadeUp"
                             onClick={ (event)=>{ 
                                 event.preventDefault();
-                                API.giveToUser({inventoryid: "5e4497c03c87b03060401fd1", quantity: 1 })
+                                API.giveToUser({inventoryid: '5e45c9d2d5005f58986aa31f', quantity: 1 })
                                 .then(
                                     function(response){
                                         // if(response){
@@ -116,6 +116,9 @@ export default function Give(props) {
                                     }
                                 )
                                 .catch(
+                                    function(error){
+                                        console.log(error)
+                                    }
                                     // function(error) {
                                     //     if(error == "Error: Failed to login"){
                                     //        setError("Username or Password incorrect please try again")

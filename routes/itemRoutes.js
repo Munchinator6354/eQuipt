@@ -188,7 +188,8 @@ module.exports = function(app) {
                     .create(GiveItem)
                     .then(function(dbInventory){
                         //after creating item, update user2 with Given item in their inventory.
-                        return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true});
+                        return db.User.findOneAndUpdate({username: username2}, {$push: {inventory:dbInventory._id}}, {new:true})
+                        console.log("WALLAWALLA")
                     })
                     .catch(function(err){
                         res.json(err);
