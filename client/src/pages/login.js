@@ -94,18 +94,6 @@ export default function Login() {
                                         dispatch(login())
                                         dispatch(username(response.data.username))
                                         dispatch(getUserInfo(response.data))
-                                        // API.grabPlayerInventory({username: response.data.username})
-                                        //     .then(
-                                        //         function(response){
-                                        //             if(response){
-                                        //                 console.log("something")
-                                        //             }
-                                        //         console.log("42 off bench");
-                                        //     }).catch(
-                                        //         function(error){
-                                        //             console.log(error);
-                                        //         }
-                                        //     );
                                         setError("")
                                         console.log(response)
                                         }

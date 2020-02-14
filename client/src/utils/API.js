@@ -15,6 +15,19 @@ export default {
             })
         })
     },
+    giveToUser: function (userData) {
+        return new Promise((resolve, reject)=>{
+           axios.put("/api/give/fromuser/Bob/touser/Abedude", userData)
+               .then(response => {
+                   console.log(response)
+                   resolve(response);
+               }).catch(error => {
+                   console.log("Give server error: ");
+                   console.log(error)
+                   reject(Error("Failed to give user"))
+               })
+           })
+       },
     getUserInfo: function () {
         return new Promise((resolve, reject)=>{
            axios.get("/api/login")
@@ -66,5 +79,6 @@ export default {
         })
 
     }
+    
 
 };
