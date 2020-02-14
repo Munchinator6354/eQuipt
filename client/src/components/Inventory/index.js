@@ -1,6 +1,6 @@
 import React from 'react';
 import background from "../../images/Door.jpg";
-import { useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const styles = {
     background: {
@@ -16,8 +16,8 @@ const styles = {
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
         height: "95vh",
-        overflow:"scroll",
-        overflowX:"hidden",
+        overflow: "scroll",
+        overflowX: "hidden",
     },
     font: {
         marginBottom: "5px",
@@ -33,7 +33,7 @@ const styles = {
         fontFamily: "Almendra SC, serif",
         marginLeft: "15px"
     },
-    imageFormat:{
+    imageFormat: {
         height: "5vh"
     }
 }
@@ -51,30 +51,32 @@ export default function InventoryForm() {
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
 
                 <table className="table table-dark">
-
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Item Level</th>
-                        <th scope="col">Market Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Image</th>
-                    </tr>
-
-                    {userInfo.inventory.map(user => (
-
+                    <tbody>
                         <tr>
-                            <td>{user.name}</td>
-                            <td>{user.description}</td>
-                            <td>{user.itemlevel}</td>
-                            <td>{user.marketprice}</td>
-                            <td>{user.quantity}</td>
-                            <td><img style={styles.imageFormat} src={user.link}/></td>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Item Level</th>
+                            <th scope="col">Market Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Image</th>
                         </tr>
 
-                    ))}
+                        {userInfo.inventory.map(item => (
+                            // User returns as an array of objects?
 
+                            <tr key={item._id}>
+                                
+                                <td key={item.name}>{item.name}</td>
+                                <td key={item.description}>{item.description}</td>
+                                <td key={item.itemlevel}>{item.itemlevel}</td>
+                                <td key={item.marketprice}>{item.marketprice}</td>
+                                <td key={item.name.quantity}>{item.quantity}</td>
+                                <td key={item.link}><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
+                            </tr>
 
+                        ))}
+
+                    </tbody>
                 </table>
 
             </div>

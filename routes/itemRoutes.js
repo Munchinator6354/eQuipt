@@ -113,7 +113,7 @@ module.exports = function(app) {
     app.put("/api/give/fromuser/:username1/touser/:username2", function(req, res) {
         // Get username1 items from req.body
         // ODM call to put username1 items into username2 inventory.
-        //Drop down menu with all of a users
+        // Drop down menu with all of a users
         let give = {
             username1: req.params.username1,
             username2: req.params.username2,
@@ -124,12 +124,12 @@ module.exports = function(app) {
         var GiveItem;
         
         // res.json(give);
-        //First find item within Inventory table by id
+        // First find item within Inventory table by id
         db.Inventory
         .findOne({_id: give.inventoryid})
         .then(function(dbInventory){
-                //create new item based on item's fields with quantity given from above
-                //if quantity given is the same as original quantity then delete item from table 
+                // Create new item based on item's fields with quantity given from above
+                // If quantity given is the same as original quantity then delete item from table 
             if (dbInventory.quantity === give.give_quantity){
                 db.Inventory
                 .findById({_id:give.inventoryid})
@@ -138,7 +138,7 @@ module.exports = function(app) {
                 .catch(err => res.status(422).json(err));
              }
              else{
-                 //else reduce quantity by quantity given as the New Quantity
+                 // Else reduce quantity by quantity given as the New Quantity
                  db.Inventory
                 .findById({_id:give.inventoryid})
                  .then(function(dbModel){
@@ -154,7 +154,7 @@ module.exports = function(app) {
                      res.json(err);
                  }) 
              }
-             //Let's create an object to hold all of the given items info
+             // Let's create an object to hold all of the given items info
                 GiveItem = {
                 name: dbInventory.name,
                 description: dbInventory.description,
@@ -164,15 +164,18 @@ module.exports = function(app) {
                 link: dbInventory.link
             }  
 
+
             
             //DB USER look up user 2 and if findone inventory name returns then change quantity else
+
             db.User
             .findOne({username: give.username2})
             .populate("inventory")
             .then(function(dbUser){
+
                let obj = null;
                let AlreadyHaveID;
-              
+              //loop through receiving user's inventory, if name is found change obj to true and log that inventory id
                console.log(dbUser.inventory);
                for (var i = 0; i < dbUser.inventory.length; i++){
                    if (dbUser.inventory[i].name === GiveItem.name){
@@ -193,6 +196,8 @@ module.exports = function(app) {
                 // console.log(GiveItem.name);
                 // console.log(dbUser.inventory);
 
+
+              
                 if(obj){
                    console.log("Worked");
 
@@ -203,7 +208,7 @@ module.exports = function(app) {
                         // console.log(dbInventory.quantity)
                         
                        
-                //     // //     //Calculate Received quantity then update that inventoryid's quantity
+                  //Calculate Received quantity then update that inventoryid's quantity
                         let ReceivedQuantity = dbInventory.quantity + give.give_quantity;
                         console.log(ReceivedQuantity);
                         return db.Inventory.findOneAndUpdate({_id:AlreadyHaveID}, { quantity: ReceivedQuantity })
