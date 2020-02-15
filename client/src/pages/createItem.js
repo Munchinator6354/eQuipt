@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Create from '../components/Create'
+import { useSelector } from 'react-redux';
 import API from "../utils/API";
 export default class createItem extends Component {
     state = {
@@ -11,6 +12,7 @@ export default class createItem extends Component {
         link: "",
         error: ""
     }
+    userInfo = useSelector(state => state.userInfo);
     handleInputChange = event => {
         const{name, value} = event.target;
         this.setState({ 
@@ -18,8 +20,10 @@ export default class createItem extends Component {
     };
     handleFormSubmit = event => {
         console.log("HEEHEHEHEHEHEH")
+     
         event.preventDefault();
         API.createItem({
+            // username: userInfo,
             name: this.state.name, 
             description: this.state.description, 
             itemlevel: this.state.itemlevel, 
