@@ -101,7 +101,7 @@ export default function CreateNewItem() {
                         <label style={styles.labelFont} htmlFor="marketprice" className="col-sm-2 col-form-label fadeUp">Market Price</label>
                         <div className="col-sm-10">
                             <input 
-                                type="text" 
+                                type="number" 
                                 className="form-control fadeUp" 
                                 id="marketprice"
                                 name="marketprice" 
@@ -113,7 +113,7 @@ export default function CreateNewItem() {
                         <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Item Quantity</label>
                         <div className="col-sm-10">
                             <input 
-                                type="text" 
+                                type="number" 
                                 className="form-control fadeUp" 
                                 id="link"
                                 name="link" 
