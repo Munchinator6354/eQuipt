@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Create from '../components/Create'
+import { useSelector } from 'react-redux';
 import API from "../utils/API";
 export default class createItem extends Component {
     state = {
@@ -18,8 +19,10 @@ export default class createItem extends Component {
     };
     handleFormSubmit = event => {
         console.log("HEEHEHEHEHEHEH")
+        const userInfo = useSelector(state => state.userInfo);
         event.preventDefault();
         API.createItem({
+            username: userInfo,
             name: this.state.name, 
             description: this.state.description, 
             itemlevel: this.state.itemlevel, 
