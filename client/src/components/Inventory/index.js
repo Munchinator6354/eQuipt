@@ -42,13 +42,13 @@ const styles = {
 
 
 export default function InventoryForm() {
-    const userInfo = useSelector(state => state.userInfo);
-    // useEffect(() => {
-    //     console.log("YOOOOOO!")
-    //     //  API.getUserInfo({}).then().catch()
-    //     // userInfo = useSelector(state => state.userInfo);
-    //   });
-    
+   
+    useEffect(() => {
+        console.log("YOOOOOO!")
+        //  API.getUserInfo({}).then().catch()
+        // userInfo = useSelector(state => state.userInfo);
+      });
+      const userInfo = useSelector(state => state.userInfo);
 
     return (
 

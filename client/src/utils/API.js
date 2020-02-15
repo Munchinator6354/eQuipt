@@ -15,23 +15,26 @@ export default {
             })
         })
     },
-    getUserInfo:function(userData){
-        return new Promise((resolve, reject)=>{
-            axios.post("/api/user", userData)
-                .then(response=>{
-                    console.log(response)
-                    resolve(response)
-                }).catch(error=>{
-                    console.log("grab server error: " + error)
+    // getUserInfo:function(userData){
+    //     return new Promise((resolve, reject)=>{
+    //         axios.post("/api/user", userData)
+    //             .then(response=>{
+    //                 console.log(response)
+    //                 resolve(response)
+    //             }).catch(error=>{
+    //                 console.log("grab server error: " + error)
                   
-                })
-        })
-    },
+    //             })
+    //     })
+    // },
     giveToUser: function (userData) {
         return new Promise((resolve, reject)=>{
-           axios.put("/api/give/fromuser/Bob/touser/Abedude", userData)
+           axios.put("/api/give/fromuser/" + userData.userGiving + "/touser/" + userData.userToGive, userData)
                .then(response => {
                    console.log(response)
+                   console.log(userData.quantity)
+                   console.log(userData.inventoryid)
+                   console.log(userData)
                    resolve(response);
                }).catch(error => {
                    console.log("Give server error: ");
@@ -40,11 +43,14 @@ export default {
                })
            })
        },
-    getUserInfo: function () {
+    getUserInfo: function (userName) {
         return new Promise((resolve, reject)=>{
-           axios.get("/api/login")
+            
+           axios.get("/api/user", userName.username)
                .then(response => {
-                   resolve(response);
+                   console.log("THIS IS THE PLAYER USERNAME: " + userName.username)
+                   console.log("THIS IS THE RESPONSE! " + response.data)
+                resolve(response);
                }).catch(error => {
                    console.log(error)
                })
