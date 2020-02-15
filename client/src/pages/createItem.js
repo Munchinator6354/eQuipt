@@ -12,6 +12,7 @@ export default class createItem extends Component {
         link: "",
         error: ""
     }
+    userInfo = useSelector(state => state.userInfo);
     handleInputChange = event => {
         const{name, value} = event.target;
         this.setState({ 
@@ -19,10 +20,10 @@ export default class createItem extends Component {
     };
     handleFormSubmit = event => {
         console.log("HEEHEHEHEHEHEH")
-        const userInfo = useSelector(state => state.userInfo);
+     
         event.preventDefault();
         API.createItem({
-            username: userInfo,
+            // username: userInfo,
             name: this.state.name, 
             description: this.state.description, 
             itemlevel: this.state.itemlevel, 

@@ -5,7 +5,7 @@ import {
     Switch,
   } from 'react-router-dom'
 import Main from '../Main'
-import CreateItem from '../../pages/createItem';
+import CreateItem from '../../pages/createNewItem';
 import SearchPlayers from '../SearchPlayers';
 import Give from '../Give';
 import Trade from '../Trade';
