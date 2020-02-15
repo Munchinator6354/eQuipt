@@ -142,7 +142,7 @@ export default function CreateNewItem() {
                             onClick= {(event)=>{ 
                             event.preventDefault();
                             API.createItem({
-                                // username: "Bob",
+                                username: "Bob",
                                 name: itemName.current.value, 
                                 description: itemDescription.current.value, 
                                 itemlevel: itemLevel.current.value, 
