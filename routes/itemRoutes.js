@@ -55,11 +55,23 @@ module.exports = function(app) {
             quantity: req.body.quantity,
             link: req.body.link
         }
+        let user = {
+            username: req.body.username
+        }
         // res.json(item);
         console.log("YO!")
+        console.log(user);
         db.Inventory
         .create(item)
-        .then(dbInventory => res.json(dbInventory))
+        .then(function(dbInventory){
+            console.log(dbInventory);
+            db.User
+            .findOneAndUpdate(user, {$push: {inventory: dbInventory._id}}, {new:true})
+            .then(function(dbUser){
+                console.log(dbUser);
+                res.json(dbUser);
+            })
+        })
         .catch(err => res.status(422).json(err));
         
     });
