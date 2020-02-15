@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { logout } from '../actions/logout';
 import { username } from '../actions/getUsername';
 import { getUserInfo } from '../actions/getUserInfo';
+import { useHistory } from 'react-router-dom';
 
 const styles = {
     background: {
@@ -50,6 +51,7 @@ export default function Login() {
     let userName = React.createRef();
     let password = React.createRef();
     const [loginError, setError] = useState("");
+    const history = useHistory();
 
     return (
         <div style={styles.background}>
@@ -95,12 +97,8 @@ export default function Login() {
                                                 dispatch(username(response.data.username));
                                                 dispatch(getUserInfo(response.data));
                                                 setError("");
-                                                console.log(response);
+                                                history.push("/");
                                             }
-                                            // API.getUserInfo({}).then(
-                                            //     function(response) {
-                                            //     }
-                                            // );
                                         }
                                     )
                                     .catch(
@@ -108,10 +106,14 @@ export default function Login() {
                                             if (error == "Error: Failed to login") {
                                                 setError("Username or Password incorrect please try again");
                                             }
+                                            console.log(error);
+                                            console.log("Logging out");
                                             dispatch(logout());
                                         }
                                     );
                             }}
+
+
                             className="btn btn-outline-light fadeUp">
                             Login
                         </button>
