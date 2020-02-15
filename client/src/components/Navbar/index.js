@@ -70,13 +70,13 @@ export default function Navbar() {
                             </Link>
                             </li>
                             : ''}
-                        {isLogged ?
+                        {/* {isLogged ?
                             <li className="nav-item active">
                                 <Link to="/trade" style={styles.font} className="navbar-brand nav-link">
                                     Trade
                             </Link>
                             </li>
-                            : ''}
+                            : ''} */}
                         {(isLogged === true && userInfo.role === "Staff") ?
                             <li className="nav-item active">
                                 <Link to="/create" style={styles.font} className="navbar-brand nav-link">

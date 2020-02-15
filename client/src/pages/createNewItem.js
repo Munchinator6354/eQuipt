@@ -1,15 +1,8 @@
 import React, {useState} from 'react'
 import background from "../images/Create.jpg";
-
 import API from "../utils/API";
-
-import { useSelector } from 'react-redux';
-// import { useDispatch } from 'react-redux'
-// import { login } from '../../actions/logIn';
-// import { Link } from 'react-router-dom';
-// import { logout } from '../../actions/logout';
-// import { username } from '../../actions/getUsername';
-// import { getUserInfo } from '../../actions/getUserInfo';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserInfo } from '../actions/getUserInfo';
 
 const styles = {
     background: {
@@ -44,9 +37,9 @@ const styles = {
 }
 export default function CreateNewItem() {
     const userInfo = useSelector(state => state.userInfo);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     
-    const username = userInfo.userName
+    
     let itemName = React.createRef();
     let itemDescription = React.createRef();
     let itemLevel = React.createRef();
@@ -142,14 +135,42 @@ export default function CreateNewItem() {
                             onClick= {(event)=>{ 
                             event.preventDefault();
                             API.createItem({
-                                username: "Bob",
+                                username: userInfo.username,
                                 name: itemName.current.value, 
                                 description: itemDescription.current.value, 
                                 itemlevel: itemLevel.current.value, 
                                 marketprice: itemMarketPrice.current.value, 
                                 quantity: itemQuantity.current.value, 
                                 link: itemImageLink.current.value
-                            })}}
+                            }).then(
+                                function(response){  
+                                       console.log("GOT HERE!!!!!!!!")
+                                    API.getUserInfo({username: userInfo.username})
+                                    .then(
+                                        function(response){
+                                            dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))))
+                                          console.log("THISWORKED!" + JSON.parse(JSON.stringify(response.data)))
+                                        }
+                                    )
+                                    .catch(
+                                        function(error){
+                                            console.log(error)
+                                        }
+                                    );
+                                                        
+                                }
+                            ) .catch(
+                                function(error){
+                                    console.log(error)
+                                }
+                                // function(error) {
+                                //     if(error == "Error: Failed to login"){
+                                //        setError("Username or Password incorrect please try again")
+                                //     }
+                                //     dispatch(logout())
+                                // }
+                            );
+                        }}
                             className="btn btn-outline-light fadeUp">
                             Forge New Item
                         </button>
