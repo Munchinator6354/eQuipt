@@ -79,7 +79,7 @@ module.exports = function(app) {
 
         let user = {username: req.body.username};
         db.Inventory
-        .create(item.item)
+        .create(item)
         .then(dbInventory => db.User.findByIdAndUpdate({user},{ $push: dbInventory._id}, { new: true }))
         .then(dbUser => res.json(dbUser))
         .catch(err => res.status(422).json(err));
