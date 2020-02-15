@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import API from "../utils/API";
-import background from '../images/Door.jpg'
-import { useDispatch } from 'react-redux'
+import background from '../images/Door.jpg';
+import { useDispatch } from 'react-redux';
 import { login } from '../actions/logIn';
 import { Link } from 'react-router-dom';
 import { logout } from '../actions/logout';
@@ -21,9 +21,9 @@ const styles = {
         opacity: "1",
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
-        height:"95vh",
+        height: "95vh",
     },
-    font:{
+    font: {
         marginBottom: "5px",
         fontSize: "1.6em",
         fontFamily: "Almendra SC, serif"
@@ -42,7 +42,7 @@ const styles = {
         fontFamily: "Almendra SC, serif",
         marginLeft: "15px"
     }
-}
+};
 
 export default function Login() {
 
@@ -53,66 +53,65 @@ export default function Login() {
 
     return (
         <div style={styles.background}>
-             <div className="container" style={styles.center}>
+            <div className="container" style={styles.center}>
                 <br />
-                <h1 style={styles.font} className="fadeUp">Login if you dare!</h1><br/>
+                <h1 style={styles.font} className="fadeUp">Login if you dare!</h1><br />
                 <form>
                     <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">User Name</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
+                            <input
+                                type="text"
+                                className="form-control fadeUp"
                                 id="username"
-                                name="username" 
+                                name="username"
                                 ref={userName}
-                                />
+                            />
                         </div>
                     </div>
                     <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="password" 
-                                className="form-control fadeUp" 
+                            <input
+                                type="password"
+                                className="form-control fadeUp"
                                 name="password"
-                                id="inputPassword" 
-                                ref={password}/>
+                                id="inputPassword"
+                                ref={password} />
                         </div>
                     </div>
                     <p style={styles.errorFont} className="text-center">{loginError}</p>
                     <br />
                     <div className="form-group row">
-                        <button 
-                            style={styles.buttonFont} 
-                            onClick={ (event)=>{ 
+                        <button
+                            style={styles.buttonFont}
+                            onClick={(event) => {
                                 event.preventDefault();
-                                API.authenticateUser({username: userName.current.value, password: password.current.value })
-                                .then(
-                                    function(response){
-                                        if(response){
-                                        dispatch(login())
-                                        dispatch(username(response.data.username))
-                                        dispatch(getUserInfo(response.data))
-                                        setError("")
-                                        console.log(response)
+                                API.authenticateUser({ username: userName.current.value, password: password.current.value })
+                                    .then(
+                                        function(response) {
+                                            if (response) {
+                                                dispatch(login());
+                                                dispatch(username(response.data.username));
+                                                dispatch(getUserInfo(response.data));
+                                                setError("");
+                                                console.log(response);
+                                            }
+                                            // API.getUserInfo({}).then(
+                                            //     function(response) {
+                                            //     }
+                                            // );
                                         }
-                                    
-                                    }
-                                )
-                                .catch(
-                                    function(error) {
-                                        if(error == "Error: Failed to login"){
-                                           setError("Username or Password incorrect please try again")
+                                    )
+                                    .catch(
+                                        function(error) {
+                                            if (error == "Error: Failed to login") {
+                                                setError("Username or Password incorrect please try again");
+                                            }
+                                            dispatch(logout());
                                         }
-                                        dispatch(logout())
-                                    }
-                                );
-                                API.getUserInfo({}).then(
-                                    function(response){
-                                    }
-                                )
-                            }} 
+                                    );
+                            }}
                             className="btn btn-outline-light fadeUp">
                             Login
                         </button>
@@ -121,11 +120,11 @@ export default function Login() {
                 <br />
                 <h2 style={styles.font} className="fadeUp">Register &nbsp;
                 <Link to="/register" >
-                    here 
+                        here
                 </Link>
-                &nbsp;if you must!</h2>
-                
+                    &nbsp;if you must!</h2>
+
             </div>
         </div>
-    )
+    );
 }
