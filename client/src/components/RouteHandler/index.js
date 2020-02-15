@@ -33,7 +33,7 @@ export default function RouteHandler(props) {
                         <AdminProtectedRoute exact path="/Create" component={CreateItem}/>
                         <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} />
                         <ProtectedRoute exact path="/Give" component={Give} />
-                        <ProtectedRoute exact path="/Trade" component={Trade} />
+                        {/* <ProtectedRoute exact path="/Trade" component={Trade} /> */}
                         <ProtectedRoute exact path="/Inventory" component={Inventory} />
                         <ProtectedRoute exact path="/Welcome" component={Welcome}/>
                         <Route exact path="/Logout" component={LogOut}/>

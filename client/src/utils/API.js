@@ -15,7 +15,18 @@ export default {
                 });
         });
     },
-
+    createItem: function(itemData) {
+        return new Promise((resolve, reject) => {
+            axios.post("/api/createItem", itemData)
+            .then(response => {
+                console.log(response);
+                resolve(response);
+            }).catch(error => {
+                console.log('createItem server error: ');
+                console.log(error);
+            });
+        })
+    },
     giveToUser: function(userData) {
         return new Promise((resolve, reject) => {
             axios.put("/api/give/fromuser/" + userData.userGiving + "/touser/" + userData.userToGive, userData)
@@ -65,18 +76,7 @@ export default {
                 console.log(error);
             });
     },
-    createItem: function(itemData) {
-        console.log(itemData);
-        console.log("within axios post");
-
-        axios.post("/api/createItem", itemData)
-            .then(response => {
-                console.log(response);
-            }).catch(error => {
-                console.log('createItem server error: ');
-                console.log(error);
-            });
-    },
+ 
     grabPlayerInventory: function(username) {
         return new Promise((resolve, reject) => {
             axios.get("/api/items/" + username)
