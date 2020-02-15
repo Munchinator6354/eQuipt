@@ -34,18 +34,6 @@ module.exports = function(app) {
                 .catch(err => res.status(422).json(err));
         });
 
-    // app.get(
-    //     "/api/user",
-    //     function(req, res) {
-    //         console.log('===== User!!======');
-    //         console.log(req.user);
-    //         if (req.user) {
-    //             res.json({ user: req.user });
-    //         } else {
-    //             res.json({ user: null });
-    //         }
-    //     });
-
     // ===========================================================================
     // POST
     // ===========================================================================
