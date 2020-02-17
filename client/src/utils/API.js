@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 export default {
 
-    authenticateUser: function (userData) {
+    authenticateUser: function(userData) {
         return new Promise((resolve, reject) => {
             axios.post("/api/login", userData)
                 .then(response => {
@@ -16,7 +16,7 @@ export default {
                 });
         });
     },
-    createItem: function (itemData) {
+    createItem: function(itemData) {
         return new Promise((resolve, reject) => {
             axios.post("/api/createItem", itemData)
                 .then(response => {
@@ -26,9 +26,9 @@ export default {
                     console.log('createItem server error: ');
                     console.log(error);
                 });
-        })
+        });
     },
-    giveToUser: function (userData) {
+    giveToUser: function(userData) {
         return new Promise((resolve, reject) => {
             axios.put("/api/give/fromuser/" + userData.userGiving + "/touser/" + userData.userToGive, userData)
                 .then(response => {
@@ -47,13 +47,13 @@ export default {
 
     // getUserInfo calls the /api/user route which returns the user who is currently logged in
     // for a session.
-    getUserInfo: function () {
+    getUserInfo: function() {
         return new Promise((resolve, reject) => {
             // No need to send the username to api/user, because the backend will send you whoever
             // is currently logged in for that session.
             axios.get("/api/user")
                 .then(response => {
-                    console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
+                    // console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
                     resolve(response);
                 }).catch(error => {
                     console.log(error);
@@ -84,7 +84,7 @@ export default {
         });
     },
 
-    grabPlayerInventory: function (username) {
+    grabPlayerInventory: function(username) {
         return new Promise((resolve, reject) => {
             axios.get("/api/items/" + username)
                 .then(response => {
@@ -94,8 +94,26 @@ export default {
                     console.log(error);
                 });
         });
-
+    },
+    changeQuantity: function(itemInfo) {
+        return new Promise((resolve, reject) => {
+            axios.put("/api/updateItem/", itemInfo)
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    deleteItem: function(itemId) {
+        return new Promise((resolve, reject) => {
+            console.log(itemId);
+            axios.delete("/api/item/", { params: { id: itemId } })
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
     }
-
-
 };
