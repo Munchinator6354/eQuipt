@@ -51,14 +51,14 @@ mongoose.connect(
     {name: 'Pistol', description: 'A basic pistol.', itemlevel: '0' , marketprice: '30' , quantity: '0', link:'https://www.medievalcollectibles.com/wp-content/uploads/2019/04/ME-0170.png' },
     {name: 'Werewolf Tallow', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://vignette.wikia.nocookie.net/witcher/images/f/fa/Bestiary_Wolf.png/revision/latest/top-crop/width/360/height/450?cb=20071116211923' },
     {name: "Dragon's Eye", description: 'A common apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '0.5' , quantity: '0', link:'https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/dragon-eye-aaron-spong.jpg' },
-    {name: 'Mandrake', description: 'A common apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '0.5' , quantity: '0', link:'https://i0.wp.com/blog.strictlymedicinalseeds.com/wp-content/uploads/2019/03/Mandrake-Root.jpg?resize=352%2C431&ssl=1' },
-    {name: 'Ghoul Venom', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://i.pinimg.com/originals/c1/14/fb/c114fb37c86bc6fa51d090df9c65bd0e.jpg' },
-    {name: 'Grave Blood', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://bloodborne.wiki.fextralife.com/file/Bloodborne/blood_vial.jpg' },
-    {name: 'Vampire Blood', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://img.huffingtonpost.com/asset/5bad75332200005700daaf3d.jpeg?ops=scalefit_630_noupscale' },
-    {name: "Widow's Petal", description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://image.shutterstock.com/image-photo/four-red-petal-flower-kalanchoe-260nw-739244008.jpg' },
-    {name: 'Thornwood Fern', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://upload.wikimedia.org/wikipedia/commons/7/71/Athyrium_filix-femina.jpg' },
-    {name: 'Tarkathi Poppy', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://cdn.shopify.com/s/files/1/1186/5156/products/Red-Poppy_1024x1024.jpeg?v=1456914865' },
-    {name: 'Crypt Moss', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhO27vvTIVUJMBjrCHdwy9MSgQpCr0nxmVbdvmBiqGxdOBIRuZ' }
+    {name: 'Mandrake', description: 'A common apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '0.5' , quantity: '0', link:'https://vignette.wikia.nocookie.net/bloodbrothersgame/images/c/c3/Mandrake.png/revision/latest/top-crop/width/360/height/450?cb=20121106225737' },
+    {name: 'Ghoul Venom', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://cdn.clipart.email/26dd8c59b3bd5d5554cf15baffc03c12_poison-clipart-panda-free-clipart-images_999-2331.png' },
+    {name: 'Grave Blood', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://vignette.wikia.nocookie.net/slay-the-spire/images/4/4e/BloodVial.png/revision/latest?cb=20200203150024' },
+    {name: 'Vampire Blood', description: 'A rare apothecary reagent acquired from a monster.', itemlevel: 'N/A' , marketprice: '10' , quantity: '0', link:'https://vignette.wikia.nocookie.net/darkmetal/images/a/a4/Blood-Vial.png/revision/latest/scale-to-width-down/340?cb=20150716160903' },
+    {name: "Widow's Petal", description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://www.transparentpng.com/thumb/flower/dahlia-flower-png-orange-transparent-image-0.png' },
+    {name: 'Thornwood Fern', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://i.ya-webdesign.com/images/fern-png-8.png' },
+    {name: 'Tarkathi Poppy', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://lh3.googleusercontent.com/proxy/rWBkdJUmuTtKAyPHKFIdJ5ARL0Y6RTXdkPc9nxY_vWnrHjlGvDhAfaIBsPFI9k9Vu5F_spcctNZDRaugvCGHKWhI04jkEP1HRGOgVO4BvTtfw4M' },
+    {name: 'Crypt Moss', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://oldschool.runescape.wiki/images/8/83/Grimy_ranarr_weed_detail.png?ba61f' }
     ]
 
 var userSeed = [
@@ -115,7 +115,7 @@ db.User
      })
     })
      .catch(function(err) {
-      //     // If an error occurs, send it back to the client
+          // If an error occurs, send it back to the client
           res.json(err);
         });  
       })
