@@ -10,10 +10,10 @@ mongoose.connect(
   );
 
   var inventorySeed = [
-    {name: 'Apothecary Kit', description: 'Required to craft Apothecary items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://i.pinimg.com/originals/45/d1/13/45d113961f591f6a6e45a2a1aadcc941.png' },
-    {name: 'Artificer Kit', description: 'Required to craft Artificer items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://vignette.wikia.nocookie.net/findle/images/6/6b/ArtificerPIC.PNG/revision/latest?cb=20190301024642' },
+    {name: 'Apothecary Kit', description: 'Required to craft Apothecary items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://www.rauantiques.com/wp/wp-content/uploads/2019/12/medicine-chest.png' },
+    {name: 'Artificer Kit', description: 'Required to craft Artificer items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_256/https://www.mmorpgtips.com/wp-content/uploads/2013/09/Master-Infiltrator-Build.png' },
     {name: 'Blacksmith Kit', description: 'Required to craft Blacksmith items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://vignette.wikia.nocookie.net/kingdom-come-deliverance/images/6/69/Kingdom_Come_-_Armour_kit.png/revision/latest/top-crop/width/360/height/360?cb=20180226192330' },
-    {name: 'Bowyer Kit', description: 'Required to craft Bowyer items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://f1.pngfuel.com/png/371/594/431/bow-and-arrow-archery-recurve-bow-crossbow-bowyer-drawing-yumi-english-longbow-png-clip-art.png' },
+    {name: 'Bowyer Kit', description: 'Required to craft Bowyer items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/965452e2-ec2e-43ec-a2e2-430dd80531c5/dauix5r-1472b9b8-6033-4dbb-8bf6-5bd8d96344af.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzk2NTQ1MmUyLWVjMmUtNDNlYy1hMmUyLTQzMGRkODA1MzFjNVwvZGF1aXg1ci0xNDcyYjliOC02MDMzLTRkYmItOGJmNi01YmQ4ZDk2MzQ0YWYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.c6_I7CvnCA5ENwyYzHW8KePCpJPyDG7_GMwE0NxwbZg' },
     {name: 'Gunsmith Kit', description: 'Required to craft Gunsmith items.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://blog.hornguild.org/wp-content/uploads/2015/12/1-toone-lathe-2.png' },
     {name: 'Chirurgeon Kit', description: 'Required to use certain skills, such as Mend.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://i.pinimg.com/originals/86/c2/8b/86c28b9633a2024b3690936528164063.png' },
     {name: 'Cloak', description: 'Aids in the spreading of rumors.', itemlevel: '1' , marketprice: '18' , quantity: '0', link:'https://vignette.wikia.nocookie.net/clubpenguin/images/5/57/Greenhoodedcloak.PNG/revision/latest/scale-to-width-down/340?cb=20140217164343' },
@@ -44,7 +44,7 @@ mongoose.connect(
     {name: 'Bullets', description: 'A set of 3 bullets.', itemlevel: '1' , marketprice: '17' , quantity: '0', link:'https://gamepedia.cursecdn.com/arksurvivalevolved_gamepedia/8/88/Simple_Bullet.png' },
     {name: 'Iron Ingot', description: 'A rough iron ingot.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://gamepedia.cursecdn.com/atlas_gamepedia_en/0/0a/Iron_Ingot.png' },
     {name: 'Cloth', description: 'A bolt of cloth.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://vignette.wikia.nocookie.net/gardenpaws/images/5/51/Cloth.png/revision/latest/top-crop/width/360/height/450?cb=20180915170530' },
-    {name: 'Refined Wood', description: 'A bit of refined wood.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://lh3.googleusercontent.com/proxy/sZBDdDx5nSvP7Ze_GCq1x9vfcMw1Dedymh5Xjg5MvSMY_wHi_wG_a8K64ZUHo8lJcGWOTHnyo1Y_cbWpM4ukBCIBNoEAR9Pf' },
+    {name: 'Refined Wood', description: 'A bit of refined wood.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://gamepedia.cursecdn.com/minecraft_gamepedia/c/c5/Oak_Planks_JE6_BE2.png' },
     {name: 'Leather', description: 'A bit of leather.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://vignette.wikia.nocookie.net/elderscrolls/images/4/4b/TESV_Leather.png/revision/latest/top-crop/width/360/height/450?cb=20120311135843' },
     {name: 'Distilled Spirits', description: 'Distilled spirits which can be used as a base for many apothecarial substances.', itemlevel: 'N/A' , marketprice: '1' , quantity: '0', link:'https://pics.clipartpng.com/Liquor_Bottle_PNG_Clipart-87.png' },
     {name: 'Bow', description: 'A basic longbow.', itemlevel: '0' , marketprice: '10' , quantity: '0', link:'https://pluspng.com/img-png/archery-png-hd-file-ffxi-archery-20-png-475.png' },
@@ -104,7 +104,7 @@ db.User
 .then(data => {
   console.log(data.result.n + " records inserted!");
   db.Inventory
-  .find({name: /Iron/i})
+  .find({})
   .then(function(dbModel){
      db.User
      .findOneAndUpdate({playername: "Bob"}, {$push: {inventory: dbModel}}, {new:true})
