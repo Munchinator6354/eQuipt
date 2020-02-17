@@ -270,16 +270,29 @@ module.exports = function(app) {
     app.delete("/api/item/:username", function(req, res) {
         // ODM delete, where { username: username } and the item details are retrieved
         // from req.body.
-        let deleteUser = {
-            username: req.params.username,
+
+        let item = {
+            id: req.body.id
         }
-        let deleteItem = {
-            username: req.params.username,
-        }
-        // res.json(deletion);
-        db.User
-        .findOneAndRemove({deletion, "inventory.name": req.body.name})
-        .then(dbUser=> res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+        // let user = {
+        //     username: req.body.username
+        // }
+        db.Inventory
+        .findByIdAndDelete({_id: item.id})
+        .then(dbModel => res.json(dbModel))
+        .catch(function(err){
+            res.json(err);
+        })
+        // let deleteUser = {
+        //     username: req.params.username,
+        // }
+        // let deleteItem = {
+        //     username: req.params.username,
+        // }
+        // // res.json(deletion);
+        // db.User
+        // .findOneAndRemove({deletion, "inventory.name": req.body.name})
+        // .then(dbUser=> res.json(dbUser))
+        // .catch(err => res.status(422).json(err));
     });
 };
