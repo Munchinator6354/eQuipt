@@ -242,12 +242,17 @@ module.exports = function(app) {
             id: req.body.id,
             quantity: req.body.quantity,  
         }
+        console.log("Item to increase: ");
+        console.log(item);
         // let user = {
         //     username: req.body.username
         // }
         db.Inventory
-        .findByIdAndUpdate({_id: item.id}, {'inventory.$.quantity': item.quantity})
-        .then(dbModel => res.json(dbModel))
+        .findByIdAndUpdate({_id: item.id}, {quantity: item.quantity}, {new: true})
+        .then(dbModel => {
+            console.log(dbModel);
+            res.json(dbModel);
+        })
         .catch(function(err){
             res.json(err);
         })
