@@ -1,15 +1,71 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "eQuipt",
+  "short_name": "eQuipt",
+  "start_url" : "./index.html",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#ff0000",
+  "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "favicon.ico",
-      "sizes": "48x48",
-      "type": "image/png"
-    }
-  ],
-  "start_url": "./index.html",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+            "src": "favicon.ico",
+            "sizes": "48x48",
+            "type": "image/png"
+          },
+      {
+          "src": "./images/icons/treasure-chest-16-188617.png",
+          "type": "image/png",
+          "sizes": "16x16"
+      },
+      {
+          "src": "./images/icons/treasure-chest-24-188617.png",
+          "type": "image/png",
+          "sizes": "24x24"
+      },
+      {
+          "src": "./images/icons/treasure-chest-32-188617.png",
+          "type": "image/png",
+          "sizes": "32x32"
+      },
+      {
+          "src": "./images/icons/treasure-chest-48-188617.png",
+          "type": "image/png",
+          "sizes": "48x48"
+      },
+      {
+          "src": "./images/icons/treasure-chest-57-188617.png",
+          "type": "image/png",
+          "sizes": "57x57"
+      },
+      {
+          "src": "./images/icons/treasure-chest-64-188617.png",
+          "type": "image/png",
+          "sizes": "64x64"
+      },
+      {
+          "src": "./images/icons/treasure-chest-72-188617.png",
+          "type": "image/png",
+          "sizes": "72x72"
+      },
+      {
+          "src": "./images/icons/treasure-chest-114-188617.png",
+          "type": "image/png",
+          "sizes": "114x114"
+      },
+      {
+          "src": "./images/icons/treasure-chest-120-188617.png",
+          "type": "image/png",
+          "sizes": "120x120"
+      },
+      {
+          "src": "./images/icons/treasure-chest-144-188617.png",
+          "type": "image/png",
+          "sizes": "144x144"
+      },
+      {
+          "src": "./images/icons/treasure-chest-152-188617.png",
+          "type": "image/png",
+          "sizes": "152x152"
+      }
+  ]
 }
