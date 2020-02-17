@@ -232,18 +232,32 @@ module.exports = function(app) {
 
     // Update an item's quantity, name, or description. Only staff users can update
     // items.
-    app.put("/api/item/:username", function(req, res) {
+    app.put("/api/updateItem", function(req, res) {
         // ODM update, where { username: username } and the item details are retrieved
         // from req.body.
-        let update = {
-            username: req.params.username,
+        // let user = {
+        //     username: req.body.username,
+        // }
+        let item = {
+            id: req.body.id,
+            quantity: req.body.quantity,  
         }
-        db.User
-        .findOne(update)
-        .update({"inventory.name": req.body.name}, 
-        {$set: {'inventory.$.name': req.body.name,'inventory.$.description': req.body.description,'inventory.$.itemlevel': req.body.itemlevel,'inventory.$.marketprice': req.body.marketprice,'inventory.$.quantity': req.body.quantity,'inventory.$.link': req.body.link}})
-        .then(dbUser=> res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+        // let user = {
+        //     username: req.body.username
+        // }
+        db.Inventory
+        .findByIdAndUpdate({_id: item.id}, {'inventory.$.quantity': item.quantity})
+        .then(dbModel => res.json(dbModel))
+        .catch(function(err){
+            res.json(err);
+        })
+
+        // db.User
+        // .findOne(user)
+        // .update({"inventory._id": item.id}, 
+        // {$set: {'inventory.$.quantity': item.quantity,'inventory.$.link': item.link}})
+        // .then(dbUser=> res.json(dbUser))
+        // .catch(err => res.status(422).json(err));
     });
 
     // API DELETE Requests
@@ -256,13 +270,29 @@ module.exports = function(app) {
     app.delete("/api/item/:username", function(req, res) {
         // ODM delete, where { username: username } and the item details are retrieved
         // from req.body.
-        let deletion = {
-            username: req.params.username,
+
+        let item = {
+            id: req.body.id
         }
-        // res.json(deletion);
-        db.User
-        .findOneAndRemove({deletion, "inventory.name": req.body.name})
-        .then(dbUser=> res.json(dbUser))
-        .catch(err => res.status(422).json(err));
+        // let user = {
+        //     username: req.body.username
+        // }
+        db.Inventory
+        .findByIdAndDelete({_id: item.id})
+        .then(dbModel => res.json(dbModel))
+        .catch(function(err){
+            res.json(err);
+        })
+        // let deleteUser = {
+        //     username: req.params.username,
+        // }
+        // let deleteItem = {
+        //     username: req.params.username,
+        // }
+        // // res.json(deletion);
+        // db.User
+        // .findOneAndRemove({deletion, "inventory.name": req.body.name})
+        // .then(dbUser=> res.json(dbUser))
+        // .catch(err => res.status(422).json(err));
     });
 };
