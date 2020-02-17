@@ -112,8 +112,6 @@ export default function Login() {
                                         }
                                     );
                             }}
-
-
                             className="btn btn-outline-light fadeUp">
                             Login
                         </button>

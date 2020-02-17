@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 export default {
 
@@ -18,14 +19,14 @@ export default {
     createItem: function(itemData) {
         return new Promise((resolve, reject) => {
             axios.post("/api/createItem", itemData)
-            .then(response => {
-                console.log(response);
-                resolve(response);
-            }).catch(error => {
-                console.log('createItem server error: ');
-                console.log(error);
-            });
-        })
+                .then(response => {
+                    console.log(response);
+                    resolve(response);
+                }).catch(error => {
+                    console.log('createItem server error: ');
+                    console.log(error);
+                });
+        });
     },
     giveToUser: function(userData) {
         return new Promise((resolve, reject) => {
@@ -52,7 +53,7 @@ export default {
             // is currently logged in for that session.
             axios.get("/api/user")
                 .then(response => {
-                    console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
+                    // console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
                     resolve(response);
                 }).catch(error => {
                     console.log(error);
@@ -60,23 +61,29 @@ export default {
         });
     },
     signUpUser: function(newUser) {
-        console.log(newUser);
-        axios.post("/api/register", newUser)
-            .then(response => {
-                if (response.data) {
-                    console.log('successful signup');
-                    this.setState({
-                        redirectTo: '/login'
-                    });
-                } else {
-                    console.log('Sign-up error');
-                }
-            }).catch(error => {
-                console.log('Sign up server error: ');
-                console.log(error);
-            });
+        return new Promise((resolve, reject) => {
+            // No need to send the username to api/user, because the backend will send you whoever
+            // is currently logged in for that session.
+            axios.post("/api/register", newUser)
+                .then(response => {
+                    console.log(response + 'this is the response');
+                    if (response.data) {
+                        console.log('successful signup');
+                        resolve(response.data);
+                        // this.setState({
+                        //     redirectTo: '/login'
+                        // });
+                    } else {
+                        console.log('Sign-up error');
+                    }
+                }).catch(error => {
+                    console.log('Sign up server error: ');
+                    console.log(error);
+                    reject(error);
+                });
+        });
     },
- 
+
     grabPlayerInventory: function(username) {
         return new Promise((resolve, reject) => {
             axios.get("/api/items/" + username)
@@ -87,8 +94,26 @@ export default {
                     console.log(error);
                 });
         });
-
+    },
+    changeQuantity: function(itemInfo) {
+        return new Promise((resolve, reject) => {
+            axios.put("/api/updateItem/", itemInfo)
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    deleteItem: function(itemId) {
+        return new Promise((resolve, reject) => {
+            console.log(itemId);
+            axios.delete("/api/item/", { params: { id: itemId } })
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
     }
-
-
 };
