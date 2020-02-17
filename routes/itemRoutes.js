@@ -242,17 +242,12 @@ module.exports = function(app) {
             id: req.body.id,
             quantity: req.body.quantity,  
         }
-        console.log("Item to increase: ");
-        console.log(item);
         // let user = {
         //     username: req.body.username
         // }
         db.Inventory
         .findByIdAndUpdate({_id: item.id}, {quantity: item.quantity}, {new: true})
-        .then(dbModel => {
-            console.log(dbModel);
-            res.json(dbModel);
-        })
+        .then(dbModel => res.json(dbModel))
         .catch(function(err){
             res.json(err);
         })
@@ -272,16 +267,14 @@ module.exports = function(app) {
     // ---------------------------------------------------------------------------
 
     // Delete an item from a user. Only staff users can delete items.
-    app.delete("/api/item/:username", function(req, res) {
+    app.delete("/api/item", function(req, res) {
         // ODM delete, where { username: username } and the item details are retrieved
         // from req.body.
 
         let item = {
-            id: req.body.id
+            id: req.query.id
         }
-        // let user = {
-        //     username: req.body.username
-        // }
+
         db.Inventory
         .findByIdAndDelete({_id: item.id})
         .then(dbModel => res.json(dbModel))

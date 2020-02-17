@@ -58,12 +58,10 @@ function StaffQuantity(props) {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity + 1 })
                         .then(function(response) {
-                            console.log(response);
                             API.getUserInfo({ username: props.theUser.username })
                                 .then(
                                     function(response) {
                                         dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                        console.log(JSON.parse(JSON.stringify(response.data)));
                                     }
                                 )
                                 .catch(
@@ -87,12 +85,10 @@ function StaffQuantity(props) {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity - 1 })
                         .then(function(response) {
-                            console.log(response);
                             API.getUserInfo({ username: props.theUser.username })
                                 .then(
                                     function(response) {
                                         dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                        console.log(JSON.parse(JSON.stringify(response.data)));
                                     }
                                 )
                                 .catch(
@@ -109,7 +105,32 @@ function StaffQuantity(props) {
                 }}>
                 -
                 </button>
-            <button className="btn btn-danger mx-2">Delete</button>
+            <button
+                className="btn btn-danger mx-2"
+                onClick={(event) => {
+                    event.preventDefault();
+                    API.deleteItem(props.theItem._id)
+                        .then(function(response) {
+                            API.getUserInfo({ username: props.theUser.username })
+                                .then(
+                                    function(response) {
+                                        dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                    }
+                                )
+                                .catch(
+                                    function(error) {
+                                        console.log(error);
+                                    }
+                                );
+                        })
+                        .catch(
+                            function(error) {
+                                console.log(error);
+                            }
+                        );
+                }}>
+                Delete
+                </button>
         </td>
     );
 }

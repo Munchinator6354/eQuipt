@@ -53,7 +53,7 @@ export default {
             // is currently logged in for that session.
             axios.get("/api/user")
                 .then(response => {
-                    console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
+                    // console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
                     resolve(response);
                 }).catch(error => {
                     console.log(error);
@@ -98,6 +98,17 @@ export default {
     changeQuantity: function(itemInfo) {
         return new Promise((resolve, reject) => {
             axios.put("/api/updateItem/", itemInfo)
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    reject(error);
+                });
+        });
+    },
+    deleteItem: function(itemId) {
+        return new Promise((resolve, reject) => {
+            console.log(itemId);
+            axios.delete("/api/item/", { params: { id: itemId } })
                 .then(response => {
                     resolve(response);
                 }).catch(error => {
