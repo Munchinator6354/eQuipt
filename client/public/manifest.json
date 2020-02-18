@@ -66,6 +66,11 @@
           "src": "./images/icons/treasure-chest-152-188617.png",
           "type": "image/png",
           "sizes": "152x152"
-      }
+      },
+      {
+        "src": "./images/icons/treasure-chest-512-188617.png",
+        "type": "image/png",
+        "sizes": "512x512"
+    }
   ]
 }
