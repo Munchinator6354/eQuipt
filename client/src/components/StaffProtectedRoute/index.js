@@ -16,8 +16,7 @@ export default function StaffProtectedRoute({component: Component,loggedIn: Logg
     <div>
     <Router>
     <Route {...rest} render={(props) => (
-        (loggedInState === true &&
-        (userInfo.role === "Staff" || userInfo.role === "Admin"))
+        (loggedInState === true && (userInfo.role === "Staff" || userInfo.role === "Admin"))
         ? <Component {...props} />
         : <Redirect to='/404' />
     )} />

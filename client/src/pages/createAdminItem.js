@@ -44,7 +44,7 @@ export default function CreateAdminItem() {
     let itemLevel = React.createRef();
     let itemMarketPrice = React.createRef();
     let itemImageLink = React.createRef();
-    const [itemID, setItemID] = useState("");
+    // const [itemID, setItemID] = useState("");
 
     return (
 
@@ -90,18 +90,6 @@ export default function CreateAdminItem() {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="marketprice" className="col-sm-2 col-form-label fadeUp">Market Price</label>
-                        <div className="col-sm-10">
-                            <input
-                                type="number"
-                                className="form-control fadeUp"
-                                id="marketprice"
-                                name="marketprice"
-                                ref={itemMarketPrice}
-                            />
-                        </div>
-                    </div>
-                    <div className="form-group row">
                         <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Image Link</label>
                         <div className="col-sm-10">
                             <input
@@ -121,25 +109,24 @@ export default function CreateAdminItem() {
                             onClick={(event) => {
                                 event.preventDefault();
                                 API.createAdminItem({
-                                    username: userInfo.username,
                                     name: itemName.current.value,
                                     description: itemDescription.current.value,
                                     itemlevel: itemLevel.current.value,
                                     link: itemImageLink.current.value
                                 }).then(
                                     function(response) {
-                                        API.getUserInfo({ username: userInfo.username })
-                                            .then(
-                                                function(response) {
-                                                    dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                                }
-                                            )
-                                            .catch(
-                                                function(error) {
-                                                    console.log(error);
-                                                }
-                                            );
-
+                                        // API.getUserInfo({ username: userInfo.username })
+                                        //     .then(
+                                        //         function(response) {
+                                        //             dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                        //         }
+                                        //     )
+                                        //     .catch(
+                                        //         function(error) {
+                                        //             console.log(error);
+                                        //         }
+                                        //     );
+                                        console.log(response);
                                     }
                                 ).catch(
                                     function(error) {

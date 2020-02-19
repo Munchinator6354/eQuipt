@@ -8,8 +8,7 @@ import Main from '../Main'
 import CreateItem from '../../pages/createNewItem';
 // import SearchPlayers from '../SearchPlayers';
 import CreateAdminItem from '../../pages/createAdminItem';
-import CreateUser from '../../pages/createUser';
-import SearchPlayers from '../SearchPlayers';
+// import CreateUser from '../../pages/createUser';
 import Give from '../Give';
 // import Trade from '../Trade';
 import NoMatch from '../../pages/noMatch';
@@ -37,8 +36,7 @@ export default function RouteHandler(props) {
                         {/* <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} /> */}
                         <StaffProtectedRoute exact path="/Create" component={CreateItem}/>
                         <AdminProtectedRoute exact path="/CreateAdmin" component={CreateAdminItem} />
-                        <AdminProtectedRoute exact path="/CreateUser" component={CreateUser} />
-                        <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} />
+                        {/* <AdminProtectedRoute exact path="/CreateUser" component={CreateUser} /> */}
                         <ProtectedRoute exact path="/Give" component={Give} />
                         {/* <ProtectedRoute exact path="/Trade" component={Trade} /> */}
                         <ProtectedRoute exact path="/Inventory" component={Inventory} />

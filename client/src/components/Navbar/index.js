@@ -65,7 +65,7 @@ export default function Navbar() {
                             : ''}
                         {isLogged ?
                             <li className="nav-item active">
-                                <Link to="/give" style={styles.font} className="navbar-brand nav-link">
+                                <Link to="/Give" style={styles.font} className="navbar-brand nav-link">
                                     Give
                             </Link>
                             </li>
@@ -77,10 +77,17 @@ export default function Navbar() {
                             </Link>
                             </li>
                             : ''} */}
-                        {(isLogged === true && userInfo.role === "Staff") ?
+                        {(isLogged === true && (userInfo.role === "Staff" || userInfo.role === "Admin")) ?
                             <li className="nav-item active">
-                                <Link to="/create" style={styles.font} className="navbar-brand nav-link">
+                                <Link to="/Create" style={styles.font} className="navbar-brand nav-link">
                                     Create
+                            </Link>
+                            </li>
+                            : ''}
+                        {(isLogged === true && userInfo.role === "Admin") ?
+                            <li className="nav-item active">
+                                <Link to="/CreateAdmin" style={styles.font} className="navbar-brand nav-link">
+                                    Forge New Item
                             </Link>
                             </li>
                             : ''}

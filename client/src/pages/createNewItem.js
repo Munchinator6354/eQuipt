@@ -62,44 +62,7 @@ export default function CreateNewItem() {
                                 className="form-control fadeUp" 
                                 id="name"
                                 name="name"
-                                ref={itemName}/> 
-                             
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Item Description</label>
-                        <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
-                                id="description"
-                                name="description"
-                                ref={itemDescription}/>
-
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="itemlevel" className="col-sm-2 col-form-label fadeUp">Item Level</label>
-                        <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
-                                id="itemlevel"
-                                name="itemlevel" 
-                                ref={itemLevel}
-                                />
-                        </div>
-                    </div>
-                    <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="marketprice" className="col-sm-2 col-form-label fadeUp">Market Price</label>
-                        <div className="col-sm-10">
-                            <input 
-                                type="number" 
-                                className="form-control fadeUp" 
-                                id="marketprice"
-                                name="marketprice" 
-                                ref={itemMarketPrice}
-                                />
+                                ref={itemName}/>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -114,19 +77,6 @@ export default function CreateNewItem() {
                                 />
                         </div>
                     </div>
-                    <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Image Link</label>
-                        <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
-                                id="link"
-                                name="link" 
-                                ref={itemImageLink}
-                                />
-                        </div>
-                    </div>
-               
                     <br />
                     <div className="form-group row">
                         <button 
@@ -172,7 +122,7 @@ export default function CreateNewItem() {
                             );
                         }}
                             className="btn btn-outline-light fadeUp">
-                            Forge New Item
+                            Create Inventory Item
                         </button>
                     </div>
                 </form>

@@ -27,6 +27,19 @@ export default {
                 });
         });
     },
+    createAdminItem: function(itemData) {
+        return new Promise((resolve, reject) => {
+            resolve(itemData);
+            // axios.post("/api/createAdminItem", itemData)
+            //     .then(response => {
+            //         console.log(response);
+            //         resolve(response);
+            //     }).catch(error => {
+            //         console.log('createItem server error: ');
+            //         console.log(error);
+            //     });
+        });
+    },
     giveToUser: function(userData) {
         return new Promise((resolve, reject) => {
             axios.put("/api/give/fromuser/" + userData.userGiving + "/touser/" + userData.userToGive, userData)
@@ -43,7 +56,6 @@ export default {
                 });
         });
     },
-
     // getUserInfo calls the /api/user route which returns the user who is currently logged in
     // for a session.
     getUserInfo: function() {
@@ -82,7 +94,6 @@ export default {
                 });
         });
     },
-
     grabPlayerInventory: function(username) {
         return new Promise((resolve, reject) => {
             axios.get("/api/items/" + username)
