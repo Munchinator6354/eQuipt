@@ -103,11 +103,9 @@ export default function Login() {
                                     )
                                     .catch(
                                         function(error) {
-                                            if (error == "Error: Failed to login") {
+                                            if (error.message === "Failed to login") {
                                                 setError("Username or Password incorrect please try again");
                                             }
-                                            console.log(error);
-                                            console.log("Logging out");
                                             dispatch(logout());
                                         }
                                     );

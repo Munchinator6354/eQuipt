@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import background from "../../images/Door.jpg";
 import API from "../../utils/API";
 import { useSelector } from 'react-redux';
@@ -53,7 +53,7 @@ function StaffQuantity(props) {
     return (
         <td key={props.theItem.name.quantity}>
             <button
-                className="btn btn-secondary mr-2"
+                className="btn btn-outline-light btn-sm mr-2"
                 onClick={(event) => {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity + 1 })
@@ -80,7 +80,7 @@ function StaffQuantity(props) {
             </button>
             {props.theItem.quantity}
             <button
-                className="btn btn-secondary ml-2"
+                className="btn btn-outline-light btn-sm mr-2"
                 onClick={(event) => {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity - 1 })
@@ -106,7 +106,7 @@ function StaffQuantity(props) {
                 -
                 </button>
             <button
-                className="btn btn-danger mx-2"
+                className="btn btn-outline-danger btn-sm mx-2"
                 onClick={(event) => {
                     event.preventDefault();
                     API.deleteItem(props.theItem._id)
@@ -159,8 +159,10 @@ export default function InventoryForm() {
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Description</th>
+                            
                             <th scope="col">Item Level</th>
-                            <th scope="col">Market Price</th>
+                            {/* <th scope="col">Market Price</th> */}
+                        
                             <th scope="col" style={styles.quantityWidth}>Quantity</th>
                             <th scope="col">Image</th>
                         </tr>
@@ -170,9 +172,10 @@ export default function InventoryForm() {
                                 <td key={item.name}>{item.name}</td>
                                 <td key={item.description}>{item.description}</td>
                                 <td key={item.itemlevel}>{item.itemlevel}</td>
-                                <td key={item.marketprice}>{item.marketprice}</td>
+                                {/* <td key={item.marketprice}>{item.marketprice}</td> */}
                                 <Quantity theItem={item} theUser={userInfo} />
                                 <td key={item.link}><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
+                                
                             </tr>
                         ))}
                     </tbody>

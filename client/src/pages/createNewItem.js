@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import background from "../images/Create.jpg";
 import API from "../utils/API";
 import { useSelector, useDispatch } from 'react-redux';
@@ -46,7 +46,7 @@ export default function CreateNewItem() {
     let itemMarketPrice = React.createRef();
     let itemImageLink = React.createRef();
     let itemQuantity = React.createRef();
-    const [itemID, setItemID] = useState("");
+    // const [itemID, setItemID] = useState("");
     return (
 
         <div style={styles.background}>
@@ -159,7 +159,7 @@ export default function CreateNewItem() {
                                     );
                                                         
                                 }
-                            ) .catch(
+                            ).catch(
                                 function(error){
                                     console.log(error)
                                 }

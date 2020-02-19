@@ -6,9 +6,9 @@ import {
   } from 'react-router-dom'
 import Main from '../Main'
 import CreateItem from '../../pages/createNewItem';
-import SearchPlayers from '../SearchPlayers';
+// import SearchPlayers from '../SearchPlayers';
 import Give from '../Give';
-import Trade from '../Trade';
+// import Trade from '../Trade';
 import NoMatch from '../../pages/noMatch';
 import Register from '../../pages/register';
 import Login from '../../pages/login';
@@ -31,7 +31,7 @@ export default function RouteHandler(props) {
                         <Route exact path="/login" component={Login}/>
                         <Route exact path='/test' component={TestComponent}/>
                         <AdminProtectedRoute exact path="/Create" component={CreateItem}/>
-                        <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} />
+                        {/* <ProtectedRoute exact path="/SearchPlayers" component={SearchPlayers} /> */}
                         <ProtectedRoute exact path="/Give" component={Give} />
                         {/* <ProtectedRoute exact path="/Trade" component={Trade} /> */}
                         <ProtectedRoute exact path="/Inventory" component={Inventory} />

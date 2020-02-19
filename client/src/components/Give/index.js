@@ -3,10 +3,6 @@ import API from "../../utils/API";
 import background from "../../images/Gift.jpg";
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux'
-import { login } from '../../actions/logIn';
-import { Link } from 'react-router-dom';
-import { logout } from '../../actions/logout';
-import { username } from '../../actions/getUsername';
 import { getUserInfo } from '../../actions/getUserInfo';
 
 
@@ -44,13 +40,9 @@ const styles = {
 export default function Give(props) {
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
-    
-    const username1 = userInfo.userName
     let selectedItem = React.createRef();
     let qtyToGive = React.createRef();
     let userToGive = React.createRef();
-    let userName = React.createRef();
-    let password = React.createRef();
     const [itemID, setItemID] = useState("");
     return (
 
