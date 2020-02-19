@@ -45,7 +45,10 @@ class Register extends Component {
                 })
                 
         }
-        else {console.log('error')}
+        else {
+            console.log('error')
+            this.setState({error: "Invalid Email Syntax, Please Edit and Try Again"})
+        }
 
     };
     render() {
@@ -53,6 +56,7 @@ class Register extends Component {
             <RegisterForm
                 handleInputChange={this.handleInputChange}
                 handleFormSubmit={this.handleFormSubmit}
+                error={this.state.error}
             />
 
         );

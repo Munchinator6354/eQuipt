@@ -88,6 +88,9 @@ export default function Register(props) {
                                 id="email" />
                         </div>
                     </div>
+                    <p>
+                        {props.error}
+                    </p>
                     <div className="form-group row">
                         <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
                         <div className="col-sm-10">
@@ -99,6 +102,7 @@ export default function Register(props) {
                                 onChange={props.handleInputChange}
                                 id="inputPassword" />
                         </div>
+
                     </div>
                     <br />
                     <div className="form-group row">
@@ -114,5 +118,6 @@ export default function Register(props) {
                 
             </div>
         </div>
+        
                 )
             }
