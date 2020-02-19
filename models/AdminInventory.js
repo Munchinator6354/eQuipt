@@ -21,10 +21,6 @@ var AdminInventorySchema = new Schema({
     type: Number,
     required: false
   },
-  marketprice: {
-    type: Number,
-    required: true
-  },
   link: {
     type: String,
     required: false
