@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 // Using the Schema constructor, create a new Inventory Schema object
 // This is similar to a Sequelize model
-var InventorySchema = new Schema({
+var AdminInventorySchema = new Schema({
   // `name` is required and of type String
   name: {
     type: String,
@@ -21,10 +21,6 @@ var InventorySchema = new Schema({
     type: Number,
     required: false
   },
-  quantity: {
-      type: Number,
-      required: false
-  },
   link: {
     type: String,
     required: false
@@ -32,8 +28,8 @@ var InventorySchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var Inventory = mongoose.model("Inventory", InventorySchema);
+var AdminInventory = mongoose.model("AdminInventory", AdminInventorySchema);
 
 // Export the Article model
-module.exports = Inventory;
+module.exports = AdminInventory;
 
