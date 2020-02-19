@@ -30,14 +30,14 @@ export default {
     createAdminItem: function(itemData) {
         return new Promise((resolve, reject) => {
             resolve(itemData);
-            // axios.post("/api/createAdminItem", itemData)
-            //     .then(response => {
-            //         console.log(response);
-            //         resolve(response);
-            //     }).catch(error => {
-            //         console.log('createItem server error: ');
-            //         console.log(error);
-            //     });
+            axios.post("/api/createAdminItem", itemData)
+                .then(response => {
+                    console.log(response);
+                    resolve(response);
+                }).catch(error => {
+                    console.log('createItem server error: ');
+                    console.log(error);
+                });
         });
     },
     giveToUser: function(userData) {

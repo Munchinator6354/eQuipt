@@ -115,17 +115,17 @@ export default function CreateAdminItem() {
                                     link: itemImageLink.current.value
                                 }).then(
                                     function(response) {
-                                        // API.getUserInfo({ username: userInfo.username })
-                                        //     .then(
-                                        //         function(response) {
-                                        //             dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                        //         }
-                                        //     )
-                                        //     .catch(
-                                        //         function(error) {
-                                        //             console.log(error);
-                                        //         }
-                                        //     );
+                                        API.getUserInfo({ username: userInfo.username })
+                                            .then(
+                                                function(response) {
+                                                    dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                                }
+                                            )
+                                            .catch(
+                                                function(error) {
+                                                    console.log(error);
+                                                }
+                                            );
                                         console.log(response);
                                     }
                                 ).catch(
