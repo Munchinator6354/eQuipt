@@ -28,6 +28,15 @@ module.exports = function(app) {
         .catch(err => res.status(422).json(err));
     });
 
+        // Get all of the items from AdminTable
+        app.get("/api/adminitems", function(req, res) {
+            // ODM find, where { username: req.params.username }
+            db.AdminInventory
+            .find({})
+            .then(dbModel=> res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+        });
+
     // ICEBOX: Get all of the items in the entire database. Only staff users should be able
     // to view all items in the database.
     app.get("/api/items", function(req, res) {
@@ -51,7 +60,6 @@ module.exports = function(app) {
             name: req.body.name,
             description: req.body.description,
             itemlevel: req.body.itemlevel,
-            marketprice: req.body.marketprice,
             quantity: req.body.quantity,
             link: req.body.link
         }
@@ -74,6 +82,26 @@ module.exports = function(app) {
         })
         .catch(err => res.status(422).json(err));
         
+    });
+
+    //for admin user to forge a new item
+    app.post("/api/createAdminItem", function(req, res) {
+     
+        let item = {
+            name: req.body.name,
+            description: req.body.description,
+            itemlevel: req.body.itemlevel,
+            link: req.body.link
+        }
+        console.log("YO!")
+      
+        db.AdminInventory
+        .create(item)
+        .then(function(dbInventory){
+            console.log(dbInventory);
+            res.json(dbInventory);    
+        })
+        .catch(err => res.status(422).json(err));
     });
     // Create a new item associated with a user id. Only staff users can create 
     // new items.
@@ -173,7 +201,6 @@ module.exports = function(app) {
                 name: dbInventory.name,
                 description: dbInventory.description,
                 itemlevel: dbInventory.itemlevel,
-                marketprice: dbInventory.marketprice,
                 quantity: give.give_quantity,
                 link: dbInventory.link
             }  
