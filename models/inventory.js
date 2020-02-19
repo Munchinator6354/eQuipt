@@ -21,10 +21,6 @@ var InventorySchema = new Schema({
     type: Number,
     required: false
   },
-  marketprice: {
-    type: Number,
-    required: true
-  },
   quantity: {
       type: Number,
       required: false
