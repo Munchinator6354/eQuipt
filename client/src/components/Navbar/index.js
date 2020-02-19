@@ -49,13 +49,13 @@ export default function Navbar() {
                             </Link>
                             </li>
                         }
-                        {isLogged ?
+                        {/* {isLogged ?
                             <li className="nav-item active">
                                 <Link to="/searchPlayers" style={styles.font} className="navbar-brand nav-link">
                                     Search
                             </Link>
                             </li>
-                            : ''}
+                            : ''} */}
                         {isLogged ?
                             <li className="nav-item active">
                                 <Link to="/Inventory" style={styles.font} className="navbar-brand nav-link">
