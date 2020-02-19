@@ -51,7 +51,6 @@ module.exports = function(app) {
             name: req.body.name,
             description: req.body.description,
             itemlevel: req.body.itemlevel,
-            marketprice: req.body.marketprice,
             quantity: req.body.quantity,
             link: req.body.link
         }
@@ -173,7 +172,6 @@ module.exports = function(app) {
                 name: dbInventory.name,
                 description: dbInventory.description,
                 itemlevel: dbInventory.itemlevel,
-                marketprice: dbInventory.marketprice,
                 quantity: give.give_quantity,
                 link: dbInventory.link
             }  
