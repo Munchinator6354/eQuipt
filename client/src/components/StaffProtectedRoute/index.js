@@ -7,7 +7,7 @@ import {
 import {useSelector} from 'react-redux';
 
 
-export default function AdminProtectedRoute({component: Component,loggedIn: LoggedIn, ...rest }) {
+export default function StaffProtectedRoute({component: Component,loggedIn: LoggedIn, ...rest }) {
 
   const loggedInState = useSelector(state => state.isLogged)
   const userInfo = useSelector(state => state.userInfo)
@@ -17,7 +17,7 @@ export default function AdminProtectedRoute({component: Component,loggedIn: Logg
     <Router>
     <Route {...rest} render={(props) => (
         (loggedInState === true &&
-        userInfo.role === "Admin")
+        (userInfo.role === "Staff" || userInfo.role === "Admin"))
         ? <Component {...props} />
         : <Redirect to='/404' />
     )} />
