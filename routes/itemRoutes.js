@@ -74,6 +74,25 @@ module.exports = function(app) {
         .catch(err => res.status(422).json(err));
         
     });
+    app.post("/api/createAdminItem", function(req, res) {
+        // ODM create, where { username: req.params.username } and the item is 
+        // retrieved from req.body
+        let item = {
+            name: req.body.name,
+            description: req.body.description,
+            itemlevel: req.body.itemlevel,
+            link: req.body.link
+        }
+        console.log("YO!")
+      
+        db.AdminInventory
+        .create(item)
+        .then(function(dbInventory){
+            console.log(dbInventory);
+            res.json(dbInventory);    
+        })
+        .catch(err => res.status(422).json(err));
+    });
     // Create a new item associated with a user id. Only staff users can create 
     // new items.
     // app.post("/api/createItem", function(req, res) {
