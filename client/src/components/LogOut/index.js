@@ -1,5 +1,6 @@
 import React from 'react'
 import background from "../../images/exit.jpg";
+import {Link} from 'react-router-dom';
 const styles = {
     background: {
         backgroundImage: `url(${background})`,
@@ -37,7 +38,7 @@ export default function logOut(props) {
             <div className="container" style={styles.center}>
                 <br />
                 <h1 style={styles.font} className="fadeUp">You have logged out</h1><br />
-                <a href ="/login" style={styles.font} className="fadeUp">Log back in</a>
+                <Link to="/login" style={styles.font} className="fadeUp">Log back in</Link>
             </div>
         </div>
     )
