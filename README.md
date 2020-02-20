@@ -30,10 +30,22 @@ To view the Heroku app page, see here: https://larp-equipt.herokuapp.com/
 
 ## How does the app function for end-users?
 
-(Gifs of app use to go here)
+Step 1: Registering a New User
+
+<img src="readmeGifs/registerNewUser.gif" width="400" height="500"/>
+
+Step 2: Logging In
+
+<img src="readmeGifs/loggingIn.gif" width="650" height="350"/>
+
+Step 3: Viewing Inventory Page
+
+Step 4: Forging a New Item (Admin/Staff Players Only)
+
+Step 5: Giving Items
 
 ## Technologies Used
-This app has been coded in Javascript, React.js is used as the frontend framework. Passport.js is implemented for user authentication. Node.js, Mongoose.js (ODM), and MongoDB are used for backend data management. Light use of regular expressions (Regex) were included. Lastly, written to be mobile friendly, we have implemented Service Workers to enable an "offline" viewing of user inventory via mobile phone.
+This app has been coded in Javascript, React.js is used as the frontend framework. Passport.js is implemented for user authentication. Node.js, Mongoose.js (ODM), and MongoDB are used for backend data management. Movement on page load brought to you by Sass. Light use of regular expressions (Regex) was included. Lastly, written to be mobile friendly, we have implemented Service Workers to enable an "offline" viewing of user inventory via mobile phone.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript  
 https://reactjs.org/  
@@ -41,6 +53,7 @@ http://www.passportjs.org/
 https://nodejs.org/en/  
 https://mongoosejs.com/  
 https://www.mongodb.com/  
+https://sass-lang.com/documentation  
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions  
 https://developers.google.com/web/fundamentals/primers/service-workers  
 
