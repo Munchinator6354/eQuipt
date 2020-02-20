@@ -158,28 +158,30 @@ export default function InventoryForm() {
             <div className="container" style={styles.center}>
                 <br />
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
-                <table className="table table-dark">
+                <div class="table-responsive-sm">
+                <table className="table table-sm table-striped table-dark">
                     <tbody>
                         <tr>
-                            <th scope="col" >Name</th>
-                            <th scope="col" className="d-none d-md-block d-xl-none">Description</th>
-                            <th scope="col" >Level</th>
-                            <th scope="col" >Image</th>
+                            <th scope="col"  >Name</th>
+                            <th scope="col" className="d-none d-sm-block">Description</th>
+                            <th scope="col" className="d-none d-sm-block">Level</th>
+                            <th scope="col" className="d-none d-sm-block">Image</th>
                             <th scope="col" style={styles.quantityWidth}>Quantity</th>
                             
                         </tr>
 
                         {userInfo.inventory.map(item => (
                             <tr key={item._id}>
-                                <td key={item.name}>{item.name}</td>
-                                <td key={item.description} className="d-none d-md-block d-xl-none">{item.description}</td>
-                                <td key={item.itemlevel} >{item.itemlevel}</td>
-                                <td key={item.link} ><img  style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
+                                <td key={item.name} >{item.name}</td>
+                                <td key={item.description} className="d-none d-sm-block">{item.description}</td>
+                                <td key={item.itemlevel} className="d-none d-sm-block">{item.itemlevel}</td>
+                                <td key={item.link} className="d-none d-sm-block"><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
                                 <Quantity theItem={item} theUser={userInfo} />
                             </tr>
                         ))}
                     </tbody>
                 </table>
+                </div>
             
             </div>
         </div>
