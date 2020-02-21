@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import background from "../images/Create.jpg";
 import API from "../utils/API";
 import { useSelector, useDispatch } from 'react-redux';
@@ -124,7 +124,6 @@ export default function CreateAdminItem() {
                                                     console.log(error);
                                                 }
                                             );
-                                        console.log(response);
                                     }
                                 ).catch(
                                     function(error) {

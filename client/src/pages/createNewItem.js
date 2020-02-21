@@ -44,11 +44,6 @@ export default function CreateNewItem() {
     const adminInventory = useSelector(state => state.adminInventory);
     
     let selectedItem = React.createRef();
-    let chosenItem = React.createRef();
-    let itemName = React.createRef();
-    let itemDescription = React.createRef();
-    let itemLevel = React.createRef();
-    let itemImageLink = React.createRef();
     let itemQuantity = React.createRef();
     
     const [itemID, setItemID] = useState("");
@@ -91,13 +86,12 @@ export default function CreateNewItem() {
                             onClick={(event) => {
                                 event.preventDefault();
                                 const object = adminInventory.find(item => item._id === itemID);
-                                console.log(object);
                                 API.createItem({
                                     username: userInfo.username,
                                     name: object.name,
                                     description: object.description,
                                     itemlevel: object.itemLevel,
-                                    quantity: itemQuantity.current.value,
+                                    quantity: parseInt(itemQuantity.current.value),
                                     link: object.link
                                 }).then(
                                     function(response) {
@@ -112,7 +106,6 @@ export default function CreateNewItem() {
                                                     console.log(error);
                                                 }
                                             );
-
                                     }
                                 ).catch(
                                     function(error) {

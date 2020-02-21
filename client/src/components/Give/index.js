@@ -38,16 +38,16 @@ const styles = {
 };
 
 export default function Give(props) {
-    
+
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
-    
+
     let selectedItem = React.createRef();
     let qtyToGive = React.createRef();
     let userToGive = React.createRef();
-    
+
     const [itemID, setItemID] = useState("");
-    
+
     return (
 
         <div style={styles.background}>
@@ -99,12 +99,10 @@ export default function Give(props) {
                                 API.giveToUser({ inventoryid: itemID, quantity: parseInt(qtyToGive.current.value), userToGive: userToGive.current.value, userGiving: userInfo.username })
                                     .then(
                                         function(response) {
-
                                             API.getUserInfo({ username: userInfo.username })
                                                 .then(
                                                     function(response) {
                                                         dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                                        console.log(JSON.parse(JSON.stringify(response.data)));
                                                     }
                                                 )
                                                 .catch(
@@ -122,7 +120,6 @@ export default function Give(props) {
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     );

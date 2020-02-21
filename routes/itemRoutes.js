@@ -91,7 +91,6 @@ module.exports = function(app) {
                 let obj = null;
                 let AlreadyHaveID;
                 //loop through receiving user's inventory, if name is found change obj to true and log that inventory id
-                console.log(dbUser.inventory);
                 for (var i = 0; i < dbUser.inventory.length; i++) {
                     if (dbUser.inventory[i].name === item.name) {
                         obj = true;
@@ -105,8 +104,10 @@ module.exports = function(app) {
                         .then(function(dbInventory) {
                             //Calculate Received quantity then update that inventoryid's quantity
                             let ReceivedQuantity = dbInventory.quantity + item.quantity;
-                            console.log(ReceivedQuantity);
-                            return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: ReceivedQuantity });
+                            return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: ReceivedQuantity }, { new: true });
+                        })
+                        .then(function(dbInventory) {
+                            res.json(dbInventory);
                         })
                         .catch(function(err) {
                             res.json(err);
@@ -117,13 +118,12 @@ module.exports = function(app) {
                     db.Inventory
                         .create(item)
                         .then(function(dbInventory) {
-                            //     //after creating item, update user2 with Given item in their inventory.
+                            //after creating item, update user2 with Given item in their inventory.
                             var NewInvID = dbInventory._id;
-                            console.log(dbInventory);
                             return db.User.findOneAndUpdate({ _id: dbUser._id }, { $push: { inventory: NewInvID } }, { new: true });
                         })
                         .then(function(dbUser) {
-                            console.log(dbUser);
+                            res.json(dbUser);
                         })
                         .catch(function(err) {
                             res.json(err);
@@ -141,12 +141,10 @@ module.exports = function(app) {
             itemlevel: req.body.itemlevel,
             link: req.body.link
         };
-        console.log("YO!");
 
         db.AdminInventory
             .create(item)
             .then(function(dbInventory) {
-                console.log(dbInventory);
                 res.json(dbInventory);
             })
             .catch(err => res.status(422).json(err));
@@ -154,30 +152,10 @@ module.exports = function(app) {
 
     // API UPDATE Requests
     //
-    // Trade items between users
     // Give items to another user
     // Update an item (name, description, and/or quantity)
     //
     // ---------------------------------------------------------------------------
-
-    // Trade items between two users. 
-    app.put("/api/trade/:username1/:username2", function(req, res) {
-        // How to authenticate both users...?
-        // The ODM call will be a bit complicated here.
-        // Get username1 items from req.body
-        // Get username2 items from req.body
-        // ODM call to put username1 items into username2 inventory
-        // ODM call to put username2 items into username1 inventory
-        // ICEBOX: During those two calls, there needs to be a check for duplicate items.
-        // ICEBOX: If username1 already has an item that username2 is giving them, then that
-        // existing item's quantity should be updated (and vice versa)
-        let trade = {
-            username1: req.params.username1,
-            username2: req.params.username2,
-            items: req.body
-        };
-        res.json(trade);
-    });
 
     // Give items from one user to another. The "fromuser" is the only user that
     // needs to be authenticated.
@@ -212,7 +190,7 @@ module.exports = function(app) {
                         .then(function(dbModel) {
                             let NewQuantity = dbModel.quantity - GiveItem.quantity;
                             db.Inventory
-                                .findOneAndUpdate({ _id: give.inventoryid }, { quantity: NewQuantity })
+                                .findOneAndUpdate({ _id: give.inventoryid }, { quantity: NewQuantity }, { new: true })
                                 .then(dbModel => res.json(dbModel))
                                 .catch(function(err) {
                                     res.json(err);
@@ -253,7 +231,10 @@ module.exports = function(app) {
                                     //Calculate Received quantity then update that inventoryid's quantity
                                     let ReceivedQuantity = dbInventory.quantity + give.give_quantity;
                                     console.log(ReceivedQuantity);
-                                    return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: ReceivedQuantity });
+                                    return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: ReceivedQuantity }, { new: true });
+                                })
+                                .then(function(dbInventory) {
+                                    res.json(dbInventory);
                                 })
                                 .catch(function(err) {
                                     res.json(err);
@@ -270,7 +251,7 @@ module.exports = function(app) {
                                     return db.User.findOneAndUpdate({ _id: dbUser._id }, { $push: { inventory: NewInvID } }, { new: true });
                                 })
                                 .then(function(dbUser) {
-                                    console.log(dbUser);
+                                    res.json(dbUser);
                                 })
                                 .catch(function(err) {
                                     res.json(err);

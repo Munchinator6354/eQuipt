@@ -6,7 +6,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post("/api/login", userData)
                 .then(response => {
-                    console.log(response);
                     resolve(response);
                 }).catch(error => {
                     console.log("Login server error: ");
@@ -19,7 +18,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.post("/api/createItem", itemData)
                 .then(response => {
-                    console.log(response);
                     resolve(response);
                 }).catch(error => {
                     console.log('createItem server error: ');
@@ -32,7 +30,6 @@ export default {
             resolve(itemData);
             axios.post("/api/createAdminItem", itemData)
                 .then(response => {
-                    console.log(response);
                     resolve(response);
                 }).catch(error => {
                     console.log('createItem server error: ');
@@ -44,10 +41,6 @@ export default {
         return new Promise((resolve, reject) => {
             axios.put("/api/give/fromuser/" + userData.userGiving + "/touser/" + userData.userToGive, userData)
                 .then(response => {
-                    console.log(response);
-                    console.log(userData.quantity);
-                    console.log(userData.inventoryid);
-                    console.log(userData);
                     resolve(response);
                 }).catch(error => {
                     console.log("Give server error: ");
@@ -64,7 +57,6 @@ export default {
             // is currently logged in for that session.
             axios.get("/api/user")
                 .then(response => {
-                    // console.log("THIS IS THE RESPONSE! " + JSON.stringify(response.data));
                     resolve(response);
                 }).catch(error => {
                     console.log(error);
@@ -77,13 +69,8 @@ export default {
             // is currently logged in for that session.
             axios.post("/api/register", newUser)
                 .then(response => {
-                    console.log(response + 'this is the response');
                     if (response.data) {
-                        console.log('successful signup');
                         resolve(response.data);
-                        // this.setState({
-                        //     redirectTo: '/login'
-                        // });
                     } else {
                         console.log('Sign-up error');
                     }
