@@ -1,9 +1,11 @@
 import React from 'react';
+import API from '../../utils/API';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../actions/logout';
 import { username } from '../../actions/getUsername';
 import { getUserInfo } from '../../actions/getUserInfo';
+import { getAdminInventory } from '../../actions/getAdminInventory';
 
 const styles = {
     background: {
@@ -65,7 +67,7 @@ export default function Navbar() {
                             : ''}
                         {isLogged ?
                             <li className="nav-item active">
-                                <Link to="/give" style={styles.font} className="navbar-brand nav-link">
+                                <Link to="/Give" style={styles.font} className="navbar-brand nav-link">
                                     Give
                             </Link>
                             </li>
@@ -77,10 +79,23 @@ export default function Navbar() {
                             </Link>
                             </li>
                             : ''} */}
-                        {(isLogged === true && userInfo.role === "Staff") ?
-                            <li className="nav-item active">
-                                <Link to="/create" style={styles.font} className="navbar-brand nav-link">
+                        {(isLogged === true && (userInfo.role === "Staff" || userInfo.role === "Admin")) ?
+                            <li className="nav-item active" onClick={() => {
+                                API.getAdminInventory().then(function(response) {
+                                    dispatch(getAdminInventory(response.data));
+                                }).catch(function(error) {
+                                    console.log(error);
+                                });
+                            }}>
+                                <Link to="/Create" style={styles.font} className="navbar-brand nav-link">
                                     Create
+                            </Link>
+                            </li>
+                            : ''}
+                        {(isLogged === true && userInfo.role === "Admin") ?
+                            <li className="nav-item active">
+                                <Link to="/CreateAdmin" style={styles.font} className="navbar-brand nav-link">
+                                    Forge New Item
                             </Link>
                             </li>
                             : ''}
@@ -89,6 +104,7 @@ export default function Navbar() {
                                 dispatch(logout());
                                 dispatch(username(""));
                                 dispatch(getUserInfo(""));
+                                dispatch(getAdminInventory(""));
                             }}>
                                 <Link to="/logout" style={styles.font} className="navbar-brand nav-link">
                                     Logout

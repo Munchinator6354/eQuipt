@@ -113,8 +113,8 @@ mongoose.connect(
 {name: 'Crypt Moss', description: 'An uncommon apothecary reagent acquired from a plant.', itemlevel: 'N/A', link:'https://oldschool.runescape.wiki/images/8/83/Grimy_ranarr_weed_detail.png?ba61f' }
   ]
 var userSeed = [
-  {playername: "Bob", username: "Bob", password: "12345", charactername: "Bobert", email:"Bob@gmail.com", role:"Staff" },
-  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Drained Druid", email:"Noelle@gmail.com", role:"Player" },
+  {playername: "Bob", username: "Bob", password: "12345", charactername: "Bobert", email:"Bob@gmail.com", role:"Admin" },
+  {playername: "Noelle", username: "noelley", password: "12344", charactername: "Noelle the Drained Druid", email:"Noelle@gmail.com", role:"Staff" },
   {playername: "Ryan", username: "ryanguy", password: "12346", charactername: "Ryan the Narcoleptic Noble", email:"Ryan@gmail.com", role:"Player" },
   {playername: "Abe", username: "Abedude", password: "12347", charactername: "Abe the Weary Wizard", email:"Abe@gmail.com", role:"Player" },
   {playername: "Jessica", username: "Jessicagirl", password: "12348", charactername: "Jessica the Comical Cleric", email:"Jessica@gmail.com", role:"Player" }

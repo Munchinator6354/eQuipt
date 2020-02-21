@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import API from "../utils/API";
+import React from 'react';
 import background from "../images/Create.jpg";
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import API from "../utils/API";
+import { useSelector, useDispatch } from 'react-redux';
 import { getUserInfo } from '../actions/getUserInfo';
 
 const styles = {
@@ -36,45 +35,67 @@ const styles = {
         marginLeft: "15px"
     }
 };
-
-export default function CreateNewItem() {
+export default function CreateAdminItem() {
     
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userInfo);
-    const adminInventory = useSelector(state => state.adminInventory);
-    
-    let selectedItem = React.createRef();
-    let itemQuantity = React.createRef();
-    
-    const [itemID, setItemID] = useState("");
+    let itemName = React.createRef();
+    let itemDescription = React.createRef();
+    let itemLevel = React.createRef();
+    let itemImageLink = React.createRef();
 
     return (
 
         <div style={styles.background}>
             <div className="container" style={styles.center}>
                 <br />
-                <h1 className="fadeUp" style={styles.font}>Create Item</h1>
+                <h1 className="fadeUp" style={styles.font}>Create Admin Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="itemName" className="col-sm-2 col-form-label fadeUp">Item Name</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item Name</label>
                         <div className="col-sm-10">
-                            <select onChange={(e) => { setItemID(e.target.value) }} className="form-control fadeUp" id="itemName">
-                            <option value="default" selected="selected">Select one option</option>
-                                {adminInventory.map(item => (
-                                        <option ref={selectedItem} value={item._id}>{item.name}</option>
-                                ))}
-                            </select>
+                            <input
+                                type="text"
+                                className="form-control fadeUp"
+                                id="name"
+                                name="name"
+                                ref={itemName} />
+
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="quantity" className="col-sm-2 col-form-label fadeUp">Item Quantity</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Item Description</label>
                         <div className="col-sm-10">
                             <input
-                                type="number"
+                                type="text"
+                                className="form-control fadeUp"
+                                id="description"
+                                name="description"
+                                ref={itemDescription} />
+
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label style={styles.labelFont} htmlFor="itemlevel" className="col-sm-2 col-form-label fadeUp">Item Level</label>
+                        <div className="col-sm-10">
+                            <input
+                                type="text"
+                                className="form-control fadeUp"
+                                id="itemlevel"
+                                name="itemlevel"
+                                ref={itemLevel}
+                            />
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Image Link</label>
+                        <div className="col-sm-10">
+                            <input
+                                type="text"
                                 className="form-control fadeUp"
                                 id="link"
                                 name="link"
-                                ref={itemQuantity}
+                                ref={itemImageLink}
                             />
                         </div>
                     </div>
@@ -85,14 +106,11 @@ export default function CreateNewItem() {
                             type="submit"
                             onClick={(event) => {
                                 event.preventDefault();
-                                const object = adminInventory.find(item => item._id === itemID);
-                                API.createItem({
-                                    username: userInfo.username,
-                                    name: object.name,
-                                    description: object.description,
-                                    itemlevel: object.itemLevel,
-                                    quantity: parseInt(itemQuantity.current.value),
-                                    link: object.link
+                                API.createAdminItem({
+                                    name: itemName.current.value,
+                                    description: itemDescription.current.value,
+                                    itemlevel: itemLevel.current.value,
+                                    link: itemImageLink.current.value
                                 }).then(
                                     function(response) {
                                         API.getUserInfo({ username: userInfo.username })
@@ -114,11 +132,10 @@ export default function CreateNewItem() {
                                 );
                             }}
                             className="btn btn-outline-light fadeUp">
-                            Create Inventory Item
+                            Forge New Admin Item
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     );

@@ -8,6 +8,7 @@ import { logout } from '../actions/logout';
 import { username } from '../actions/getUsername';
 import { getUserInfo } from '../actions/getUserInfo';
 import { useHistory } from 'react-router-dom';
+import { getAdminInventory } from '../actions/getAdminInventory';
 
 const styles = {
     background: {
@@ -96,8 +97,15 @@ export default function Login() {
                                                 dispatch(login());
                                                 dispatch(username(response.data.username));
                                                 dispatch(getUserInfo(response.data));
-                                                setError("");
-                                                history.push("/");
+                                                if (response.data.role === "Staff" || response.data.role === "Admin") {
+                                                    API.getAdminInventory().then(function(response) {
+                                                        dispatch(getAdminInventory(response.data));
+                                                        setError("");
+                                                        history.push("/");
+                                                    }).catch(function(error) {
+                                                        console.log(error);
+                                                    });
+                                                }
                                             }
                                         }
                                     )

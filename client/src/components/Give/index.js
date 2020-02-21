@@ -1,10 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import API from "../../utils/API";
 import background from "../../images/Gift.jpg";
 import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../../actions/getUserInfo';
-
 
 const styles = {
     background: {
@@ -36,14 +35,19 @@ const styles = {
         fontFamily: "Almendra SC, serif",
         marginLeft: "15px"
     }
-}
+};
+
 export default function Give(props) {
+
     const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
+
     let selectedItem = React.createRef();
     let qtyToGive = React.createRef();
     let userToGive = React.createRef();
+
     const [itemID, setItemID] = useState("");
+
     return (
 
         <div style={styles.background}>
@@ -52,14 +56,13 @@ export default function Give(props) {
                 <h1 className="fadeUp" style={styles.font}>Give Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Example select</label>
+                        <label style={styles.labelFont} htmlFor="exampleFormControlSelect1" className="col-sm-2 col-form-label fadeUp">Item Name</label>
                         <div className="col-sm-10">
                             <select onChange={(e) => setItemID(e.target.value)} className="form-control fadeUp" id="exampleFormControlSelect1">
-                            <option value="default" selected="selected">Select one option </option>
+                                <option value="default" selected="selected">Select one option </option>
                                 {userInfo.inventory.map(item => (
-                                        <option ref={selectedItem} value={item._id}>{item.name}</option>
+                                    <option ref={selectedItem} value={item._id}>{item.name}</option>
                                 ))}
-                            
                             </select>
                         </div>
                     </div>
@@ -91,45 +94,33 @@ export default function Give(props) {
                             style={styles.buttonFont}
                             type="submit"
                             className="btn btn-outline-light fadeUp"
-                            onClick={ (event)=>{ 
+                            onClick={(event) => {
                                 event.preventDefault();
-                                API.giveToUser({inventoryid: itemID, quantity: parseInt(qtyToGive.current.value), userToGive: userToGive.current.value, userGiving: userInfo.username })
-                                .then(
-                                    function(response){  
-                                       
-                                        API.getUserInfo({username: userInfo.username})
-                                        .then(
-                                            function(response){
-                                                dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))))
-                                              console.log( JSON.parse(JSON.stringify(response.data)))
-                                            }
-                                        )
-                                        .catch(
-                                        );
-                                                            
-                                    }
-                                )
-                                .catch(
-                                    function(error){
-                                        console.log(error)
-                                    }
-                                    // function(error) {
-                                    //     if(error == "Error: Failed to login"){
-                                    //        setError("Username or Password incorrect please try again")
-                                    //     }
-                                    //     dispatch(logout())
-                                    // }
-                                );
+                                API.giveToUser({ inventoryid: itemID, quantity: parseInt(qtyToGive.current.value), userToGive: userToGive.current.value, userGiving: userInfo.username })
+                                    .then(
+                                        function(response) {
+                                            API.getUserInfo({ username: userInfo.username })
+                                                .then(
+                                                    function(response) {
+                                                        dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                                    }
+                                                )
+                                                .catch(
+                                                );
 
-                           
-                            }} 
-                            >
+                                        }
+                                    )
+                                    .catch(
+                                        function(error) {
+                                            console.log(error);
+                                        }
+                                    );
+                            }}>
                             Give
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
-    )
+    );
 }
