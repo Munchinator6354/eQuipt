@@ -73,13 +73,21 @@ function SubmitGive(props) {
                     event.preventDefault();
                     API.giveToUser({ inventoryid: props.theGiveInfo.itemID, quantity: parseInt(props.theGiveInfo.qtyToGive), userToGive: props.theGiveInfo.userToGive, userGiving: props.theUserInfo.username })
                         .then(
-                            function (itemGiven) {
-                                console.log(itemGiven.data);
+                            function (transactionDetails) {
+                                const transaction = transactionDetails.data;
                                 API.getUserInfo({ username: props.theUserInfo.username })
                                     .then(
                                         function (response) {
                                             dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                            setModalMessage(itemGiven.data.quantity + " " + itemGiven.data.name + "(s) given successfully to " + props.theGiveInfo.userToGive);
+                                            
+                                            let messageString = props.theGiveInfo.qtyToGive + " " + transaction.user2Item.name + "(s) successfully given to " + props.theGiveInfo.userToGive + "! ";
+                                            if (transaction.user1ItemDeleted) {
+                                                messageString += "All " + transaction.user1Item.name + "(s) were removed from your inventory.";
+                                            } else {
+                                                messageString += "You have " + transaction.user1Item.quantity + " " + transaction.user1Item.name + "(s) left in your inventory.";
+                                            }
+                                            
+                                            setModalMessage(messageString);
                                             setModalTitle("Success");
                                             setModalShow(true);
                                         }
