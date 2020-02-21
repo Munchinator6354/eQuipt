@@ -50,7 +50,7 @@ function CreateAdminItemModal(props) {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={props.onHide}>
                         Ok
-            </Button>
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
