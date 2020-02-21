@@ -112,7 +112,7 @@ export default function Login() {
                                         }
                                     );
                             }}
-                            className="btn btn-outline-light fadeUp">
+                            className="btn btn-outline-light fadeUp LoginButton">
                             Login
                         </button>
                     </div>
