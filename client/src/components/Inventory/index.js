@@ -27,21 +27,9 @@ const styles = {
         fontSize: "1.6em",
         fontFamily: "Almendra SC, serif"
     },
-    itemFont: {
-        marginBottom: "5px",
-        fontSize: "1em",
-        fontFamily: "Almendra SC, serif",
-        textAlign: "center"
-    },
     labelFont: {
         fontSize: "1em",
         fontFamily: "Almendra SC, serif",
-    },
-    itemTitle: {
-        marginBottom: "5px",
-        fontSize: "1.8em",
-        fontFamily: "Almendra SC, serif",
-        textAlign: "center"
     },
     buttonFont: {
         fontSize: "1em",
@@ -49,29 +37,26 @@ const styles = {
         marginLeft: "15px"
     },
     imageFormat: {
-        height: "12vh"
+        height: "5vh"
     },
     quantityWidth: {
         columnWidth: "300px"
     },
     button: {
         color: "white"
-    },
-    tableBorder: {
-        border: "1px solid white"
     }
 };
 
 function PlayerQuantity(props) {
-    return <td style={styles.itemFont} className="d-block" key={props.theItem.name.quantity}>{props.theItem.quantity}</td>;
+    return <td key={props.theItem.name.quantity}>{props.theItem.quantity}</td>;
 }
 
 function StaffQuantity(props) {
     const dispatch = useDispatch();
     return (
-        <td style={styles.itemFont} className="d-block" key={props.theItem.name.quantity}>
+        <td key={props.theItem.name.quantity}>
             <button
-                className="btn btn-secondary mr-2"
+                className="btn mr-2"
                 style={styles.button}
                 onClick={(event) => {
                     event.preventDefault();
@@ -95,11 +80,11 @@ function StaffQuantity(props) {
                             }
                         );
                 }}>
-                ▲
+                +
             </button>
-            <button type="text" className="btn btn-secondary">{props.theItem.quantity}</button>&nbsp;&nbsp;&nbsp;
+            {props.theItem.quantity}
             <button
-                className="btn btn btn-secondary mr-2"
+                className="btn mr-2"
                 style={styles.button}
                 onClick={(event) => {
                     event.preventDefault();
@@ -123,7 +108,7 @@ function StaffQuantity(props) {
                             }
                         );
                 }}>
-                ▼
+                -
                 </button>
             <button
                 className="btn btn-danger mx-2"
@@ -149,10 +134,9 @@ function StaffQuantity(props) {
                             }
                         );
                 }}>
-                Delete
+                x
                 </button>
         </td>
-       
     );
 }
 
@@ -174,29 +158,26 @@ export default function InventoryForm() {
             <div className="container" style={styles.center}>
                 <br />
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
-                <div className="table-responsive-sm">
+                <div class="table-responsive-sm">
                 <table className="table table-sm table-striped table-dark">
                     <tbody>
-                        {/* <tr>
-                            <th scope="col" className="d-block" >Name</th>
-                            <th scope="col" className="d-block">Description</th>
-                            <th scope="col" className="d-block">Level</th>
-                            <th scope="col" className="d-block">Image</th>
-                            <th scope="col" className="d-block" style={styles.quantityWidth}>Quantity</th>
+                        <tr>
+                            <th scope="col"  >Name</th>
+                            <th scope="col" className="d-none d-sm-block">Description</th>
+                            <th scope="col" className="d-none d-sm-block">Level</th>
+                            <th scope="col" className="d-none d-sm-block">Image</th>
+                            <th scope="col" style={styles.quantityWidth}>Quantity</th>
                             
-                        </tr> */}
+                        </tr>
 
                         {userInfo.inventory.map(item => (
-                          
-                            <tr style={styles.tableBorder} key={item._id}>
-                                <td key={item.name} style={styles.itemTitle} className="d-block">{item.name}</td>
-                                <td key={item.description} style={styles.itemFont} className="d-block"> {item.description}</td>
-                                <td key={item.itemlevel} style={styles.itemFont} className="d-block">Item Level: {item.itemlevel}</td>
-                                <td key={item.link} style={styles.itemFont} className="d-block"><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
+                            <tr key={item._id}>
+                                <td key={item.name} >{item.name}</td>
+                                <td key={item.description} className="d-none d-sm-block">{item.description}</td>
+                                <td key={item.itemlevel} className="d-none d-sm-block">{item.itemlevel}</td>
+                                <td key={item.link} className="d-none d-sm-block"><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
                                 <Quantity theItem={item} theUser={userInfo} />
-                                
                             </tr>
-                           
                         ))}
                     </tbody>
                 </table>
