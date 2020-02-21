@@ -40,7 +40,7 @@ export default function Register(props) {
                 <h1 className="fadeUp" style={styles.font}>Scribe your information</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="username" className="col-sm-2 col-form-label fadeUp">User Name</label>
+                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">User Name</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -53,7 +53,7 @@ export default function Register(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="playerName" className="col-sm-2 col-form-label fadeUp">Player Name</label>
+                        <label style={styles.labelFont} htmlFor="playerName" className="col-sm-2 col-form-label fadeUp">Player Name</label>
                         <div className="col-sm-10">
                             <input 
                                 type="text" 
@@ -65,7 +65,7 @@ export default function Register(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="characterName" className="col-sm-2 col-form-label fadeUp">Character Name</label>
+                        <label style={styles.labelFont} htmlFor="characterName" className="col-sm-2 col-form-label fadeUp">Character Name</label>
                         <div className="col-sm-10">
                             <input 
                                 type="characterName" 
@@ -77,7 +77,7 @@ export default function Register(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="email" className="col-sm-2 col-form-label fadeUp">Email Address</label>
+                        <label style={styles.labelFont} htmlFor="email" className="col-sm-2 col-form-label fadeUp">Email Address</label>
                         <div className="col-sm-10">
                             <input 
                                 type="email" 
@@ -89,7 +89,7 @@ export default function Register(props) {
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} for="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
+                        <label style={styles.labelFont} htmlFor="inputPassword" className="col-sm-2 col-form-label fadeUp">Password</label>
                         <div className="col-sm-10">
                             <input 
                                 type="password" 

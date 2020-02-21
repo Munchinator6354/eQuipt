@@ -28,6 +28,15 @@ module.exports = function(app) {
         .catch(err => res.status(422).json(err));
     });
 
+        // Get all of the items from AdminTable
+        app.get("/api/adminitems", function(req, res) {
+            // ODM find, where { username: req.params.username }
+            db.AdminInventory
+            .find({})
+            .then(dbModel=> res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+        });
+
     // ICEBOX: Get all of the items in the entire database. Only staff users should be able
     // to view all items in the database.
     app.get("/api/items", function(req, res) {
@@ -74,9 +83,10 @@ module.exports = function(app) {
         .catch(err => res.status(422).json(err));
         
     });
+
+    //for admin user to forge a new item
     app.post("/api/createAdminItem", function(req, res) {
-        // ODM create, where { username: req.params.username } and the item is 
-        // retrieved from req.body
+     
         let item = {
             name: req.body.name,
             description: req.body.description,

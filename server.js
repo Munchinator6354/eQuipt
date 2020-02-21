@@ -13,8 +13,8 @@ const MongoStore = require('connect-mongo')(session)
 // Set port, intialize express, and connect to MongoDB
 // ================================================================================
 
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://GenericUser:GenericPassword123@ds029658.mlab.com:29658/heroku_4xwdbn2k";
-var MONGODB_URI = "mongodb://localhost/eQuiptDB";
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/eQuiptDB" ;
+// var MONGODB_URI = "mongodb://localhost/eQuiptDB";
 
 const PORT = process.env.PORT || 3001;
 const app = express();
