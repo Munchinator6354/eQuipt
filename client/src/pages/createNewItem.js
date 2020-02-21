@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import API from "../utils/API";
 import background from "../images/Create.jpg";
+import API from "../utils/API";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useSelector } from 'react-redux';
@@ -64,7 +64,7 @@ function SubmitCreate(props) {
     const dispatch = useDispatch();
 
     return (
-        <div>
+        <div className="form-group row">
             <button
                 style={styles.buttonFont}
                 type="submit"
@@ -147,16 +147,14 @@ export default function CreateNewItem() {
                             <input
                                 type="number"
                                 className="form-control fadeUp"
-                                id="link"
-                                name="link"
+                                id="quantity"
+                                name="quantity"
                                 onChange={(e) => { setItemQuantity(e.target.value) }}
                             />
                         </div>
                     </div>
                     <br />
-                    <div className="form-group row">
-                        <SubmitCreate theItemId={itemID} theAdminInv={adminInventory} theUserInfo={userInfo} theQuantity={itemQuantity} />
-                    </div>
+                    <SubmitCreate theItemId={itemID} theAdminInv={adminInventory} theUserInfo={userInfo} theQuantity={itemQuantity} />
                 </form>
             </div>
         </div>
