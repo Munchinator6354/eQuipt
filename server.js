@@ -27,6 +27,9 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//Use static directory for mp3
+app.use(express.static(__dirname + "/client/public"));
+
 // Sessions
 app.use(
 	session({
