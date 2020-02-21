@@ -30,7 +30,7 @@ To view the Heroku app page, see here: https://larp-equipt.herokuapp.com/
 
 ## How does the app function for end-users?
 
-Step 1: Registering a New User
+Step 1: Registering a New User - (Pictured showing mobile ready viewing)
 
 <img src="readmeGifs/registerNewUser.gif" width="400" height="500"/>
 
@@ -38,11 +38,17 @@ Step 2: Logging In
 
 <img src="readmeGifs/loggingIn.gif" width="650" height="350"/>
 
-Step 3: Viewing Inventory Page
+Step 3: Forging a New Item (Admin/Staff Players Only)
 
-Step 4: Forging a New Item (Admin/Staff Players Only)
+<img src="readmeGifs/forgeItems.gif" width="650" height="350"/>
+
+Step 4: Viewing Inventory Page
+
+<img src="readmeGifs/viewingInventory.gif" width="650" height="350"/>
 
 Step 5: Giving Items
+
+<img src="readmeGifs/giveItems.gif" width="650" height="350"/>
 
 ## Technologies Used
 This app has been coded in Javascript, React.js is used as the frontend framework. Passport.js is implemented for user authentication. Node.js, Mongoose.js (ODM), and MongoDB are used for backend data management. Movement on page load brought to you by Sass. Light use of regular expressions (Regex) was included. Lastly, written to be mobile friendly, we have implemented Service Workers to enable an "offline" viewing of user inventory via mobile phone.
