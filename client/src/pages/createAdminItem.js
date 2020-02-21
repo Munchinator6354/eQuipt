@@ -37,14 +37,12 @@ const styles = {
 };
 export default function CreateAdminItem() {
     
-    const userInfo = useSelector(state => state.userInfo);
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userInfo);
     let itemName = React.createRef();
     let itemDescription = React.createRef();
     let itemLevel = React.createRef();
-    let itemMarketPrice = React.createRef();
     let itemImageLink = React.createRef();
-    // const [itemID, setItemID] = useState("");
 
     return (
 

@@ -1,7 +1,8 @@
-import React from 'react'
-import background from "../images/Create.jpg";
+import React, { useState } from 'react';
 import API from "../utils/API";
-import { useSelector, useDispatch } from 'react-redux';
+import background from "../images/Create.jpg";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../actions/getUserInfo';
 
 const styles = {
@@ -18,9 +19,9 @@ const styles = {
         opacity: "1",
         color: "white",
         backgroundColor: "rgba(0,0,0,.7)",
-        height:"95vh",
+        height: "95vh",
     },
-    font:{
+    font: {
         marginBottom: "5px",
         fontSize: "1.55em",
         fontFamily: "Almendra SC, serif"
@@ -34,19 +35,24 @@ const styles = {
         fontFamily: "Almendra SC, serif",
         marginLeft: "15px"
     }
-}
+};
+
 export default function CreateNewItem() {
-    const userInfo = useSelector(state => state.userInfo);
+    
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userInfo);
+    const adminInventory = useSelector(state => state.adminInventory);
     
-    
+    let selectedItem = React.createRef();
+    let chosenItem = React.createRef();
     let itemName = React.createRef();
     let itemDescription = React.createRef();
     let itemLevel = React.createRef();
-    let itemMarketPrice = React.createRef();
     let itemImageLink = React.createRef();
     let itemQuantity = React.createRef();
-    // const [itemID, setItemID] = useState("");
+    
+    const [itemID, setItemID] = useState("");
+
     return (
 
         <div style={styles.background}>
@@ -55,79 +61,72 @@ export default function CreateNewItem() {
                 <h1 className="fadeUp" style={styles.font}>Create Item</h1>
                 <form>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="username" className="col-sm-2 col-form-label fadeUp">Item Name</label>
+                        <label style={styles.labelFont} htmlFor="itemName" className="col-sm-2 col-form-label fadeUp">Item Name</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="text" 
-                                className="form-control fadeUp" 
-                                id="name"
-                                name="name"
-                                ref={itemName}/>
+                            <select onChange={(e) => { setItemID(e.target.value) }} className="form-control fadeUp" id="itemName">
+                            <option value="default" selected="selected">Select one option</option>
+                                {adminInventory.map(item => (
+                                        <option ref={selectedItem} value={item._id}>{item.name}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label style={styles.labelFont} htmlFor="link" className="col-sm-2 col-form-label fadeUp">Item Quantity</label>
+                        <label style={styles.labelFont} htmlFor="quantity" className="col-sm-2 col-form-label fadeUp">Item Quantity</label>
                         <div className="col-sm-10">
-                            <input 
-                                type="number" 
-                                className="form-control fadeUp" 
+                            <input
+                                type="number"
+                                className="form-control fadeUp"
                                 id="link"
-                                name="link" 
+                                name="link"
                                 ref={itemQuantity}
-                                />
+                            />
                         </div>
                     </div>
                     <br />
                     <div className="form-group row">
-                        <button 
-                            style={styles.buttonFont} 
-                            type="submit" 
-                            onClick= {(event)=>{ 
-                            event.preventDefault();
-                            API.createItem({
-                                username: userInfo.username,
-                                name: itemName.current.value, 
-                                description: itemDescription.current.value, 
-                                itemlevel: itemLevel.current.value, 
-                                marketprice: itemMarketPrice.current.value, 
-                                quantity: itemQuantity.current.value, 
-                                link: itemImageLink.current.value
-                            }).then(
-                                function(response){  
-                                       console.log("GOT HERE!!!!!!!!")
-                                    API.getUserInfo({username: userInfo.username})
-                                    .then(
-                                        function(response){
-                                            dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))))
-                                          console.log("THISWORKED!" + JSON.parse(JSON.stringify(response.data)))
-                                        }
-                                    )
-                                    .catch(
-                                        function(error){
-                                            console.log(error)
-                                        }
-                                    );
-                                                        
-                                }
-                            ).catch(
-                                function(error){
-                                    console.log(error)
-                                }
-                                // function(error) {
-                                //     if(error == "Error: Failed to login"){
-                                //        setError("Username or Password incorrect please try again")
-                                //     }
-                                //     dispatch(logout())
-                                // }
-                            );
-                        }}
+                        <button
+                            style={styles.buttonFont}
+                            type="submit"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                const object = adminInventory.find(item => item._id === itemID);
+                                console.log(object);
+                                API.createItem({
+                                    username: userInfo.username,
+                                    name: object.name,
+                                    description: object.description,
+                                    itemlevel: object.itemLevel,
+                                    quantity: itemQuantity.current.value,
+                                    link: object.link
+                                }).then(
+                                    function(response) {
+                                        API.getUserInfo({ username: userInfo.username })
+                                            .then(
+                                                function(response) {
+                                                    dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                                }
+                                            )
+                                            .catch(
+                                                function(error) {
+                                                    console.log(error);
+                                                }
+                                            );
+
+                                    }
+                                ).catch(
+                                    function(error) {
+                                        console.log(error);
+                                    }
+                                );
+                            }}
                             className="btn btn-outline-light fadeUp">
                             Create Inventory Item
                         </button>
                     </div>
                 </form>
-                
+
             </div>
         </div>
-                )
-            }
+    );
+}

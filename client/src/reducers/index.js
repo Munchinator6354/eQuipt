@@ -3,6 +3,7 @@ import counterReducer from './counter';
 import usernameReducer  from './username';
 import {createStore, combineReducers} from 'redux';
 import userInfo from './userInfo';
+import adminInventory from './adminInventory';
 
 function saveToLocalStorage(state) {
     try {
@@ -28,7 +29,8 @@ const allReducers = combineReducers({
     counter: counterReducer,
     isLogged: loggedReducer,
     username: usernameReducer,
-    userInfo: userInfo
+    userInfo: userInfo,
+    adminInventory: adminInventory
 });
 
 const persistedState = loadFromLocalStorage();

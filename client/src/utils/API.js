@@ -105,6 +105,17 @@ export default {
                 });
         });
     },
+    getAdminInventory: function() {
+        return new Promise((resolve, reject) => {
+            axios.get("/api/adminitems")
+                .then(response => {
+                    resolve(response);
+                }).catch(error => {
+                    console.log(error);
+                    reject(error);
+                });
+        });
+    },
     changeQuantity: function(itemInfo) {
         return new Promise((resolve, reject) => {
             axios.put("/api/updateItem/", itemInfo)
