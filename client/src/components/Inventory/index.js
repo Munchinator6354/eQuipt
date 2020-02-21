@@ -158,7 +158,7 @@ function StaffQuantity(props) {
 
 function Quantity(props) {
     const playerType = props.theUser.role;
-    if (playerType === "Staff") {
+    if (playerType === "Staff" || playerType === "Admin") {
         return <StaffQuantity theItem={props.theItem} theUser={props.theUser} />;
     }
     return <PlayerQuantity theItem={props.theItem} />;
