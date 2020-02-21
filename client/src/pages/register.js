@@ -15,7 +15,7 @@ class Register extends Component {
     };
 
     checkEmail = emailString => {
-        let filter = /^[a -zA-Z0-9\.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9\.]{2,5}$/;
+        let filter = /^[a -zA-Z0-9.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9.]{2,5}$/;
         if (!filter.test(emailString)) {
             return false;
         } else {

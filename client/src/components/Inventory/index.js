@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import background from "../../images/Door.jpg";
 import API from "../../utils/API";
 import { useSelector } from 'react-redux';
@@ -27,9 +27,21 @@ const styles = {
         fontSize: "1.6em",
         fontFamily: "Almendra SC, serif"
     },
+    itemFont: {
+        marginBottom: "5px",
+        fontSize: "1em",
+        fontFamily: "Almendra SC, serif",
+        textAlign: "center"
+    },
     labelFont: {
         fontSize: "1em",
         fontFamily: "Almendra SC, serif",
+    },
+    itemTitle: {
+        marginBottom: "5px",
+        fontSize: "1.8em",
+        fontFamily: "Almendra SC, serif",
+        textAlign: "center"
     },
     buttonFont: {
         fontSize: "1em",
@@ -37,23 +49,30 @@ const styles = {
         marginLeft: "15px"
     },
     imageFormat: {
-        height: "5vh"
+        height: "12vh"
     },
     quantityWidth: {
         columnWidth: "300px"
+    },
+    button: {
+        color: "white"
+    },
+    tableBorder: {
+        border: "1px solid white"
     }
 };
 
 function PlayerQuantity(props) {
-    return <td key={props.theItem.name.quantity}>{props.theItem.quantity}</td>;
+    return <td style={styles.itemFont} className="d-block" key={props.theItem.name.quantity}>{props.theItem.quantity}</td>;
 }
 
 function StaffQuantity(props) {
     const dispatch = useDispatch();
     return (
-        <td key={props.theItem.name.quantity}>
+        <td style={styles.itemFont} className="d-block" key={props.theItem.name.quantity}>
             <button
                 className="btn btn-secondary mr-2"
+                style={styles.button}
                 onClick={(event) => {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity + 1 })
@@ -76,11 +95,12 @@ function StaffQuantity(props) {
                             }
                         );
                 }}>
-                +
+                ▲
             </button>
-            {props.theItem.quantity}
+            <button type="text" className="btn btn-secondary">{props.theItem.quantity}</button>&nbsp;&nbsp;&nbsp;
             <button
-                className="btn btn-secondary ml-2"
+                className="btn btn btn-secondary mr-2"
+                style={styles.button}
                 onClick={(event) => {
                     event.preventDefault();
                     API.changeQuantity({ id: props.theItem._id, quantity: props.theItem.quantity - 1 })
@@ -103,7 +123,7 @@ function StaffQuantity(props) {
                             }
                         );
                 }}>
-                -
+                ▼
                 </button>
             <button
                 className="btn btn-danger mx-2"
@@ -132,6 +152,7 @@ function StaffQuantity(props) {
                 Delete
                 </button>
         </td>
+       
     );
 }
 
@@ -153,30 +174,34 @@ export default function InventoryForm() {
             <div className="container" style={styles.center}>
                 <br />
                 <h1 style={styles.font} className="fadeUp">Inventory</h1><br />
-
-                <table className="table table-dark">
+                <div className="table-responsive-sm">
+                <table className="table table-sm table-striped table-dark">
                     <tbody>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Item Level</th>
-                            <th scope="col">Market Price</th>
-                            <th scope="col" style={styles.quantityWidth}>Quantity</th>
-                            <th scope="col">Image</th>
-                        </tr>
+                        {/* <tr>
+                            <th scope="col" className="d-block" >Name</th>
+                            <th scope="col" className="d-block">Description</th>
+                            <th scope="col" className="d-block">Level</th>
+                            <th scope="col" className="d-block">Image</th>
+                            <th scope="col" className="d-block" style={styles.quantityWidth}>Quantity</th>
+                            
+                        </tr> */}
 
                         {userInfo.inventory.map(item => (
-                            <tr key={item._id}>
-                                <td key={item.name}>{item.name}</td>
-                                <td key={item.description}>{item.description}</td>
-                                <td key={item.itemlevel}>{item.itemlevel}</td>
-                                <td key={item.marketprice}>{item.marketprice}</td>
+                          
+                            <tr style={styles.tableBorder} key={item._id}>
+                                <td key={item.name} style={styles.itemTitle} className="d-block">{item.name}</td>
+                                <td key={item.description} style={styles.itemFont} className="d-block"> {item.description}</td>
+                                <td key={item.itemlevel} style={styles.itemFont} className="d-block">Item Level: {item.itemlevel}</td>
+                                <td key={item.link} style={styles.itemFont} className="d-block"><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
                                 <Quantity theItem={item} theUser={userInfo} />
-                                <td key={item.link}><img style={styles.imageFormat} src={item.link} alt={item.name + 'image'} /></td>
+                                
                             </tr>
+                           
                         ))}
                     </tbody>
                 </table>
+                </div>
+            
             </div>
         </div>
     );
