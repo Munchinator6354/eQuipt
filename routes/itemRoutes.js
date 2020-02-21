@@ -94,8 +94,8 @@ module.exports = function (app) {
                             let receivedQuantity = dbInventory.quantity + newItem.quantity;
                             return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: receivedQuantity }, { new: true });
                         })
-                        .then(function (dbInventory) {
-                            res.json(dbInventory);
+                        .then(function (updatedItem) {
+                            res.json(updatedItem);
                         })
                         .catch(function (err) {
                             res.json(err);
@@ -109,7 +109,7 @@ module.exports = function (app) {
                             var NewInvID = dbInventory._id;
                             db.User.findOneAndUpdate({ _id: dbUser._id }, { $push: { inventory: NewInvID } }, { new: true })
                                 .then(function (updatedUser) {
-                                    res.json(updatedUser);
+                                    res.json(newItem);
                                 })
                                 .catch(function (err) {
                                     res.json(err);

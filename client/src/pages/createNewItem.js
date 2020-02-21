@@ -80,12 +80,18 @@ function SubmitCreate(props) {
                         link: object.link
                     }).then(
                         function (response) {
-                            console.log(response);
+                            const updatedItem = response.data;
                             API.getUserInfo({ username: props.theUserInfo.username })
                                 .then(
                                     function (response) {
                                         dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                        setModalMessage("New item created successfully. Please navigate to Inventory to view it.");
+
+                                        let messageString = props.theQuantity + " " + updatedItem.name + "(s) were successfully created and added to your inventory.";
+                                        if (parseInt(updatedItem.quantity) !== parseInt(props.theQuantity)) {
+                                            messageString += " You now have " + updatedItem.quantity + " " + updatedItem.name + "(s) total.";
+                                        }
+
+                                        setModalMessage(messageString);
                                         setModalTitle("Success");
                                         setModalShow(true);
                                     }
