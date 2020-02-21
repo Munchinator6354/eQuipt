@@ -56,55 +56,43 @@ module.exports = function (app) {
     //
     // ---------------------------------------------------------------------------
     app.post("/api/createItem", function (req, res) {
-        // ODM create, where { username: req.params.username } and the item is 
-        // retrieved from req.body
-        // // res.json(item);
-        // console.log("YO!");
-        // console.log(user);
-        // db.Inventory
-        //     .create(item)
-        //     .then(function(dbInventory) {
-        //         console.log(dbInventory);
-        //         db.User
-        //             .findOneAndUpdate(user, { $push: { inventory: dbInventory._id } }, { new: true })
-        //             .then(function(dbUser) {
-        //                 console.log(dbUser);
-        //                 res.json(dbUser);
-        //             });
-        //     })
-        //     .catch(err => res.status(422).json(err));
+
         // Let's create an object to hold all of the given items info
-        let item = {
+        let newItem = {
             name: req.body.name,
             description: req.body.description,
             itemlevel: req.body.itemlevel,
             quantity: req.body.quantity,
             link: req.body.link
         };
+
         let user = {
             username: req.body.username
         };
+
         db.User
             .findOne(user)
             .populate("inventory")
             .then(function (dbUser) {
-                let obj = null;
+
+                let itemFound = false;
                 let AlreadyHaveID;
-                //loop through receiving user's inventory, if name is found change obj to true and log that inventory id
+
+                // Loop through receiving user's inventory, if name is found change obj to true and log that inventory id
                 for (var i = 0; i < dbUser.inventory.length; i++) {
-                    if (dbUser.inventory[i].name === item.name) {
-                        obj = true;
+                    if (dbUser.inventory[i].name === newItem.name) {
+                        itemFound = true;
                         AlreadyHaveID = dbUser.inventory[i]._id;
                     }
                 }
-                //if item is in receivers inventory we'll update the quantity
-                if (obj) {
+                // If item is in receivers inventory we'll update the quantity
+                if (itemFound) {
                     db.Inventory
                         .findOne({ _id: AlreadyHaveID })
                         .then(function (dbInventory) {
-                            //Calculate Received quantity then update that inventoryid's quantity
-                            let ReceivedQuantity = dbInventory.quantity + item.quantity;
-                            return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: ReceivedQuantity }, { new: true });
+                            // Calculate Received quantity then update that inventoryid's quantity
+                            let receivedQuantity = dbInventory.quantity + newItem.quantity;
+                            return db.Inventory.findOneAndUpdate({ _id: AlreadyHaveID }, { quantity: receivedQuantity }, { new: true });
                         })
                         .then(function (dbInventory) {
                             res.json(dbInventory);
@@ -112,18 +100,20 @@ module.exports = function (app) {
                         .catch(function (err) {
                             res.json(err);
                         });
-                }
-                //if item is not already in receivers inventory create new item
-                else {
+                // If item is not already in receivers inventory create new item
+                } else {
                     db.Inventory
-                        .create(item)
+                        .create(newItem)
                         .then(function (dbInventory) {
-                            //after creating item, update user2 with Given item in their inventory.
+                            // After creating item, update the user with new item in their inventory.
                             var NewInvID = dbInventory._id;
-                            return db.User.findOneAndUpdate({ _id: dbUser._id }, { $push: { inventory: NewInvID } }, { new: true });
-                        })
-                        .then(function (dbUser) {
-                            res.json(dbUser);
+                            db.User.findOneAndUpdate({ _id: dbUser._id }, { $push: { inventory: NewInvID } }, { new: true })
+                                .then(function (updatedUser) {
+                                    res.json(updatedUser);
+                                })
+                                .catch(function (err) {
+                                    res.json(err);
+                                })
                         })
                         .catch(function (err) {
                             res.json(err);
@@ -261,7 +251,7 @@ module.exports = function (app) {
                                                     })
                                                     .catch(err => res.status(422).json(err));
 
-                                                // Else reduce quantity by quantity given as the New Quantity
+                                            // Else reduce quantity by quantity given as the New Quantity
                                             } else {
                                                 let reducedQuantity = existingItem.quantity - giveTransaction.give_quantity;
                                                 db.Inventory
@@ -287,7 +277,7 @@ module.exports = function (app) {
                                 .catch(function (err) {
                                     res.json(err);
                                 });
-                            // Else if item is not already in receiver's inventory, create new item
+                        // Else if item is not already in receiver's inventory, create new item
                         } else {
                             // Create new item based on item's fields with quantity given from above
                             const newItem = {
@@ -323,6 +313,7 @@ module.exports = function (app) {
                                             // console.log("-------------------------------------");
 
                                             returnedJson.user2Item = createdItem;
+                                            
                                             // If quantity given is the same as original quantity then delete item from table
                                             if (existingItem.quantity === giveTransaction.give_quantity) {
                                                 db.Inventory
@@ -341,7 +332,7 @@ module.exports = function (app) {
                                                     })
                                                     .catch(err => res.status(422).json(err));
 
-                                                // Else reduce quantity by quantity given as the New Quantity
+                                            // Else reduce quantity by quantity given as the New Quantity
                                             } else {
                                                 let reducedQuantity = existingItem.quantity - giveTransaction.give_quantity;
                                                 db.Inventory
