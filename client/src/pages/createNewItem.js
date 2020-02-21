@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import API from "../utils/API";
 import background from "../images/Create.jpg";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { getUserInfo } from '../actions/getUserInfo';
@@ -37,16 +39,89 @@ const styles = {
     }
 };
 
-export default function CreateNewItem() {
-    
+function CreateItemModal(props) {
+    return (
+        <>
+            <Modal show={props.show} onHide={props.onHide}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{props.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>{props.message}</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={props.onHide}>
+                        Ok
+            </Button>
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
+}
+
+function SubmitCreate(props) {
+    const [modalShow, setModalShow] = useState(false);
+    const [modalMessage, setModalMessage] = useState("");
+    const [modalTitle, setModalTitle] = useState("");
     const dispatch = useDispatch();
-    const userInfo = useSelector(state => state.userInfo);
+
+    return (
+        <div>
+            <button
+                style={styles.buttonFont}
+                type="submit"
+                onClick={(event) => {
+                    event.preventDefault();
+                    const object = props.theAdminInv.find(item => item._id === props.theItemId);
+                    API.createItem({
+                        username: props.theUserInfo.username,
+                        name: object.name,
+                        description: object.description,
+                        itemlevel: object.itemLevel,
+                        quantity: parseInt(props.theQuantity),
+                        link: object.link
+                    }).then(
+                        function (response) {
+                            console.log(response);
+                            API.getUserInfo({ username: props.theUserInfo.username })
+                                .then(
+                                    function (response) {
+                                        dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
+                                        setModalMessage("New item created successfully. Please navigate to Inventory to view it.");
+                                        setModalTitle("Success");
+                                        setModalShow(true);
+                                    }
+                                )
+                                .catch(
+                                    function (error) {
+                                        console.log(error);
+                                        setModalMessage(error);
+                                        setModalTitle("Error");
+                                        setModalShow(true);
+                                    }
+                                );
+                        }
+                    ).catch(
+                        function (error) {
+                            console.log(error);
+                        }
+                    );
+                }}
+                className="btn btn-outline-light fadeUp">
+                Create Inventory Item
+            </button>
+            <CreateItemModal show={modalShow} message={modalMessage} title={modalTitle} onHide={() => setModalShow(false)} />
+        </div>
+    )
+}
+
+export default function CreateNewItem() {
+
     const adminInventory = useSelector(state => state.adminInventory);
-    
+    const userInfo = useSelector(state => state.userInfo);
+
     let selectedItem = React.createRef();
-    let itemQuantity = React.createRef();
-    
+
     const [itemID, setItemID] = useState("");
+    const [itemQuantity, setItemQuantity] = useState("0");
 
     return (
 
@@ -59,9 +134,9 @@ export default function CreateNewItem() {
                         <label style={styles.labelFont} htmlFor="itemName" className="col-sm-2 col-form-label fadeUp">Item Name</label>
                         <div className="col-sm-10">
                             <select onChange={(e) => { setItemID(e.target.value) }} className="form-control fadeUp" id="itemName">
-                            <option value="default" selected="selected">Select one option</option>
+                                <option value="default">Select one option</option>
                                 {adminInventory.map(item => (
-                                        <option ref={selectedItem} value={item._id}>{item.name}</option>
+                                    <option ref={selectedItem} value={item._id}>{item.name}</option>
                                 ))}
                             </select>
                         </div>
@@ -74,51 +149,15 @@ export default function CreateNewItem() {
                                 className="form-control fadeUp"
                                 id="link"
                                 name="link"
-                                ref={itemQuantity}
+                                onChange={(e) => { setItemQuantity(e.target.value) }}
                             />
                         </div>
                     </div>
                     <br />
                     <div className="form-group row">
-                        <button
-                            style={styles.buttonFont}
-                            type="submit"
-                            onClick={(event) => {
-                                event.preventDefault();
-                                const object = adminInventory.find(item => item._id === itemID);
-                                API.createItem({
-                                    username: userInfo.username,
-                                    name: object.name,
-                                    description: object.description,
-                                    itemlevel: object.itemLevel,
-                                    quantity: parseInt(itemQuantity.current.value),
-                                    link: object.link
-                                }).then(
-                                    function(response) {
-                                        API.getUserInfo({ username: userInfo.username })
-                                            .then(
-                                                function(response) {
-                                                    dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                                }
-                                            )
-                                            .catch(
-                                                function(error) {
-                                                    console.log(error);
-                                                }
-                                            );
-                                    }
-                                ).catch(
-                                    function(error) {
-                                        console.log(error);
-                                    }
-                                );
-                            }}
-                            className="btn btn-outline-light fadeUp">
-                            Create Inventory Item
-                        </button>
+                        <SubmitCreate theItemId={itemID} theAdminInv={adminInventory} theUserInfo={userInfo} theQuantity={itemQuantity} />
                     </div>
                 </form>
-
             </div>
         </div>
     );
