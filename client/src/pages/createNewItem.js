@@ -75,7 +75,7 @@ function SubmitCreate(props) {
                         username: props.theUserInfo.username,
                         name: object.name,
                         description: object.description,
-                        itemlevel: object.itemLevel,
+                        itemlevel: parseInt(object.itemlevel),
                         quantity: parseInt(props.theQuantity),
                         link: object.link
                     }).then(
