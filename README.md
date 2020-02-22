@@ -56,10 +56,11 @@ Step 6: Giving Items (Any user)
 <img src="readmeGifs/giveItems.gif" width="650" height="350"/>
 
 ## Technologies Used
-This app has been coded in Javascript, React.js is used as the frontend framework. Bcrypt.js was used for password hashing. Passport.js is implemented for user authentication. Node.js, Mongoose.js (ODM), and MongoDB are used for backend data management. Movement on page load brought to you by Sass. Light use of regular expressions (Regex) was included. Lastly, written to be mobile friendly, we have implemented Service Workers to enable an "offline" viewing of user inventory via mobile phone.
+This app has been coded in Javascript, React.js is used as the frontend framework. Redux.js was used to manage state. Bcrypt.js was used for password hashing. Passport.js is implemented for user authentication. Node.js, Mongoose.js (ODM), and MongoDB are used for backend data management. Movement on page load brought to you by Sass. Light use of regular expressions (Regex) was included. Lastly, written to be mobile friendly, we have implemented Service Workers to enable an "offline" viewing of user inventory via mobile phone.
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript  
 https://reactjs.org/  
+https://redux.js.org/  
 https://www.npmjs.com/package/bcryptjs  
 http://www.passportjs.org/  
 https://nodejs.org/en/  
