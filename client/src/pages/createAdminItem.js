@@ -58,6 +58,7 @@ function CreateAdminItemModal(props) {
 }
 
 function SubmitCreateAdminItem(props) {
+    
     const [modalShow, setModalShow] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
     const [modalTitle, setModalTitle] = useState("");
@@ -76,19 +77,23 @@ function SubmitCreateAdminItem(props) {
                         itemlevel: props.theItemInfo.level,
                         link: props.theItemInfo.link
                     }
-                    console.log(newItem);
-                    API.createAdminItem({
-                        name: props.theItemInfo.name,
-                        description: props.theItemInfo.description,
-                        itemlevel: props.theItemInfo.level,
-                        link: props.theItemInfo.link
-                    }).then(
+                    API.createAdminItem(newItem).then(
                         function (response) {
+                            
+                            const createdItem = response.data;
+
                             API.getUserInfo({ username: props.theUserInfo.username })
                                 .then(
                                     function (response) {
                                         dispatch(getUserInfo(JSON.parse(JSON.stringify(response.data))));
-                                        setModalMessage("New admin item created successfully. You should now be able to see it in the drop down options when creating a new inventory item.");
+
+                                        let messageString = "New item created successfully with the following details." +
+                                            " Item Name: " + createdItem.name +
+                                            ", Item Description: " + createdItem.description + 
+                                            ", Item Level: " + createdItem.itemlevel +
+                                            ", Item Image Link: " + createdItem.link;
+
+                                        setModalMessage(messageString);
                                         setModalTitle("Success");
                                         setModalShow(true);
                                     }
