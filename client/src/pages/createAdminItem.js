@@ -127,7 +127,7 @@ export default function CreateAdminItem() {
 
     const [itemName, setItemName] = useState("");
     const [itemDescription, setItemDescription] = useState("");
-    const [itemLevel, setItemLevel] = useState("");
+    const [itemLevel, setItemLevel] = useState(0);
     const [itemImageLink, setItemImageLink] = useState("");
 
     return (
@@ -169,7 +169,7 @@ export default function CreateAdminItem() {
                                 className="form-control fadeUp"
                                 id="itemlevel"
                                 name="itemlevel"
-                                onChange={(e) => { setItemLevel(e.target.value) }}
+                                onChange={(e) => { setItemLevel(parseInt(e.target.value)) }}
                             />
                         </div>
                     </div>

@@ -177,14 +177,6 @@ export default function InventoryForm() {
                 <div className="table-responsive-sm">
                 <table className="table table-sm table-striped table-dark">
                     <tbody>
-                        {/* <tr>
-                            <th scope="col" className="d-block" >Name</th>
-                            <th scope="col" className="d-block">Description</th>
-                            <th scope="col" className="d-block">Level</th>
-                            <th scope="col" className="d-block">Image</th>
-                            <th scope="col" className="d-block" style={styles.quantityWidth}>Quantity</th>
-                            
-                        </tr> */}
 
                         {userInfo.inventory.map(item => (
                           
